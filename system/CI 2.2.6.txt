@@ -1,0 +1,2 @@
+CodeIgniter Version 2.2.6
+Date 12/05/2016

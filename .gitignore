@@ -1,0 +1,9 @@
+.idea/
+admin/config/config.php
+admin/config/database.php
+admin/cache/
+admin/logs/index.html
+site/cache/.htaccess
+site/config/config.php
+site/config/database.php
+site/logs/index.html
