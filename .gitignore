@@ -7,3 +7,4 @@ site/cache/.htaccess
 site/config/config.php
 site/config/database.php
 site/logs/index.html
+thumb/cache/
