@@ -435,6 +435,7 @@ class User_model extends CI_Model{
                 ->join('dating as dt','dt.id = du.datingID','left')
                 ->join('user as u','u.id = dt.userID','left')
                 ->where('du.user',$userID)
+                ->where('du.time_end >=',time())
                 ->order_by('dt.id','DESC')
                 ->get()->result();
         return $query;
