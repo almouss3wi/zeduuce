@@ -1220,7 +1220,8 @@ class User extends MX_Controller {
         $DB['accept'] = 1;
         $DB['dt_update'] = date('Y-m-d H:i:s');
         $id = $this->user->acceptDating($DB,$id);
-        if($id){
+        $isDated = $this->user->checkOrCreateDatedUser($id);
+        if($id && $isDated == true){
             $data['status'] = true;
         }else{
             $data['status'] = false;

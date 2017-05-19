@@ -244,4 +244,23 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
     }
     return true;
 }
-?>
+
+/**
+ * T.Trung
+ * @param int $user_id
+ * @param int $invited_user_id
+ * @return boolean
+ */
+function isDated($user_id, $invited_user_id){
+    $ci = &get_instance();
+    $query = $ci->db->select('id')
+        ->from('user_dated')
+        ->where('user_id', $user_id)
+        ->where('invited_user_id', $invited_user_id)
+        ->get();
+    if($query->num_rows()){
+        return true;
+    } else {
+        return false;
+    }
+}

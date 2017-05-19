@@ -479,7 +479,28 @@ class User_model extends CI_Model{
         return $query;
     }
     
-    
+    //T.Trung
+
+    /**
+     * @param int $dating_user_id
+     * @return boolean
+     */
+    public function checkOrCreateDatedUser($dating_user_id){
+        $row = $this->db->select('d.userID, du.user')
+            ->from('dating as d')
+            ->join('dating_user as du', 'd.id = du.datingID')
+            ->where('du.id', $dating_user_id)
+            ->get()->row();
+        $user_id = $row->userID;
+        $invited_user_id = $row->user;
+
+        //check 2 person is dated
+        $isDated = isDated($user_id, $invited_user_id);
+        if($isDated === false){
+            $data = array('user_id'=>$user_id, 'invited_user_id'=>$invited_user_id);
+            $isDated = $this->db->insert('user_dated', $data);
+        }
+        return $isDated;
+    }
     /** The End*/
 }
-?>
