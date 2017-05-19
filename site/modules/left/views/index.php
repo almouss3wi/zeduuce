@@ -49,6 +49,6 @@
         <li><a href="<?php echo site_url('user/myinvitationer')?>">Mine invitationer</a></li>
         <li><a href="<?php echo site_url('user/myinvitationerjoin')?>">Du skal forkæles! (<span class="red"><?php echo $numinvitajoin;?></span>)</a></li>
         <li><a href="<?php echo site_url('user/myinvitationerapproved')?>">Det er mig der forkæler! (<span class="red"><?php echo $numinvitaapproved;?></span>)</a></li>
-        <li><a href="<?php echo site_url('user/myphoto')?>">Mine Kontaktpersoner</a></li>
+        <li><a href="<?php echo site_url('user/mycontactperson')?>">Mine Kontaktpersoner</a></li>
     </ul>
 </div>

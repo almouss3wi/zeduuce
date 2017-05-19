@@ -9,12 +9,22 @@ class User extends MX_Controller {
         $this->load->library('user_agent');
         $this->language = $this->lang->lang();
     }
-    function index(){
-        $meta = $this->general_model->getMetaData(2);
+
+    /**
+     * @param $meta
+     * @param $data
+     */
+    public function addMeta($meta, &$data){
         $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
         $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
         $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
         $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+    }
+
+    function index(){
+        $meta = $this->general_model->getMetaData(2);
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -30,13 +40,11 @@ class User extends MX_Controller {
 		$data['page'] = 'user/index';
 		$this->load->view('templates', $data);
 	}
-    
+
     function profile($id){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -57,10 +65,8 @@ class User extends MX_Controller {
     
     function b2b(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -71,10 +77,8 @@ class User extends MX_Controller {
     /** Photo*/
     function myphoto(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -146,10 +150,8 @@ class User extends MX_Controller {
     
     function mydeal(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -161,10 +163,8 @@ class User extends MX_Controller {
     /** Message*/
     function mymessages(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -191,10 +191,8 @@ class User extends MX_Controller {
     }
     function messages($id){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -244,10 +242,8 @@ class User extends MX_Controller {
     /** Invitation*/
     function myinvitationer(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -334,10 +330,8 @@ class User extends MX_Controller {
     
     function myinvitationerjoin(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -422,10 +416,8 @@ class User extends MX_Controller {
     
     function myinvitationerapproved(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -503,10 +495,8 @@ class User extends MX_Controller {
     
     function favorit($page=0){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -556,10 +546,8 @@ class User extends MX_Controller {
     
     function positiv($page=0){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -627,10 +615,8 @@ class User extends MX_Controller {
     
     function browsing($page=0,$invita=NULL){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if($invita){
             $this->session->set_userdata('invita',$invita);
         }
@@ -853,10 +839,8 @@ class User extends MX_Controller {
     /** User*/
     function register(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if($this->input->post()){
             $user = $this->user->getUser(NULL,$this->input->post('email'),NULL,NULL,NULL,1);
             if($user){
@@ -918,10 +902,8 @@ class User extends MX_Controller {
     /** PAYMENT*/
     function success(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         
         $payment = $this->session->userdata('payment');
         $userid = $this->session->userdata('userid');
@@ -941,10 +923,8 @@ class User extends MX_Controller {
     }
     function cancel(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         
         $this->session->unset_userdata('userid');
         $this->session->unset_userdata('payment');
@@ -960,10 +940,8 @@ class User extends MX_Controller {
     /** END PAYMENT*/
     function update(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -1015,10 +993,8 @@ class User extends MX_Controller {
     }
     function forgotpass(){
         $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->addMeta($meta, $data);
 
         
 		$data['page'] = 'user/forgotpass';
