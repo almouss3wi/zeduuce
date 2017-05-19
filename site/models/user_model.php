@@ -3,6 +3,18 @@ class User_model extends CI_Model{
 	function __construct(){
         parent::__construct();
 	}
+
+    /**
+     * @param $meta
+     * @param $data
+     */
+    public function addMeta($meta, &$data){
+        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
+        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
+        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
+        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+    }
+
     /** USER*/
     function getBrowsing($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL){
         $this->db->select('u.*');
