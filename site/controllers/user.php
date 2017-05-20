@@ -8,6 +8,11 @@ class User extends MX_Controller {
         $this->load->model('user_model', 'user');
         $this->load->library('user_agent');
         $this->language = $this->lang->lang();
+
+        //From class and method to get meta data
+        $class = $this->router->fetch_class();
+        $method = $this->router->fetch_method();
+
     }
 
     function index(){
@@ -1245,7 +1250,7 @@ class User extends MX_Controller {
         $this->session->unset_userdata($SearchUser);
 
         $data['user'] = $this->session->userdata('user');
-        $config['base_url'] = base_url().$this->language.'/user/favorit/';
+        $config['base_url'] = base_url().$this->language.'/user/mycontactperson/';
         $config['total_rows'] = $this->user->getNumContactPersons($data['user']->id);
         $config['per_page'] = $this->config->item('numberpage');
         $config['num_links'] = 2;
