@@ -2,6 +2,7 @@
 class User extends MX_Controller {
 	private $language = "";
     private $message = "";
+    private $_meta = null;
     function __construct(){
         parent::__construct();
         $this->session->set_userdata(array('url'=>uri_string()));
@@ -12,13 +13,13 @@ class User extends MX_Controller {
         //From class and method to get meta data
         $class = $this->router->fetch_class();
         $method = $this->router->fetch_method();
-
+        $code = $class.'-'.$method;
+        $this->_meta = $this->general_model->getMetaDataFromUrl($code);
     }
 
     function index(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -36,9 +37,8 @@ class User extends MX_Controller {
 	}
 
     function profile($id){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -58,9 +58,8 @@ class User extends MX_Controller {
     }
     
     function b2b(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -70,9 +69,8 @@ class User extends MX_Controller {
     }
     /** Photo*/
     function myphoto(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -143,9 +141,8 @@ class User extends MX_Controller {
     }
     
     function mydeal(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -156,9 +153,8 @@ class User extends MX_Controller {
     }
     /** Message*/
     function mymessages(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -184,9 +180,8 @@ class User extends MX_Controller {
 		$this->load->view('templates', $data);
     }
     function messages($id){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -235,9 +230,8 @@ class User extends MX_Controller {
     }
     /** Invitation*/
     function myinvitationer(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -323,9 +317,8 @@ class User extends MX_Controller {
     }
     
     function myinvitationerjoin(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -409,9 +402,8 @@ class User extends MX_Controller {
     }
     
     function myinvitationerapproved(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -488,9 +480,8 @@ class User extends MX_Controller {
     }
     
     function favorit($page=0){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -539,9 +530,8 @@ class User extends MX_Controller {
     }
     
     function positiv($page=0){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -608,9 +598,8 @@ class User extends MX_Controller {
     }
     
     function browsing($page=0,$invita=NULL){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if($invita){
             $this->session->set_userdata('invita',$invita);
         }
@@ -832,9 +821,8 @@ class User extends MX_Controller {
     
     /** User*/
     function register(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if($this->input->post()){
             $user = $this->user->getUser(NULL,$this->input->post('email'),NULL,NULL,NULL,1);
             if($user){
@@ -895,9 +883,8 @@ class User extends MX_Controller {
     }
     /** PAYMENT*/
     function success(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         
         $payment = $this->session->userdata('payment');
         $userid = $this->session->userdata('userid');
@@ -916,9 +903,8 @@ class User extends MX_Controller {
 		$this->load->view('templates', $data);
     }
     function cancel(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         
         $this->session->unset_userdata('userid');
         $this->session->unset_userdata('payment');
@@ -933,9 +919,8 @@ class User extends MX_Controller {
     }
     /** END PAYMENT*/
     function update(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }
@@ -986,9 +971,8 @@ class User extends MX_Controller {
         
     }
     function forgotpass(){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
 
         
 		$data['page'] = 'user/forgotpass';
@@ -1237,9 +1221,8 @@ class User extends MX_Controller {
      * @return view
      */
     function mycontactperson($page=0){
-        $meta = $this->general_model->getMetaData(2);
         $data = array();
-        $this->user->addMeta($meta, $data);
+        $this->user->addMeta($this->_meta, $data);
         if(!checkLogin()){
             redirect(site_url('home/index'));
         }

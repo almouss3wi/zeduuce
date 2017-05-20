@@ -37,4 +37,13 @@ class General_model extends CI_Model{
             return false;
         }
     }
+
+    function getMetaDataFromUrl($code=NULL){
+        $query = $this->db->select('*')
+            ->from('seo')
+            ->where('seo.code',$code)
+            ->where("seo.bl_active",1)
+            ->get()->row();
+        return $query;
+    }
 }

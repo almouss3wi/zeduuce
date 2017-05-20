@@ -9,10 +9,10 @@ class User_model extends CI_Model{
      * @param $data
      */
     public function addMeta($meta, &$data){
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data['title'] = ($meta)?$meta->meta_title:"";
+        $data['meta_title'] = ($meta)?$meta->meta_title:"";
+        $data['meta_keywords'] = ($meta)?$meta->meta_keywords:"";
+        $data['meta_description'] = ($meta)?$meta->meta_description:"";
     }
 
     /** USER*/
