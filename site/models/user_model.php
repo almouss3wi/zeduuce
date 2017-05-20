@@ -514,5 +514,40 @@ class User_model extends CI_Model{
         }
         return $isDated;
     }
+
+    /**
+     * @param integer $num
+     * @param integer $offset
+     * @param integer $user
+     * @param string $search
+     * @return query result
+     */
+    function getContactPersons($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
+        $this->db->select('u.*');
+        $this->db->from('user_dated as ud');
+        $this->db->join('user as u', 'u.id = ud.invited_user_id', 'left');
+        if($search['name']){
+            $this->db->where('u.id LIKE "%'.$search['name'].'%" OR u.name LIKE "%'.$search['name'].'%"');
+        }
+        $this->db->where("ud.user_id",$user);
+        $this->db->order_by('ud.id','DESC');
+        if($num || $offset){
+            $this->db->limit($num,$offset);
+        }
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    /**
+     * @param null $user
+     * @return integer
+     */
+    function getNumContactPersons($user=NULL){
+        $this->db->select('ud.id');
+        $this->db->from('user_dated as ud');
+        $this->db->where("ud.user_id",$user);
+        $query = $this->db->get()->num_rows();
+        return $query;
+    }
     /** The End*/
 }

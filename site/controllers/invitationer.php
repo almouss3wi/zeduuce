@@ -9,7 +9,7 @@ class Invitationer extends MX_Controller {
         $this->language = $this->lang->lang();
     }
     function index(){
-        $meta = $this->general_model->getMetaData(4);
+        $meta = $this->general_model->getMetaData(2);
         $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
         $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
         $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
