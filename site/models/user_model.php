@@ -6,10 +6,15 @@ class User_model extends CI_Model{
 
     /**
      * @param $meta
-     * @param $data
+     * @param array $data
+     * @param string $custom_title
      */
-    public function addMeta($meta, &$data){
-        $data['title'] = ($meta)?$meta->meta_title:"";
+    public function addMeta($meta, &$data = array(), $custom_title = ''){
+        if($custom_title != ''){
+            $data['title'] = $custom_title;
+        } else {
+            $data['title'] = ($meta)?$meta->meta_title:"";
+        }
         $data['meta_title'] = ($meta)?$meta->meta_title:"";
         $data['meta_keywords'] = ($meta)?$meta->meta_keywords:"";
         $data['meta_description'] = ($meta)?$meta->meta_description:"";
