@@ -13,7 +13,7 @@ class User_model extends CI_Model{
         if($custom_title != ''){
             $data['title'] = $custom_title;
         } else {
-            $data['title'] = ($meta)?$meta->meta_title:"";
+            $data['title'] = ($meta)?$meta->name:"";
         }
         $data['meta_title'] = ($meta)?$meta->meta_title:"";
         $data['meta_keywords'] = ($meta)?$meta->meta_keywords:"";
