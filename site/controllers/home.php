@@ -8,13 +8,12 @@ class Home extends MX_Controller {
         $this->load->model('user_model', 'user');
         $this->load->model('tilbud_model','tilbud');
         $this->language = $this->lang->lang();
+
+        $this->_meta = $this->general_model->getMetaDataFromUrl();
     }
     public function index(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
 
         $user = $this->session->userdata('user');
         if($user){
@@ -57,11 +56,8 @@ class Home extends MX_Controller {
 	}
     
     function kontakt(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
         if($this->input->post()){
             //Send mail
             $DB['name'] = $this->input->post('name');
@@ -84,22 +80,16 @@ class Home extends MX_Controller {
 		$this->load->view('templates', $data);
     }
     function om(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
         
         $data['item'] = $this->general_model->getNewsStatic('omzeeduce');
 		$data['page'] = 'home/om';
 		$this->load->view('templates', $data);
     }
     function faq(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
         
         $data['item'] = $this->general_model->getNewsStatic('help');
 		$data['page'] = 'home/faq';
@@ -107,22 +97,16 @@ class Home extends MX_Controller {
     }
     
     function handelsbetingelser(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
         
         $data['item'] = $this->general_model->getNewsStatic('handelsbetingelser');
 		$data['page'] = 'home/handelsbetingelser';
 		$this->load->view('templates', $data);
     }
     function betingelser(){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
         
         $data['item'] = $this->general_model->getNewsStatic('betingelser');
 		$data['page'] = 'home/handelsbetingelser';
@@ -130,11 +114,8 @@ class Home extends MX_Controller {
     }
     
     function news($id){
-        $meta = $this->general_model->getMetaData(1);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
         
         
 		$data['page'] = 'home/news';

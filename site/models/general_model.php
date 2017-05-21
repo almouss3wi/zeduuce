@@ -38,7 +38,8 @@ class General_model extends CI_Model{
         }
     }
 
-    function getMetaDataFromUrl($code=NULL){
+    function getMetaDataFromUrl(){
+        $code = $this->router->fetch_class().'-'.$this->router->fetch_method();
         $query = $this->db->select('*')
             ->from('seo')
             ->where('seo.code',$code)

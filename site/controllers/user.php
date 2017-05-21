@@ -10,11 +10,8 @@ class User extends MX_Controller {
         $this->load->library('user_agent');
         $this->language = $this->lang->lang();
 
-        //From class and method to get meta data
-        $class = $this->router->fetch_class();
-        $method = $this->router->fetch_method();
-        $code = $class.'-'.$method;
-        $this->_meta = $this->general_model->getMetaDataFromUrl($code);
+        //Get meta data from url
+        $this->_meta = $this->general_model->getMetaDataFromUrl();
     }
 
     function index(){
