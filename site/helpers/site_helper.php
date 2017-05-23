@@ -187,7 +187,7 @@ function actionUser($userFrom=NULL, $userTo=NULL, $name=NULL, $type=NULL){
                     ->where('bl_active',1)
                     ->get()->row();
     if($query1 || $query2){
-        //No think to do
+        //No thing to do
         return true;
     }else{
         //Add new action

@@ -283,7 +283,6 @@ function addFavorite(user){
          dataType: 'json',
          success: function(data){
              if(data.status==true){
-				 //$("#favorite_"+user).addClass("i_favourite_active");
                  location.reload();
              }
          }
@@ -303,6 +302,43 @@ function removeFavorite(user){
          }
     });
 }
+/**
+ *
+ * @param user
+ */
+function sendKiss(user){
+    $('#loader').show();
+    $.ajax({
+        type: "POST",
+        url: base_url+"user/sendKiss",
+        data: {'user':user,'csrf_site_name':token_value},
+        dataType: 'json',
+        success: function(data){
+            if(data.status==true){
+                location.reload();
+            }
+        }
+    });
+}
+/**
+ *
+ * @param user
+ */
+function removeKiss(user){
+    $('#loader').show();
+    $.ajax({
+        type: "POST",
+        url: base_url+"user/removeKiss",
+        data: {'user':user,'csrf_site_name':token_value},
+        dataType: 'json',
+        success: function(data){
+            if(data.status==true){
+                location.reload();
+            }
+        }
+    });
+}
+
 //SHOP
 function addCart(id){
     var qty = $("#qty_"+id).val();

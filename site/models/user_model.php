@@ -322,6 +322,53 @@ class User_model extends CI_Model{
         $query = $this->db->where('user_from', $user)->where('user_to', $userID)->get('user_favorite')->row();
 		return $query;
     }
+
+    /**
+     * @author T.Trung
+     * @param null $user_id_1
+     * @param null $user_id_2
+     * @return mixed
+     */
+    function checkStatus($user_id_1 = NULL,$user_id_2 = NULL){
+        $status = new stdClass();
+        $query = $this->db->where('user_from', $user_id_1)->where('user_to', $user_id_2)->get('user_favorite')->num_rows();
+        $status->isFavorite = $query?true:false;
+
+        $query = $this->db->where('user_id', $user_id_1)->where('invited_user_id', $user_id_2)->get('user_dated')->num_rows();
+        $status->isDated = $query?true:false;
+
+        $query = $this->db->where('from_user_id', $user_id_1)->where('to_user_id', $user_id_2)->get('user_kisses')->num_rows();
+        $status->isKissed = $query?true:false;
+
+        return $status;
+    }
+
+    /**
+     * @param null $DB
+     * @return bool
+     */
+    function sendKiss($DB=NULL){
+        if($this->db->insert('user_kisses',$DB)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * @param null $user
+     * @param null $userID
+     * @return bool
+     */
+    function removeKiss($user=NULL,$userID=NULL){
+        $this->db->where('from_user_id',$user);
+        $this->db->where('to_user_id',$userID);
+        if($this->db->delete('user_kisses')){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
     /** POSITIV*/
     function getPositiv($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
