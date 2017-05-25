@@ -14,11 +14,11 @@ define('FORCE_MAGIC_QUOTES','0');
 /* DATABASE */
 
 define('BASEPATH',true);
-if(!file_exists(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'database.php')) {
+if(!file_exists(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'site'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'database.php')) {
 	echo "Please check if CometChat is installed in the correct directory.<br /> The 'cometchat' folder should be placed at <CODEEGNITER_HOME_DIRECTORY>/cometchat";
 	exit;
 }
-include_once(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'database.php');
+include_once(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'site'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'database.php');
 
 // DO NOT EDIT DATABASE VALUES BELOW
 
