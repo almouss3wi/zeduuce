@@ -112,7 +112,7 @@ if(USE_CCAUTH == '1'){
 
 /* BASE URL START */
 if(!defined('BASE_URL')) {
-  define('BASE_URL',setConfigValue('BASE_URL','/test/cometchat/'));
+  define('BASE_URL',setConfigValue('BASE_URL','/test/'));
 }
 
 /* BASE URL END */
@@ -345,7 +345,7 @@ $apikey = setConfigValue('apikey',$apikey);      // API key for RESTful APIs for
 
 /* MEMCACHE START */
 if(!defined('MEMCACHE')) {
-  define('MEMCACHE',setConfigValue('MEMCACHE','1'));       // Set to 0 if you want to disable caching and 1 to enable it.
+  define('MEMCACHE',setConfigValue('MEMCACHE','0'));       // Set to 0 if you want to disable caching and 1 to enable it.
   define('MC_SERVER',setConfigValue('MC_SERVER','localhost'));  // Set name of your memcache  server
   define('MC_PORT',setConfigValue('MC_PORT','11211'));      // Set port of your memcache  server
   define('MC_USERNAME',setConfigValue('MC_USERNAME',''));           // Set username of memcachier  server
@@ -458,9 +458,9 @@ define('DISABLE_LINKING',setConfigValue('DISABLE_LINKING','0'));      // Set to 
 define('DISABLE_YOUTUBE',setConfigValue('DISABLE_YOUTUBE','1'));      // Set to 1 if you want to disable  CometChat
 define('GZIP_ENABLED',setConfigValue('GZIP_ENABLED','0'));       // Set to 1 if you would like to compress output of JS and CSS
 if(!defined('DEV_MODE')) {
-  define('DEV_MODE',setConfigValue('DEV_MODE','0'));         // Set to 1 only during development
+  define('DEV_MODE',setConfigValue('DEV_MODE','1'));         // Set to 1 only during development
 }
-define('ERROR_LOGGING',setConfigValue('ERROR_LOGGING','0'));      // Set to 1 to log all errors (error.log file)
+define('ERROR_LOGGING',setConfigValue('ERROR_LOGGING','1'));      // Set to 1 to log all errors (error.log file)
 define('ONLINE_TIMEOUT',USE_COMET?REFRESH_BUDDYLIST*2:($maxHeartbeat/1000*2.5));
                     // Time in seconds after which a user is considered offline
 define('DISABLE_ANNOUNCEMENTS',setConfigValue('DISABLE_ANNOUNCEMENTS','0'));  // Reduce server stress by disabling announcements
