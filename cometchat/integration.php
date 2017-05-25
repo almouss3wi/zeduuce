@@ -27,10 +27,10 @@ define('DB_PORT',			$db['port']								 );
 define('DB_USERNAME',			$db['default']['username']				 );
 define('DB_PASSWORD',			$db['default']['password']				 );
 define('DB_NAME',			$db['default']['database'] 				 );
-$table_prefix = '';									// Table prefix(if any)
-$db_usertable = 'users';							// Users or members information table name
+$table_prefix = 'tb';									// Table prefix(if any)
+$db_usertable = 'user';							// Users or members information table name
 $db_usertable_userid = 'id';						// UserID field in the users or members table
-$db_usertable_name = 'username';					// Name containing field in the users or members table
+$db_usertable_name = 'name';					// Name containing field in the users or members table
 $db_avatartable = ' ';
 $db_avatarfield = ' ';
 $db_linkfield = ' '.$table_prefix.$db_usertable.'.'.$db_usertable_userid.' ';
