@@ -112,7 +112,7 @@ if(USE_CCAUTH == '1'){
 
 /* BASE URL START */
 if(!defined('BASE_URL')) {
-  define('BASE_URL',setConfigValue('BASE_URL','/cometchat/'));
+  define('BASE_URL',setConfigValue('BASE_URL','/test/cometchat/'));
 }
 
 /* BASE URL END */
