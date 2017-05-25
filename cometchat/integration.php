@@ -27,7 +27,7 @@ define('DB_PORT',			$db['port']								 );
 define('DB_USERNAME',			$db['default']['username']				 );
 define('DB_PASSWORD',			$db['default']['password']				 );
 define('DB_NAME',			$db['default']['database'] 				 );
-$table_prefix = 'tb';									// Table prefix(if any)
+$table_prefix = 'tb_';									// Table prefix(if any)
 $db_usertable = 'user';							// Users or members information table name
 $db_usertable_userid = 'id';						// UserID field in the users or members table
 $db_usertable_name = 'name';					// Name containing field in the users or members table
