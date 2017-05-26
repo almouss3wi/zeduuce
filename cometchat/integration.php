@@ -60,13 +60,6 @@ class Integration{
 
 	function getUserID() {
 		$userid = 0;
-        //T.Trung: adding user session
-		$ci_session = @unserialize(@stripslashes($_COOKIE['ci_session']));
-		$user = $ci_session['user'];
-        if (!empty($user)) {
-            $userid = $user->id;
-        }
-        //T.Trung end
 
 		if (!empty($_SESSION['basedata']) && $_SESSION['basedata'] != 'null') {
 			$_REQUEST['basedata'] = $_SESSION['basedata'];
@@ -100,6 +93,14 @@ class Integration{
 			$row = mysqli_fetch_assoc($result);
 			$userid = $row['user_id'];
 		}
+
+        //T.Trung: adding user session
+        $ci_session = @unserialize(@stripslashes($_COOKIE['ci_session']));
+        if (!empty($ci_session['user'])) {
+            $user = $ci_session['user'];
+            $userid = $user->id;
+        }
+        //T.Trung end
 
 		$userid = intval($userid);
 		return $userid;
@@ -180,11 +181,12 @@ class Integration{
 
 	function getAvatar($image) {
 		//return BASE_URL.'images/noavatar.png';
-        if (is_file(dirname(dirname(__FILE__)).'/upload/user/'.$image)) {
-            return 'http://'.$_SERVER['HTTP_HOST'].'/uploads/photo/'.$image;
+        if (is_file(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'upload'.DIRECTORY_SEPARATOR.'user'.DIRECTORY_SEPARATOR.$image)) {
+            return 'http://'.$_SERVER['HTTP_HOST'].'/zeduuce/uploads/photo/'.$image;
         } else {
-            return 'http://'.$_SERVER['HTTP_HOST'].'/templates/img/no-avatar.jpg';
+            return 'http://'.$_SERVER['HTTP_HOST'].'/zeduuce/templates/img/no-avatar.jpg';
         }
+
 	}
 
 	function getTimeStamp() {
