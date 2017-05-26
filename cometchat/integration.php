@@ -32,7 +32,7 @@ $db_usertable = 'user';							// Users or members information table name
 $db_usertable_userid = 'id';						// UserID field in the users or members table
 $db_usertable_name = 'name';					// Name containing field in the users or members table
 $db_avatartable = ' ';
-$db_avatarfield = ' ';
+$db_avatarfield = 'avatar';
 $db_linkfield = ' '.$table_prefix.$db_usertable.'.'.$db_usertable_userid.' ';
 
 /*COMETCHAT'S INTEGRATION CLASS USED FOR SITE AUTHENTICATION */
@@ -60,6 +60,14 @@ class Integration{
 
 	function getUserID() {
 		$userid = 0;
+        //T.Trung: adding user session
+		$ci_session = @unserialize(@stripslashes($_COOKIE['ci_session']));
+		$user = $ci_session['user'];
+        if (!empty($user)) {
+            $userid = $user->id;
+        }
+        //T.Trung end
+
 		if (!empty($_SESSION['basedata']) && $_SESSION['basedata'] != 'null') {
 			$_REQUEST['basedata'] = $_SESSION['basedata'];
 		}
@@ -171,7 +179,12 @@ class Integration{
 	}
 
 	function getAvatar($image) {
-		return BASE_URL.'images/noavatar.png';
+		//return BASE_URL.'images/noavatar.png';
+        if (is_file(dirname(dirname(__FILE__)).'/upload/user/'.$image)) {
+            return 'http://'.$_SERVER['HTTP_HOST'].'/uploads/photo/'.$image;
+        } else {
+            return 'http://'.$_SERVER['HTTP_HOST'].'/templates/img/no-avatar.jpg';
+        }
 	}
 
 	function getTimeStamp() {
