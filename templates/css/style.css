@@ -2775,3 +2775,8 @@ ul.list_uploaded .fa {
 #cometchat{
     padding-bottom: 0px !important;
 }
+
+.map iframe{
+    width: 100% !important;
+    height: 300px !important;
+}

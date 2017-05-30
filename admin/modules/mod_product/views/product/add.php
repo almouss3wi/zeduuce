@@ -152,7 +152,19 @@
         </div>
         <div class="col-sm-9">
             <div class="form-material">
-                <textarea class="form-control" id="content" name="content"></textarea>
+                <textarea class="form-control tinyeditor" id="content1" name="content"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row margin-bottom-10">
+        <div class="col-sm-3">
+            <div class="form-material">
+                <label class="control-label margin-top-10" for="">Map:</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-material">
+                <textarea class="form-control" id="map_code" name="map_code"></textarea>
             </div>
         </div>
     </div>

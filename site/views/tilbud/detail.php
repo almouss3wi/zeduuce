@@ -68,7 +68,7 @@
       <div class="row mb30">
         <div class="col-lg-12">
           <div class="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4467.355701648302!2d12.52256086382243!3d55.9549552939058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465237b08f840799%3A0x5ef6bf7d25b666bf!2zR2wgU3RyYW5kdmVqIDEzNywgMzA1MCBIdW1sZWLDpmssIMSQYW4gTeG6oWNo!5e0!3m2!1svi!2s!4v1447728610753" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <?php echo $item->map_code;?>
           </div>
         </div>
       </div>

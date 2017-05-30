@@ -144,6 +144,7 @@ class Product extends CI_Controller{
             $DB['address'] = $this->input->post('address');
             $DB['description'] = $this->input->post('description');
             $DB['content'] = $this->input->post('content');
+            $DB['map_code'] = $this->input->post('map_code');
             $DB['ordering'] = $this->input->post('ordering');
             $DB['dt_create'] = date('Y-m-d H:i:s');
             $DB['dt_end'] = strtotime(str_replace('/', '-', $this->input->post('dt_end')));
@@ -204,6 +205,7 @@ class Product extends CI_Controller{
             $DB['address'] = $this->input->post('address');
             $DB['description'] = $this->input->post('description');
             $DB['content'] = $this->input->post('content');
+            $DB['map_code'] = $this->input->post('map_code');
             $DB['ordering'] = $this->input->post('ordering');
             $DB['dt_update'] = date('Y-m-d H:i:s');
             $DB['dt_end'] = strtotime(str_replace('/', '-', $this->input->post('dt_end')));
