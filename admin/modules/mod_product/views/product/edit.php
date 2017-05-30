@@ -161,7 +161,7 @@
         </div>
         <div class="col-sm-9">
             <div class="form-material">
-                <textarea class="form-control" id="content" name="content"><?php echo $item->content;?></textarea>
+                <textarea class="form-control tinyeditor" id="content1" name="content"><?php echo $item->content;?></textarea>
             </div>
         </div>
     </div>
