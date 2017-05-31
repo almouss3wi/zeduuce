@@ -1321,10 +1321,9 @@ class User extends MX_Controller
 
     /**
      * @param int $page
-     * @return view
+     * @return view layout
      */
-    function mycontactperson($page = 0)
-    {
+    function mycontactperson($page = 0){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if (!checkLogin()) {
@@ -1371,6 +1370,61 @@ class User extends MX_Controller
         $data['list'] = $users;
 
         $data['page'] = 'user/mycontactperson';
+        $this->load->view('templates', $data);
+    }
+
+    /**
+     * @param int $page
+     * @return view layout
+     */
+    function sentkiss($page = 0){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+        if (!checkLogin()) {
+            redirect(site_url('home/index'));
+        }
+        /** Clear session search USER */
+        $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
+        , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
+        , 'religion' => '', 'training' => '', 'body' => '');
+        $this->session->unset_userdata($SearchUser);
+
+        $data['user'] = $this->session->userdata('user');
+        $config['base_url'] = base_url() . $this->language . '/user/sentkiss/';
+        $config['total_rows'] = $this->user->getNumSentKiss($data['user']->id);
+        $config['per_page'] = $this->config->item('numberpage');
+        $config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $listUsers = $this->user->getSentKiss($config['per_page'], (int)$page, $data['user']->id);
+        $data['pagination'] = $this->pagination->create_links();
+        if ($listUsers) {
+            $i = 0;
+            foreach ($listUsers as $row) {
+                $users[$i]['id'] = $row->id;
+                $users[$i]['name'] = $row->name;
+                $users[$i]['birthday'] = $row->birthday;
+                $users[$i]['code'] = $row->code;
+                $users[$i]['send_at'] = $row->send_at;
+                $users[$i]['facebook'] = $row->facebook;
+                if ($row->facebook && $row->avatar) {
+                    $users[$i]['avatar'] = $row->avatar;
+                } else {
+                    $photo = $this->user->getPhoto($row->id);
+                    if ($photo) {
+                        $users[$i]['avatar'] = $photo[0]->image;
+                    } else {
+                        $users[$i]['avatar'] = "";
+                    }
+                }
+                $i++;
+            }
+        } else {
+            $users = "";
+        }
+        $data['list'] = $users;
+
+        $data['page'] = 'user/sentkiss';
         $this->load->view('templates', $data);
     }
 }

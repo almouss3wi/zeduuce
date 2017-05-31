@@ -77,7 +77,7 @@
                                     <div class="step">
                                         <a href="javascript:void(0)" <?php if ($status->isKissed) { ?> onclick="removeKiss('<?php echo $item->id; ?>');" <?php } else { ?> onclick="sendKiss('<?php echo $item->id; ?>');"  <?php } ?>>
                                             <i class="<?php if ($status->isKissed) {
-                                                echo 'i_step3_active';
+                                                echo 'i_step3 active';
                                             } else {
                                                 echo 'i_step3';
                                             } ?>"></i>
@@ -93,7 +93,7 @@
                                     <div class="step">
                                         <a href="javascript:void(0)" <?php if ($status->isFavorite) { ?> onclick="removeFavorite('<?php echo $item->id; ?>');" <?php } else { ?> onclick="addFavorite('<?php echo $item->id; ?>');"  <?php } ?>>
                                             <i class="<?php if ($status->isFavorite) {
-                                                echo 'i_step4_active';
+                                                echo 'i_step4 active';
                                             } else {
                                                 echo 'i_step4';
                                             } ?>"></i>

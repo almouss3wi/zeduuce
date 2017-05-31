@@ -50,5 +50,8 @@
         <li><a href="<?php echo site_url('user/myinvitationerjoin')?>">Du skal forkæles! (<span class="red"><?php echo $numinvitajoin;?></span>)</a></li>
         <li><a href="<?php echo site_url('user/myinvitationerapproved')?>">Det er mig der forkæler! (<span class="red"><?php echo $numinvitaapproved;?></span>)</a></li>
         <li><a href="<?php echo site_url('user/mycontactperson')?>">Mine Kontaktpersoner</a></li>
+        <li><a href="<?php echo site_url('user/sentkiss')?>">Sendt kys</a></li>
+        <li><a href="<?php echo site_url('user/receivedkiss')?>">Modtaget kys</a></li>
+        <li><a href="<?php echo site_url('user/shoutouts')?>">Se shoutouts</a></li>
     </ul>
 </div>
