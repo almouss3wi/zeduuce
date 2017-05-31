@@ -633,5 +633,37 @@ class User_model extends CI_Model{
         $query = $this->db->get()->result();
         return $query;
     }
+
+    /**
+     * @param null $user_id
+     * @return mixed
+     */
+    function getNumReceivedKisses($user_id = NULL){
+        $this->db->select('id');
+        $this->db->from('user_kisses');
+        $this->db->where("to_user_id",$user_id);
+        $query = $this->db->get()->num_rows();
+        return $query;
+    }
+
+    /**
+     * @param null $num
+     * @param null $offset
+     * @param null $user_id
+     * @param null $search
+     * @return mixed
+     */
+    function getReceivedKisses($num = NULL, $offset = NULL, $user_id = NULL, $search = NULL){
+        $this->db->select('u.*, uk.send_at');
+        $this->db->from('user_kisses as uk');
+        $this->db->join('user as u', 'u.id = uk.from_user_id', 'left');
+        $this->db->where("uk.to_user_id",$user_id);
+        $this->db->order_by('uk.send_at','DESC');
+        if($num || $offset){
+            $this->db->limit($num,$offset);
+        }
+        $query = $this->db->get()->result();
+        return $query;
+    }
     /** The End*/
 }
