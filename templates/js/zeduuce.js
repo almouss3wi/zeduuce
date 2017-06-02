@@ -119,7 +119,7 @@ $(document).ready(function () {
         itemsTablet: [600, 4], //2 items between 600 and 0
         itemsMobile: true // itemsMobile disabled - inherit from itemsTablet option
     });
-    var owl = $("#owl-chat");
+    /*var owl = $("#owl-chat");
     owl.owlCarousel({
         pagination: false,
         items: 6, //10 items above 1000px browser width
@@ -130,8 +130,29 @@ $(document).ready(function () {
         autoPlay:8000,
         autoPlayHoverPause:true,
         scrollPerPage : true
+    });*/
+
+    // newest_profiles
+    var newest_profiles = $("#newest_profiles");
+    newest_profiles.owlCarousel({
+        margin: 10,
+        pagination: false,
+        navigation: true,
+        navigationText: [
+            "<i class='fa fa-chevron-left fa-3x'></i>",
+            "<i class='fa fa-chevron-right fa-3x'></i>"],
+        items : 6, //10 items above 1000px browser width
+        itemsDesktop : [1000,6], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,3], // betweem 900px and 601px
+        itemsTablet: [600,2], //2 items between 600 and 0
+        itemsMobile : true, // itemsMobile disabled - inherit from itemsTablet option
+        autoPlay:8000,
+        autoPlayHoverPause:true,
+        scrollPerPage : true
     });
-    var owl2 = $("#owl-chat2");
+
+
+    /*var owl2 = $("#owl-chat2");
     owl2.owlCarousel({
         pagination: false,
         items: 2, //10 items above 1000px browser width
@@ -142,7 +163,26 @@ $(document).ready(function () {
         autoPlay:5000,
         autoPlayHoverPause:true,
         scrollPerPage : true
+    });*/
+
+    // owl_latest_offers
+    var owl_latest_offers = $("#owl_latest_offers");
+    owl_latest_offers.owlCarousel({
+        pagination: false,
+        navigation: true,
+        navigationText: [
+            "<i class='fa fa-chevron-left fa-3x'></i>",
+            "<i class='fa fa-chevron-right fa-3x'></i>"],
+        items : 2, //10 items above 1000px browser width
+        itemsDesktop : [1000,2], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,2], // betweem 900px and 601px
+        itemsTablet: [600,2], //2 items between 600 and 0
+        itemsMobile : true, // itemsMobile disabled - inherit from itemsTablet option
+        autoPlay:5000,
+        autoPlayHoverPause:true,
+        scrollPerPage : true
     });
+
     // Custom Navigation Events
     $(".next").click(function () {
         owl.trigger('owl.next');

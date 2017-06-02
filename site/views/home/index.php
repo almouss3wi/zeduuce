@@ -56,7 +56,7 @@
         <h2 class="title2">Nyeste profiler</h2>
         <div class="row newest-profiles">
             <div class="col-md-12">
-                <div id="owl-chat" class="owl-carousel">
+                <div id="newest_profiles" class="owl-carousel">
                     <?php
                     if ($listUser) {
                         foreach ($listUser as $row) {
@@ -94,8 +94,8 @@
                         <?php }
                     } ?>
                 </div>
-                <a class="btn prev"><i class="fa fa-chevron-left"></i></a>
-                <a class="btn next"><i class="fa fa-chevron-right"></i></a>
+                <!--<a class="btn prev"><i class="fa fa-chevron-left"></i></a>
+                <a class="btn next"><i class="fa fa-chevron-right"></i></a>-->
             </div>
         </div>
         <div class="row">
@@ -106,7 +106,7 @@
         <div class="row latest-offers">
             <div class="col-lg-12">
                 <h2 class="title2">Nyeste tilbud</h2>
-                <div id="owl-chat2" class="owl-carousel">
+                <div id="owl_latest_offers" class="owl-carousel">
                     <?php if ($listPro) {
                         foreach ($listPro as $row) { ?>
                             <div class="item">
@@ -114,22 +114,25 @@
                                     <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/product/<?php echo $row->image; ?>&w=570&h=250&q=100"
                                          alt="" class="img-responsive"/>
                                     <span class="cate"><?php echo $row->company; ?></span>
-                                    <div class="item-content">
-                                        <h3><?php echo $row->name; ?></h3>
-                                        <div><?php echo $row->description; ?></div>
+                                    <div class="item-content clearfix">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <h3><?php echo $row->name; ?></h3>
+                                                <p><?php echo $row->description; ?></p>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="price">Pris:<?php echo priceFormat($row->price); ?></div>
+                                                <a href="<?php echo site_url('tilbud/detail/' . $row->id . '/' . seoUrl($row->name)); ?>" class="btn btnOderNow">Bestil nu</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="info-bottom clearfix">
-                                    <p class="price">Pris: <?php echo priceFormat($row->price); ?></p>
-                                    <a href="<?php echo site_url('tilbud/detail/' . $row->id . '/' . seoUrl($row->name)); ?>"
-                                       class="btn btnOderNow">Bestil nu</a>
                                 </div>
                             </div>
                         <?php }
                     } ?>
                 </div>
-                <a class="btn prev2"><i class="fa fa-chevron-left"></i></a>
-                <a class="btn next2"><i class="fa fa-chevron-right"></i></a>
+                <!--<a class="btn prev2"><i class="fa fa-chevron-left"></i></a>
+                <a class="btn next2"><i class="fa fa-chevron-right"></i></a>-->
             </div>
         </div>
     </div>
