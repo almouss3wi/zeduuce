@@ -123,24 +123,6 @@
     </div>
 </div>
 
-<div id="f_Transfer" class="modal fade">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content bg_white">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Overfør fra</h4>
-            </div>
-            <div class="modal-body text-center pt10">
-                <?php echo form_open_multipart(site_url('user/uploadPhoto'), array('name'=>'frm_uploadPhoto','id'=>'frm_uploadPhoto'))?>
-                <label>Min computer</label>
-                <input name="myImage[]" id="myImage" type="file" multiple="true" accept="image/*" style="borer:none;"/>
-                <?php echo form_close();?>
-                <!--p class="mt15"><a href="javascript:void(0)"><img src="<?php echo base_url();?>/templates/img/btn_facebook.png" alt="" class="img-responsive btn-inline-block"/></a></p-->
-            </div>
-        </div>
-    </div>
-</div>
-
 <div id="PUinvatation" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

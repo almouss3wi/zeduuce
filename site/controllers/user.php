@@ -92,7 +92,8 @@ class User extends MX_Controller
     function uploadPhoto()
     {
         $user = $this->session->userdata('user');
-        $config['upload_path'] = $this->config->item('root') . "uploads/photo/";
+        //$config['upload_path'] = $this->config->item('root') . "uploads/photo/";
+        $config['upload_path'] = "./uploads/photo/";
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = $this->config->item('maxupload');
         $config['encrypt_name'] = TRUE;  //rename to random string image

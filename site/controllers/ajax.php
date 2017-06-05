@@ -20,6 +20,14 @@ class Ajax extends CI_Controller{
     function deletedata(){
         $table = $this->input->post('table');
         $id = $this->input->post('id');
+        if($table == 'user_image'){
+            $this->db->select('image');
+            $this->db->from('user_image');
+            $this->db->where('id', $id);
+            $query = $this->db->get();
+            $image = $query->row();
+            unlink("uploads/photo/".$image->image);
+        }
         $query = $this->db->where('id',$id)->delete($table);
         echo true;
         return;

@@ -231,6 +231,13 @@ class Api_model extends CI_Model{
         }
     }
     function deletePhoto($id=NULL,$user=NULL){
+        $this->db->select('image');
+        $this->db->from('user_image');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        $image = $query->row();
+        unlink("uploads/photo/".$image->image);
+
         $this->db->where('id',$id);
         $this->db->where('userID',$user);
         if($this->db->delete('user_image')){

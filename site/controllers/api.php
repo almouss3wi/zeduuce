@@ -997,11 +997,11 @@ class Api extends MX_Controller{
         echo json_encode($data);
     }
     function deletePhoto($user){
-        $imagePost = $this->input->post('image');
-        $image = json_decode($imagePost,true);
-        if($image){
-            for($i=0;$i<count($image); $i++){
-                $this->api->deletePhoto($image[$i],$user);
+        $images = $this->input->post('image');
+        //$image = json_decode($imagePost,true);
+        if($images){
+            for($i=0;$i<count($images); $i++){
+                $this->api->deletePhoto($images[$i],$user);
             }
             $data['message'] = 'OK. Go!';
             $data['error'] = false;
