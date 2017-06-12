@@ -2,17 +2,40 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 main-left">
-                <p class="f12">Profilenr. <?php echo $item->id; ?></p>
-                <div class="avatar_img">
-                    <?php if ($avatar) { ?>
-                        <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/photo/<?php echo $avatar; ?>&w=260&h=260&q=100"
-                             alt="" class="img-responsive"/>
-                    <?php } else { ?>
-                        <img src="<?php echo base_url(); ?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
-                    <?php } ?>
+                <!--<p class="f12">Profilenr. <?php /*echo $item->id; */?></p>-->
+                <div id="sync1" class="owl-carousel">
+                    <?php if($photo){ foreach($photo as $row){?>
+                        <div class="item">
+                            <a href="javascript:void(0)">
+                                <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row->image;?>&w=263&h=263&q=100" alt="" class="img-responsive"/>
+                            </a>
+                        </div>
+                    <?php }}else{?>
+                        <div class="item">
+                            <a href="javascript:void(0)">
+                                <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
+                            </a>
+                        </div>
+                    <?php }?>
                 </div>
-                <p class="lookingfor">Jeg søger: Kvinde</p>
-                <div><?php echo $item->slogan; ?></div>
+                <div id="sync2" class="owl-carousel">
+                    <?php if($photo){ foreach($photo as $row){?>
+                        <div class="item">
+                            <a href="javascript:void(0)">
+                                <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row->image;?>&w=63&h=63&q=100" alt="" class="img-responsive"/>
+                            </a>
+                        </div>
+                    <?php }}else{?>
+                        <div class="item">
+                            <a href="javascript:void(0)">
+                                <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" width="63" height="63" class="img-responsive"/>
+                            </a>
+                        </div>
+                    <?php }?>
+                </div>
+                <?php if($item->slogan){?>
+                <p class="f12 profile_number2"><?php echo $item->slogan; ?></p>
+                <?php }?>
             </div>
             <div class="col-md-8">
                 <div class="main_right">

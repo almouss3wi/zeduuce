@@ -51,9 +51,10 @@ class User extends MX_Controller
 
         $photo = $this->user->getPhoto($id);
         if ($photo) {
-            $data['avatar'] = $photo[0]->image;
+            /*$data['avatar'] = $photo[0]->image;*/
+            $data['photo'] = $photo;
         } else {
-            $data['avatar'] = "";
+            $data['photo'] = "";
         }
         actionUser($data['user']->id, $id, 'View', 1);
         $data['favorite'] = $this->user->checkFavorite($data['user']->id, $id);
