@@ -124,7 +124,8 @@ class Banner extends CI_Controller{
     			if ($this->upload->do_upload('image')){	
     				$data_img = $this->upload->data();
     			}else{
-    				$this->session->set_flashdata('message',"Upload image failed");
+    			    //var_dump($this->upload->error_msg);exit();
+    				$this->session->set_flashdata('error',"Upload image failed");
                     redirect(site_url($this->module_name.'/banner/add'));
     			}
     		}else {
@@ -143,7 +144,8 @@ class Banner extends CI_Controller{
                 $this->session->set_flashdata('message',lang('admin.save_successful'));
                 redirect(site_url($this->module_name.'/banner/index'));
             }else{
-                $this->message = lang('admin.save_unsuccessful');
+                $this->session->set_flashdata('error',lang('admin.save_unsuccessful'));
+                redirect(site_url($this->module_name.'/banner/add'));
             }
         }
         $data['title'] = lang('admin.add');

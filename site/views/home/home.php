@@ -1,10 +1,17 @@
 <?php $user = $this->session->userdata['user'];?>
-<section class="banner2">
+<section class="banner_custom mt150">
     <div class="container">
         <div class="row">
-            <a class="text-center" href="javascript:void(0)">
-                <img src="<?php echo base_url();?>templates/img/banner.jpg" alt="" class="img-responsive" style="width: 100%;"/>
-            </a>
+            <div class="col-lg-12">
+                <div class="owl_bannner_custom owl-carousel">
+                    <?php foreach($listImages as $image){?>
+                    <div class="item">
+                        <img src="<?php echo base_url();?>uploads/banner/<?php echo $image->image;?>" alt="" class="img-responsive">
+                    </div>
+                    <?php }?>
+                </div>
+
+            </div>
         </div>
     </div>
 </section>

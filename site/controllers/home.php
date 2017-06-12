@@ -51,6 +51,7 @@ class Home extends MX_Controller {
         }
         $data['listUser'] = $users;
         $data['listPro'] = $this->tilbud->getData(20,0);
+        $data['listImages'] = $this->user->getGalleryImages(7);
         $data['user'] = $user;
 		$this->load->view('templates', $data);
 	}

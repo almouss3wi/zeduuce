@@ -665,5 +665,20 @@ class User_model extends CI_Model{
         $query = $this->db->get()->result();
         return $query;
     }
+
+    /**
+     * @param $category_id
+     * @return mixed
+     */
+    function getGalleryImages($category_id){
+        $this->db->select("image");
+        $this->db->from("banner_banner");
+        $this->db->where("category_id", $category_id);
+        $this->db->where("bl_active", 1);
+        $this->db->order_by('ordering','ASC');
+
+        $query = $this->db->get()->result();
+        return $query;
+    }
     /** The End*/
 }

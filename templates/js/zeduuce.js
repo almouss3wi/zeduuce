@@ -239,6 +239,20 @@ $(document).ready(function () {
         itemsMobile: true // itemsMobile disabled - inherit from itemsTablet option
     });
 
+    var owl6 = $(".owl_bannner_custom");
+    owl6.owlCarousel({
+        autoPlay:5000,
+        autoPlayHoverPause:true,
+        scrollPerPage : true,
+        navigation : false,
+        pagination: false,
+        items : 4, //10 items above 1000px browser width
+        itemsDesktop : [1000,4], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,3], // betweem 900px and 601px
+        itemsTablet: [600,2], //2 items between 600 and 0
+        itemsMobile : true // itemsMobile disabled - inherit from itemsTablet option
+    });
+
     $(".fancybox").fancybox({
         openEffect: 'none',
         closeEffect: 'none'
