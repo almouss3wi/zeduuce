@@ -667,6 +667,7 @@ class User_model extends CI_Model{
     }
 
     /**
+     * TODO: Getting images for top gallery
      * @param $category_id
      * @return mixed
      */
