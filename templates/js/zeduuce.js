@@ -1,4 +1,14 @@
 //Zeduuce JS Layout HTML 2016 - Le Duc Cuong - skype: lecuong2585
+
+$(window).scroll(function() {
+    var scroll = $(window).scrollTop();
+    if (scroll >= 50) {
+        $(".navbar").addClass("border_white");
+    } else {
+        $(".navbar").removeClass("border_white");
+    }
+});
+
 // CSG Bootstrap Inputs
 (function ($) {
     "use strict";

@@ -8,3 +8,4 @@ site/config/config.php
 site/config/database.php
 site/logs/index.html
 thumb/cache/
+cometchat/writable/cache/

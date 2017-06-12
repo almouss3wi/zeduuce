@@ -636,7 +636,7 @@ padding-left:25px;
     border-radius: 0px 0px 3px 3px; 
     -webkit-border-radius: 0px 0px 3px 3px; 
     -moz-border-radius: 0px 0px 3px 3px;
-    padding-bottom: 10px;
+    /*padding-bottom: 10px;*/
 }
 #owl_latest_profiles .owl-item .item-img, #owl_public_invitations .owl-item .item-img, #newest_profiles .owl-item .item-img {
     min-height: auto;
@@ -857,7 +857,7 @@ padding-left:25px;
 }
 .price {
 	color: #fff;
-	font-size: 22px;
+	font-size: 20px;
 	float: right;
 	margin-bottom: 10px;
 }
@@ -3004,7 +3004,7 @@ ul.list_uploaded .fa {
     margin-bottom: 5px;
     line-height: 1.3em;
 }
-.dates, .times {
+.box_info_favorite .profile_number {
     color: #5b5a5a;
 }
 .btnShoutout {
@@ -3023,7 +3023,7 @@ ul.list_uploaded .fa {
     display: block;
     position: absolute;
     right: -5px;
-    top: -8px;
+    top: 10px;
     border-radius: 50%;
     font-size: 10px;
     font-style: normal;
@@ -3192,3 +3192,29 @@ ul.list_uploaded .fa {
 .btnCreate_shoutout {
     text-align: center;
 }
+
+.banner_custom {
+    padding-top: 40px;   
+}
+.owl_bannner_custom {
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+.border_white:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -2px;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+}
+/* .border_white:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -4px;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+} */
