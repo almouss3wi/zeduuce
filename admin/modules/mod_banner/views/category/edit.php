@@ -92,7 +92,7 @@
     <div class="row margin-bottom-10">
         <div class="col-sm-12">
             <div class="form-group form-material text-center">
-                <button type="submit" class="btn btn-primary"><?php echo lang('admin.add');?></button>
+                <button type="submit" class="btn btn-primary"><?php echo lang('admin.edit');?></button>
             </div>
         </div>
     </div>

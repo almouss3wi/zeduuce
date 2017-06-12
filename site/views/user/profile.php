@@ -51,7 +51,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-9">
-                                <h4><i>Jeg søger: Kvinde</i></h4>
+                                <!--<h4><i>Jeg søger: Kvinde</i></h4>-->
                                 <div><?php echo $item->description; ?></div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                             <?php echo modules::run('myphoto/myphoto/index', $item->id); ?>
                         </div>
 
-                        <div class="row mt30">
+                        <!--<div class="row mt30">
                             <div class="col-lg-12">
                                 <h3 class="text-uppercase">Instagram billeder</h3>
                             </div>
@@ -163,19 +163,19 @@
                                 <div id="instagram_photo" class="owl-carousel mypicture">
                                     <div class="item">
                                         <a class="fancybox" rel="gallery2"
-                                           href="<?php echo base_url(); ?>templates/img/6_.jpg"><img
-                                                    src="<?php echo base_url(); ?>templates/img/6.jpg" alt=""
+                                           href="<?php /*echo base_url(); */?>templates/img/6_.jpg"><img
+                                                    src="<?php /*echo base_url(); */?>templates/img/6.jpg" alt=""
                                                     class="img-responsive"></a>
                                     </div>
                                     <div class="item">
                                         <a class="fancybox" rel="gallery2"
-                                           href="<?php echo base_url(); ?>templates/img/6_.jpg"><img
-                                                    src="<?php echo base_url(); ?>templates/img/6.jpg" alt=""
+                                           href="<?php /*echo base_url(); */?>templates/img/6_.jpg"><img
+                                                    src="<?php /*echo base_url(); */?>templates/img/6.jpg" alt=""
                                                     class="img-responsive"></a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>
