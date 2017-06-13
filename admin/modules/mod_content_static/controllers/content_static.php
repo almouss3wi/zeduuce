@@ -17,7 +17,9 @@ class Content_Static extends CI_Controller{
             $data['add'] = $this->module_name.'/content_static/add';
         }
         //Xoa key khi search
-        $this->session->unset_userdata('search');
+        if($this->session->userdata('search')) {
+            $this->session->unset_userdata('search');
+        }
         if($page > 0){
             $this->session->set_userdata('offset',$page);
         }else{
