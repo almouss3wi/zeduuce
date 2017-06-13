@@ -20,12 +20,12 @@ class Banner extends CI_Controller{
         }
         //Xoa key khi search
         //Xoa key khi search
-        /*$this->session->unset_userdata('search');
+        //$this->session->unset_userdata('search');
         if($page > 0){
             $this->session->set_userdata('offset',$page);
         }else{
             $this->session->unset_userdata('offset');
-        }*/
+        }
         $data['category'] = $this->category->get_all_category();
         $data['title'] = lang('admin.list');
         $data['page'] = 'banner/list';
