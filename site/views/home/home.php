@@ -56,6 +56,71 @@
                 <div class="border-customer"></div>
             </div>
         </div>
+        <div class="row">
+            <div class="latest_profiles">
+                <div class="col-lg-6">
+                    <h2 class="title2">Nyeste profiler</h2>
+                    <div id="owl_latest_profiles" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="item-img">
+                                <a href="#"><img src="img/peo12_268x268.jpg" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="info">
+                                <h3>Heidi H.</h3>
+                                <p>Age: 42</p>
+                                <p>Viborg</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-img">
+                                <a href="#"><img src="img/peo13_268x268.jpg" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="info">
+                                <h3>Orient X.</h3>
+                                <p>Age: 42</p>
+                                <p>Viborg</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-img">
+                                <a href="#"><img src="img/peo12_268x268.jpg" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="info">
+                                <h3>Heidi H.</h3>
+                                <p>Age: 42</p>
+                                <p>Viborg</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-img">
+                                <a href="#"><img src="img/peo13_268x268.jpg" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="info">
+                                <h3>Orient X.</h3>
+                                <p>Age: 42</p>
+                                <p>Viborg</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="owl_latest_profiles_text">
+                        <h4><?php echo $article->title;?></h4>
+                        <?php echo $article->content;?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="border-customer"></div>
+            </div>
+        </div>
         <div class="row latest-offers">
             <div class="col-lg-12">
                 <h2 class="title2">Nyeste tilbud</h2>
@@ -83,6 +148,133 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="border-customer"></div>
+            </div>
+        </div>
+        <div class="row latest-offers">
+            <div class="col-lg-6">
+                <h2 class="title2">Nyeste events</h2>
+                <div id="owl_latest_events" class="owl-carousel">
+                    <div class="item">
+                        <div class="item-img">
+                            <img src="img/img05.jpg" alt="" class="img-responsive">
+                            <span class="cate">Restaurant</span>
+                            <div class="item-content">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <h3>Restaurant Sletten</h3>
+                                        <p>Toptunet og erfarne Michelinkokke byder igen på en udsøgt gourmetoplevelse, på Restaurant Sletten i det smukke Humlebæk.</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="avatar_bottom">
+                                            <a class="has-tooltip west" href="#">
+                                                <img src="img/peo12-small.jpg" alt="" class="img-responsive img_clear">
+                                                <span class="tooltip">
+                                                        <img src="img/peo12-small-2.jpg" alt="">
+                                                        <h3>Heidi H.</h3>
+                                                        <span>Alder: 29 år
+                                                            <br> Postnr. 2000</span>
+                                                    </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-img">
+                            <span class="cate">Ophold</span>
+                            <img src="img/img06.jpg" alt="" class="img-responsive">
+                            <div class="item-content">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <h3>Restaurant Sletten</h3>
+                                        <p>Toptunet og erfarne Michelinkokke byder igen på en udsøgt gourmetoplevelse, på Restaurant Sletten i det smukke Humlebæk.</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="avatar_bottom">
+                                            <a class="has-tooltip west" href="#">
+                                                <img src="img/peo12-small.jpg" alt="" class="img-responsive img_clear">
+                                                <span class="tooltip">
+                                                        <img src="img/peo12-small-2.jpg" alt="">
+                                                        <h3>Heidi H.</h3>
+                                                        <span>Alder: 29 år
+                                                            <br> Postnr. 2000</span>
+                                                    </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-img">
+                            <img src="img/img05.jpg" alt="" class="img-responsive">
+                            <span class="cate">Restaurant</span>
+                            <div class="item-content">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <h3>Restaurant Sletten</h3>
+                                        <p>Toptunet og erfarne Michelinkokke byder igen på en udsøgt gourmetoplevelse, på Restaurant Sletten i det smukke Humlebæk.</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="avatar_bottom">
+                                            <a class="has-tooltip west" href="#">
+                                                <img src="img/peo12-small.jpg" alt="" class="img-responsive img_clear">
+                                                <span class="tooltip">
+                                                        <img src="img/peo12-small-2.jpg" alt="">
+                                                        <h3>Heidi H.</h3>
+                                                        <span>Alder: 29 år
+                                                            <br> Postnr. 2000</span>
+                                                    </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-img">
+                            <span class="cate">Ophold</span>
+                            <img src="img/img06.jpg" alt="" class="img-responsive">
+                            <div class="item-content">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <h3>Restaurant Sletten</h3>
+                                        <p>Toptunet og erfarne Michelinkokke byder igen på en udsøgt gourmetoplevelse, på Restaurant Sletten i det smukke Humlebæk.</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="avatar_bottom">
+                                            <a class="has-tooltip west" href="#">
+                                                <img src="img/peo12-small.jpg" alt="" class="img-responsive img_clear">
+                                                <span class="tooltip">
+                                                        <img src="img/peo12-small-2.jpg" alt="">
+                                                        <h3>Heidi H.</h3>
+                                                        <span>Alder: 29 år
+                                                            <br> Postnr. 2000</span>
+                                                    </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="latest_popular_events">
+                    <img src="img/img05_555x305.jpg" alt="" class="img-responsive">
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="border-customer"></div>

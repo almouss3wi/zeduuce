@@ -17,6 +17,8 @@ class Home extends MX_Controller {
 
         $user = $this->session->userdata('user');
         if($user){
+            $data['article'] = $this->general_model->getNewsStatic('home_article');
+            $data['listImages'] = $this->user->getGalleryImages(7);
             $data['page'] = 'home/home';
         }else{
             $data['page'] = 'home/index';
@@ -51,7 +53,6 @@ class Home extends MX_Controller {
         }
         $data['listUser'] = $users;
         $data['listPro'] = $this->tilbud->getData(20,0);
-        $data['listImages'] = $this->user->getGalleryImages(7);
         $data['user'] = $user;
 		$this->load->view('templates', $data);
 	}
