@@ -41,6 +41,10 @@
         </div>
     </div>
 
+    <?php if($item->slogan){?>
+        <p class="f12 profile_number2"><?php echo $item->slogan; ?></p>
+    <?php }?>
+
     <ul class="list_info_profile">
         <li><a href="<?php echo site_url('user/profile/'.$item->id.'/'.seoUrl($item->name))?>">Se min Profil</a></li>
         <li><a href="<?php echo site_url('user/myphoto')?>">Mine Billeder (<span class="red" id="num-myphoto"><?php if($numphoto){echo $numphoto;}else{echo '0';}?></span>)</a></li>
