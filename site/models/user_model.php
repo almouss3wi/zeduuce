@@ -682,6 +682,10 @@ class User_model extends CI_Model{
         return $query;
     }
 
+    /**
+     * TODO: getting new events
+     * @return mixed
+     */
     function getNewEvents(){
         $this->db->select("d.*, MIN(di.image) image, u.name, u.birthday, u.code, u.avatar");
         $this->db->from("dating as d");

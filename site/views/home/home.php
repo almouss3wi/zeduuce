@@ -44,7 +44,7 @@
                         <div class="info">
                             <h3><?php echo $row['name'];?></h3>
                             <p>Age: <?php echo $yearold;?></p>
-                            <p>Viborg</p>
+                            <p><?php echo $row['city'];?></p>
                         </div>
                     </div>
                     <?php }}?>
@@ -61,50 +61,32 @@
                 <div class="col-lg-6">
                     <h2 class="title2">Nyeste profiler</h2>
                     <div id="owl_latest_profiles" class="owl-carousel owl-theme">
+                        <?php
+                        if($listUser){foreach($listUser as $row){
+                        if($row['birthday']){
+                            $yearold = date('Y',time()) - explode('/',$row['birthday'])[2];
+                        }else{
+                            $yearold = "";
+                        }
+                        ?>
                         <div class="item">
                             <div class="item-img">
-                                <a href="#"><img src="img/peo12_268x268.jpg" alt="" class="img-responsive">
+                                <a href="<?php echo site_url('user/profile/'.$row['id'].'/'.seoUrl($row['name']));?>">
+                                    <?php if($row['avatar']){if($row['facebook']){?>
+                                        <img src="https://graph.facebook.com/<?php echo $row['facebook'];?>/picture?type=large" alt="" class="img-responsive"/>
+                                    <?php }else{ ?>
+                                        <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row['avatar'];?>&w=268&h=268&q=100" alt="" class="img-responsive"/>
+                                    <?php }}else{?>
+                                        <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
+                                    <?php }?>
                                 </a>
                             </div>
                             <div class="info">
-                                <h3>Heidi H.</h3>
-                                <p>Age: 42</p>
-                                <p>Viborg</p>
+                                <h3><?php echo $row['name'];?></h3>
+                                <p>Age: <?php echo $yearold;?></p>
                             </div>
                         </div>
-                        <div class="item">
-                            <div class="item-img">
-                                <a href="#"><img src="img/peo13_268x268.jpg" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="info">
-                                <h3>Orient X.</h3>
-                                <p>Age: 42</p>
-                                <p>Viborg</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-img">
-                                <a href="#"><img src="img/peo12_268x268.jpg" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="info">
-                                <h3>Heidi H.</h3>
-                                <p>Age: 42</p>
-                                <p>Viborg</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-img">
-                                <a href="#"><img src="img/peo13_268x268.jpg" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="info">
-                                <h3>Orient X.</h3>
-                                <p>Age: 42</p>
-                                <p>Viborg</p>
-                            </div>
-                        </div>
+                        <?php }}?>
                     </div>
                 </div>
                 <div class="col-lg-6">

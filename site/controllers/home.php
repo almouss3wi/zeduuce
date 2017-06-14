@@ -38,6 +38,7 @@ class Home extends MX_Controller {
                 $users[$i]['name'] = $row->name;
                 $users[$i]['birthday'] = $row->birthday;
                 $users[$i]['facebook'] = $row->facebook;
+                $users[$i]['city'] = $row->city;
                 if($row->facebook && $row->avatar){
                     $users[$i]['avatar'] = $row->avatar;
                 }else{
