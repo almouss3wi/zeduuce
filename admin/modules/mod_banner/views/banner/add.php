@@ -63,7 +63,7 @@
         </div>
         <div class="col-sm-9">
             <div class="form-material">
-                <textarea class="form-control tinyeditor" id="description1" name="description"></textarea>
+                <textarea class="form-control tinyeditor" id="description" name="description"></textarea>
             </div>
         </div>
     </div>
