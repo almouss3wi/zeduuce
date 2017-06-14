@@ -18,7 +18,8 @@ class Home extends MX_Controller {
         $user = $this->session->userdata('user');
         if($user){
             $data['article'] = $this->general_model->getNewsStatic('home_article');
-            $data['listImages'] = $this->user->getGalleryImages(7);
+            $data['rightBanner'] = $this->user->getImagesFromCatgoryId(8);
+            $data['listImages'] = $this->user->getImagesFromCatgoryId(7);
             $data['page'] = 'home/home';
         }else{
             $data['page'] = 'home/index';

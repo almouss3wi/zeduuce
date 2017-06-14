@@ -671,7 +671,7 @@ class User_model extends CI_Model{
      * @param $category_id
      * @return mixed
      */
-    function getGalleryImages($category_id){
+    function getImagesFromCatgoryId($category_id){
         $this->db->select("image");
         $this->db->from("banner_banner");
         $this->db->where("category_id", $category_id);

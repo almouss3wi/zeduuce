@@ -267,10 +267,9 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-6">
                 <div class="latest_popular_events">
-                    <img src="img/img05_555x305.jpg" alt="" class="img-responsive">
+                    <img src="<?php echo base_url();?>uploads/banner/<?php echo $rightBanner[0]->image;?>" alt="" class="img-responsive">
                 </div>
             </div>
         </div>
