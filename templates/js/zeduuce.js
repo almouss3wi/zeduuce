@@ -161,6 +161,37 @@ $(document).ready(function () {
         scrollPerPage : true
     });
 
+    // owl_latest_profiles
+    var owl_latest_profiles = $("#owl_latest_profiles");
+    owl_latest_profiles.owlCarousel({
+        pagination: false,
+        navigation: true,
+        navigationText: [
+            "<i class='fa fa-chevron-left fa-3x'></i>",
+            "<i class='fa fa-chevron-right fa-3x'></i>"],
+        items : 2, //10 items above 1000px browser width
+        itemsDesktop : [1000,2], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,2], // betweem 900px and 601px
+        itemsTablet: [600,2], //2 items between 600 and 0
+        itemsMobile : true // itemsMobile disabled - inherit from itemsTablet option
+    });
+
+    // owl_latest_events
+    var owl_latest_events = $("#owl_latest_events");
+    owl_latest_events.owlCarousel({
+        margin: 0,
+        pagination: false,
+        navigation: true,
+        navigationText: [
+            "<i class='fa fa-chevron-left fa-3x'></i>",
+            "<i class='fa fa-chevron-right fa-3x'></i>"],
+        items : 1, //10 items above 1000px browser width
+        itemsDesktop : [1000,1], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,1], // betweem 900px and 601px
+        itemsTablet: [600,1], //2 items between 600 and 0
+        itemsMobile : true // itemsMobile disabled - inherit from itemsTablet option
+    });
+
 
     /*var owl2 = $("#owl-chat2");
     owl2.owlCarousel({

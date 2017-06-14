@@ -20,6 +20,7 @@ class Home extends MX_Controller {
             $data['article'] = $this->general_model->getNewsStatic('home_article');
             $data['rightBanner'] = $this->user->getImagesFromCatgoryId(8);
             $data['listImages'] = $this->user->getImagesFromCatgoryId(7);
+            $data['newEvents'] = $this->user->getNewEvents();
             $data['page'] = 'home/home';
         }else{
             $data['page'] = 'home/index';

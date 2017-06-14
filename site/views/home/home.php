@@ -157,25 +157,32 @@
             <div class="col-lg-6">
                 <h2 class="title2">Nyeste events</h2>
                 <div id="owl_latest_events" class="owl-carousel">
+                    <?php foreach($newEvents as $event){
+                        if($event->birthday){
+                            $yearold = date('Y',time()) - explode('/',$event->birthday)[2];
+                        }else{
+                            $yearold = "";
+                        }
+                        ?>
                     <div class="item">
                         <div class="item-img">
-                            <img src="img/img05.jpg" alt="" class="img-responsive">
-                            <span class="cate">Restaurant</span>
+                            <img src="<?php echo site_url()?>uploads/invita/<?php echo $event->image;?>" alt="" class="img-responsive">
+                            <!--<span class="cate">Restaurant</span>-->
                             <div class="item-content">
                                 <div class="row">
                                     <div class="col-lg-10">
-                                        <h3>Restaurant Sletten</h3>
-                                        <p>Toptunet og erfarne Michelinkokke byder igen på en udsøgt gourmetoplevelse, på Restaurant Sletten i det smukke Humlebæk.</p>
+                                        <h3><?php echo $event->title;?></h3>
+                                        <p><?php echo $event->content;?></p>
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="avatar_bottom">
                                             <a class="has-tooltip west" href="#">
-                                                <img src="img/peo12-small.jpg" alt="" class="img-responsive img_clear">
+                                                <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive img_clear">
                                                 <span class="tooltip">
-                                                        <img src="img/peo12-small-2.jpg" alt="">
-                                                        <h3>Heidi H.</h3>
-                                                        <span>Alder: 29 år
-                                                            <br> Postnr. 2000</span>
+                                                        <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="">
+                                                        <h3><?php echo $event->name;?></h3>
+                                                        <span>Alder: <?php echo $yearold;?> år
+                                                            <br> Postnr. <?php echo $event->code;?></span>
                                                     </span>
                                             </a>
                                         </div>
@@ -184,87 +191,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="item-img">
-                            <span class="cate">Ophold</span>
-                            <img src="img/img06.jpg" alt="" class="img-responsive">
-                            <div class="item-content">
-                                <div class="row">
-                                    <div class="col-lg-10">
-                                        <h3>Restaurant Sletten</h3>
-                                        <p>Toptunet og erfarne Michelinkokke byder igen på en udsøgt gourmetoplevelse, på Restaurant Sletten i det smukke Humlebæk.</p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="avatar_bottom">
-                                            <a class="has-tooltip west" href="#">
-                                                <img src="img/peo12-small.jpg" alt="" class="img-responsive img_clear">
-                                                <span class="tooltip">
-                                                        <img src="img/peo12-small-2.jpg" alt="">
-                                                        <h3>Heidi H.</h3>
-                                                        <span>Alder: 29 år
-                                                            <br> Postnr. 2000</span>
-                                                    </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="item-img">
-                            <img src="img/img05.jpg" alt="" class="img-responsive">
-                            <span class="cate">Restaurant</span>
-                            <div class="item-content">
-                                <div class="row">
-                                    <div class="col-lg-10">
-                                        <h3>Restaurant Sletten</h3>
-                                        <p>Toptunet og erfarne Michelinkokke byder igen på en udsøgt gourmetoplevelse, på Restaurant Sletten i det smukke Humlebæk.</p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="avatar_bottom">
-                                            <a class="has-tooltip west" href="#">
-                                                <img src="img/peo12-small.jpg" alt="" class="img-responsive img_clear">
-                                                <span class="tooltip">
-                                                        <img src="img/peo12-small-2.jpg" alt="">
-                                                        <h3>Heidi H.</h3>
-                                                        <span>Alder: 29 år
-                                                            <br> Postnr. 2000</span>
-                                                    </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="item-img">
-                            <span class="cate">Ophold</span>
-                            <img src="img/img06.jpg" alt="" class="img-responsive">
-                            <div class="item-content">
-                                <div class="row">
-                                    <div class="col-lg-10">
-                                        <h3>Restaurant Sletten</h3>
-                                        <p>Toptunet og erfarne Michelinkokke byder igen på en udsøgt gourmetoplevelse, på Restaurant Sletten i det smukke Humlebæk.</p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="avatar_bottom">
-                                            <a class="has-tooltip west" href="#">
-                                                <img src="img/peo12-small.jpg" alt="" class="img-responsive img_clear">
-                                                <span class="tooltip">
-                                                        <img src="img/peo12-small-2.jpg" alt="">
-                                                        <h3>Heidi H.</h3>
-                                                        <span>Alder: 29 år
-                                                            <br> Postnr. 2000</span>
-                                                    </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php }?>
                 </div>
             </div>
             <div class="col-lg-6">

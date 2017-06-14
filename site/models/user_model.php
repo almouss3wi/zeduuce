@@ -681,5 +681,17 @@ class User_model extends CI_Model{
         $query = $this->db->get()->result();
         return $query;
     }
+
+    function getNewEvents(){
+        $this->db->select("d.*, MIN(di.image) image, u.name, u.birthday, u.code, u.avatar");
+        $this->db->from("dating as d");
+        $this->db->join("dating_image as di", "d.id = di.datingID");
+        $this->db->join("user as u", "d.userID = u.id");
+        $this->db->where("d.bl_active", 1);
+        $this->db->where("d.times_end >= ", time());
+
+        $result = $this->db->get()->result();
+        return $result;
+    }
     /** The End*/
 }

@@ -109,7 +109,7 @@ class Invitationer extends MX_Controller {
     		$config['encrypt_name']	= TRUE;  //rename to random string image
             $this->load->library('upload', $config);
             if(isset($_FILES['image']['name'])){
-                $data_img = $this->upload->do_multi_upload('image');
+                $data_img = $this->upload->do_upload('image');
     			if ($data_img){	
     				$data_img = $data_img;
     			}else {
