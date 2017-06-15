@@ -696,24 +696,12 @@ class User_model extends CI_Model{
         $result = $this->db->get()->result();
         $i = 0;
         foreach($result as $item){
-            $result[$i]->image = $this->_getEventImage($item->id);
+            $images = $this->getImageDating($item->id);
+            $result[$i]->image = $images[0]->image;
             $i++;
         }
         return $result;
     }
 
-    /**
-     * @param $datingId
-     * @return mixed
-     */
-    private function _getEventImage($datingId){
-        $this->db->select("image");
-        $this->db->from("dating_image");
-        $this->db->where("datingID", $datingId);
-        $this->db->limit(1);
-
-        $row = $this->db->get()->row();
-        return $row->image;
-    }
     /** The End*/
 }
