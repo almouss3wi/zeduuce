@@ -687,15 +687,33 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getNewEvents(){
-        $this->db->select("d.*, MIN(di.image) image, u.name, u.birthday, u.code, u.avatar");
+        $this->db->select("d.*, u.name, u.birthday, u.code, u.avatar");
         $this->db->from("dating as d");
-        $this->db->join("dating_image as di", "d.id = di.datingID");
         $this->db->join("user as u", "d.userID = u.id");
         $this->db->where("d.bl_active", 1);
         $this->db->where("d.times_end >= ", time());
 
         $result = $this->db->get()->result();
+        $i = 0;
+        foreach($result as $item){
+            $result[$i]->image = $this->_getEventImage($item->id);
+            $i++;
+        }
         return $result;
+    }
+
+    /**
+     * @param $datingId
+     * @return mixed
+     */
+    private function _getEventImage($datingId){
+        $this->db->select("image");
+        $this->db->from("dating_image");
+        $this->db->where("datingID", $datingId);
+        $this->db->limit(1);
+
+        $row = $this->db->get()->row();
+        return $row->image;
     }
     /** The End*/
 }
