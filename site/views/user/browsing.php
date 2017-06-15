@@ -36,10 +36,11 @@
                                         <?php }?>
                                     </select>
                                 </div>
+                                <?php $height_to = $height_to?$height_to:230;?>
                                 <div class="col-sm-6 col-md-6 col-xs-6">
                                     <select name="height_to" class="form-control">
                                         <?php for($i=100;$i<231;$i++){?>
-                                        <option <?php if($height_to == $i){echo 'selected="true"';}else{if($i==230){echo 'selected="true"';}}?> value="<?php echo $i;?>"><?php echo $i;?> cm</option>
+                                        <option <?php if($height_to == $i){echo 'selected="true';}?> value="<?php echo $i;?>"><?php echo $i;?> cm</option>
                                         <?php }?>
                                     </select>
                                 </div>
