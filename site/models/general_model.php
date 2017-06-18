@@ -64,7 +64,7 @@ class General_model extends CI_Model{
         $configEmail['smtp_host'] = 'asmtp.unoeuro.com';
         $configEmail['smtp_user'] = 'noreply@zeduuce.com';
         $configEmail['smtp_pass'] = 'yi16wunegapu';
-        $configEmail['smtp_port'] = 25;
+        $configEmail['smtp_port'] = 587;
         $configEmail['smtp_crypto'] = 'tls';
         $configEmail['smtp_timeout'] = 30;
 
@@ -76,7 +76,7 @@ class General_model extends CI_Model{
                 $this->email->clear();
                 $this->email->to($email);
                 if($from == NULL ){
-                    $this->email->from('info@zeduuce.dk ','Zeduuce.com');
+                    $this->email->from('noreply@zeduuce.com ','Zeduuce.com');
                 }
                 else{
                     $this->email->from($from,'Zeduuce.com');
