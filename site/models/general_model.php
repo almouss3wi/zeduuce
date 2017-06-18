@@ -84,6 +84,7 @@ class General_model extends CI_Model{
                 $this->email->subject($subject);
                 $this->email->message($content);
                 $this->email->send();
+                print_r($this->email->print_debugger());exit();
             }
         } catch (Exception $e){
             return false;
