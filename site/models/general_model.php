@@ -47,4 +47,48 @@ class General_model extends CI_Model{
             ->get()->row();
         return $query;
     }
+
+    /**
+     * @param $emails
+     * @param $subject
+     * @param $content
+     * @param array $data
+     * @param null $from
+     * @param string $mailType
+     * @return bool
+     */
+    function sendEmail($emails, $subject, $content, $data = array(), $from = null, $mailType = 'html')
+    {
+        $configEmail['mailtype'] = $mailType;
+        $configEmail['protocol'] = 'smtp';
+        $configEmail['smtp_host'] = 'smtp.gmail.com';
+        $configEmail['smtp_user'] = 'nttrung211@gmail.com';
+        $configEmail['smtp_pass'] = 'naka1986';
+        $configEmail['smtp_port'] = 25;
+        $configEmail['smtp_crypto'] = 'tls';
+        $configEmail['smtp_timeout'] = 30;
+
+        $this->load->library('email');
+        $this->email->set_newline("\r\n");
+        $this->email->initialize($configEmail);
+        try {
+            foreach($emails as $email){
+                $this->email->clear();
+                $this->email->to($email);
+                if($from == NULL ){
+                    $this->email->from('info@zeduuce.dk ','Zeduuce.com');
+                }
+                else{
+                    $this->email->from($from,'Zeduuce.com');
+                }
+                $this->email->subject($subject);
+                $this->email->message($content);
+                $this->email->send();
+                print_r($this->email->print_debugger());exit();
+            }
+        } catch (Exception $e){
+            return false;
+        }
+        return true;
+    }
 }

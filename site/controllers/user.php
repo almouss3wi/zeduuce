@@ -1484,6 +1484,11 @@ class User extends MX_Controller
         $data['page'] = 'user/receivedkisses';
         $this->load->view('templates', $data);
     }
+
+    function testEmail(){
+        var_dump($this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Test subject', 'Test content'));
+        exit();
+    }
 }
 
 /* End of file welcome.php */
