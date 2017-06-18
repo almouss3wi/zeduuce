@@ -60,7 +60,7 @@ class General_model extends CI_Model{
     function sendEmail($emails, $subject, $content, $data = array(), $from = null, $mailType = 'html')
     {
         $configEmail['mailtype'] = $mailType;
-        $configEmail['protocol'] = 'mail';
+        $configEmail['protocol'] = 'sendmail';
         /*$configEmail['protocol'] = 'smtp';
         $configEmail['smtp_host'] = 'smtp.gmail.com';
         $configEmail['smtp_user'] = 'nttrung211@gmail.com';
