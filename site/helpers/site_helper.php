@@ -264,3 +264,14 @@ function isDated($user_id, $invited_user_id){
         return false;
     }
 }
+
+/**
+ * @param $url
+ * @param $message
+ * @return a controller
+ */
+function customRedirectWithMessage($url, $message){
+    $ci = &get_instance();
+    $ci->session->set_flashdata('message', $message);
+    redirect($url);
+}

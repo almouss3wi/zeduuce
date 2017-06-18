@@ -297,8 +297,8 @@
                     <div class="col-md-2 pad0 i_warning">
                         <img src="<?php echo base_url();?>/templates/img/i_warning.png" alt="" class="img-responsive">
                     </div>
-                    <div class="col-md-8 text-center pad0">
-                        <p class="f19" id="error-content">&nbsp;</p>
+                    <div class="col-md-10 text-center pad0">
+                        <p class="f19" id="error-content">&nbsp;<?php echo $this->session->flashdata('message');?></p>
                     </div>
                 </div>
             </div>
@@ -336,6 +336,12 @@
 <script src="<?php echo base_url().'templates/';?>js/init.js"></script>
 <script src="<?php echo base_url().'templates/';?>js/zeduuce.js"></script>
 <script>
+    <?php if($this->session->flashdata('message')){?>
+    $( document ).ready(function() {
+        $('#error-content').html(<?php $this->session->flashdata('message');?>);
+        $('#PUerror').modal('show');
+    });
+    <?php }?>
     function sendLoginFB(response){
 		//console.log(response);
         $.ajax({

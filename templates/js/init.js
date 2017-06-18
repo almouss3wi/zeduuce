@@ -104,6 +104,15 @@ $(document).ready(function(){
     $(window).scroll(function(){
         $.validator.reposition();
     });
+
+    $("#forgotForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        }
+    });
 });
 $(window).load(function(e){
     $('#loader').fadeOut();

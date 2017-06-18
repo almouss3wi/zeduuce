@@ -1024,6 +1024,81 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
+    /**
+     * TODO: handle forgot password
+     * @author T.Trung
+     */
+    public function forgotPassHandler()
+    {
+        $email = $this->input->post('email');
+        //check validation
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_message('valid_email', 'Email feltet skal indeholde en gyldig email-adresse.');
+        if ($this->form_validation->run() == false) {
+            customRedirectWithMessage(site_url('user/forgotpass'), validation_errors());
+        }
+
+        $user = $this->user->getUser('', $email);
+
+        if (empty($user)) {
+            customRedirectWithMessage(site_url('user/forgotpass'), 'Denne konto er ikke registreret, skal du kontrollere igen.');
+        } else {
+            if (!empty($user->facebook)) {
+                customRedirectWithMessage(site_url('user/forgotpass'), 'Denne konto er logget af Facebook, kan ikke ændre password på denne hjemmeside.');
+            } else {
+                $new_password = $this->randomPassword(12, 1, "lower_case,upper_case,numbers");
+                $content = 'Kære ' . $user->name . '<br /><br />
+                        Din nye adgangskode er: <b>'.$new_password[0].'</b><br /><br />
+                        Har du spørgsmål kontakt info@zeduuce.com<br /><br />
+                        Med venlig hilsen<br/>
+                        <a href="'.base_url().'">Zeduuce.com®</a>';
+                $sent = $this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Zeduuce.com - Glemt adgangskode', $content);
+                if($sent === true){
+                    $data['password'] = md5($new_password[0]);
+                    $this->user->saveUser($data, $user->id);
+                    customRedirectWithMessage(base_url(), 'En email er sendt til din email, vær venlig at tjekke det, tak.');
+                }
+            }
+        }
+    }
+
+    function randomPassword($length, $count, $characters){
+
+    // $length - the length of the generated password
+    // $count - number of passwords to be generated
+    // $characters - types of characters to be used in the password
+
+    // define variables used within the function
+        $symbols = array();
+        $passwords = array();
+        $used_symbols = '';
+        $pass = '';
+
+    // an array of different character types
+        $symbols["lower_case"] = 'abcdefghijklmnopqrstuvwxyz';
+        $symbols["upper_case"] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $symbols["numbers"] = '1234567890';
+        $symbols["special_symbols"] = '!?~@#-_+<>[]{}';
+
+        $characters = explode(",", $characters); // get characters types to be used for the passsword
+        foreach ($characters as $key => $value) {
+            $used_symbols .= $symbols[$value]; // build a string with all characters
+        }
+        $symbols_length = strlen($used_symbols) - 1; //strlen starts from 0 so to get number of characters deduct 1
+
+        for ($p = 0; $p < $count; $p++) {
+            $pass = '';
+            for ($i = 0; $i < $length; $i++) {
+                $n = rand(0, $symbols_length); // get a random character from the string with all characters
+                $pass .= $used_symbols[$n]; // add the character to the password string
+            }
+            $passwords[] = $pass;
+        }
+
+        return $passwords; // return the generated password
+    }
+
     function login()
     {
         $email = $this->input->post('email', true);
@@ -1184,28 +1259,28 @@ class User extends MX_Controller
     }
 
     function addFavorite()
-{
-    $userID = $this->input->post('user', true);
-    $user = $this->session->userdata('user');
-    if ($user && $userID) {
-        $DB['user_from'] = $user->id;
-        $DB['user_to'] = $userID;
-        $DB['dt_create'] = date('Y-m-d H:i:s');
-        $DB['bl_active'] = 1;
-        $id = $this->user->addFavorite($DB);
-        if ($id) {
-            actionUser($user->id, $userID, 'Favorite', 2);
-            $data['status'] = true;
+    {
+        $userID = $this->input->post('user', true);
+        $user = $this->session->userdata('user');
+        if ($user && $userID) {
+            $DB['user_from'] = $user->id;
+            $DB['user_to'] = $userID;
+            $DB['dt_create'] = date('Y-m-d H:i:s');
+            $DB['bl_active'] = 1;
+            $id = $this->user->addFavorite($DB);
+            if ($id) {
+                actionUser($user->id, $userID, 'Favorite', 2);
+                $data['status'] = true;
+            } else {
+                $data['status'] = false;
+            }
         } else {
             $data['status'] = false;
         }
-    } else {
-        $data['status'] = false;
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
     }
-    header('Content-Type: application/json');
-    echo json_encode($data);
-    return;
-}
 
     function removeFavorite()
     {
@@ -1325,7 +1400,8 @@ class User extends MX_Controller
      * @param int $page
      * @return view layout
      */
-    function mycontactperson($page = 0){
+    function mycontactperson($page = 0)
+    {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if (!checkLogin()) {
@@ -1379,7 +1455,8 @@ class User extends MX_Controller
      * @param int $page
      * @return view layout
      */
-    function sentkisses($page = 0){
+    function sentkisses($page = 0)
+    {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if (!checkLogin()) {
@@ -1434,7 +1511,8 @@ class User extends MX_Controller
      * @param int $page
      * @return load view layout
      */
-    function receivedkisses($page = 0){
+    function receivedkisses($page = 0)
+    {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if (!checkLogin()) {
@@ -1485,7 +1563,8 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function testEmail(){
+    function testEmail()
+    {
         var_dump($this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Test subject', 'Test content'));
         exit();
     }

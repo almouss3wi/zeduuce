@@ -110,7 +110,7 @@
     <script src="<?php echo base_url().'templates/';?>js/ninja-slider.js"></script>
     <script src="<?php echo base_url().'templates/';?>js/thumbnail-slider.js"></script>
     
-    <script src="<?php echo base_url();?>templates/js/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
     <script src="<?php echo base_url();?>templates/js/jquery.validate.bootstrap.popover.min.js"></script>
     <script>
     var token_value = '<?php echo $this->security->get_csrf_hash();?>';
