@@ -60,13 +60,14 @@ class General_model extends CI_Model{
     function sendEmail($emails, $subject, $content, $data = array(), $from = null, $mailType = 'html')
     {
         $configEmail['mailtype'] = $mailType;
-        $configEmail['protocol'] = 'smtp';
+        $configEmail['protocol'] = 'mail';
+        /*$configEmail['protocol'] = 'smtp';
         $configEmail['smtp_host'] = 'smtp.gmail.com';
         $configEmail['smtp_user'] = 'nttrung211@gmail.com';
         $configEmail['smtp_pass'] = 'naka1986';
         $configEmail['smtp_port'] = 25;
         $configEmail['smtp_crypto'] = 'tls';
-        $configEmail['smtp_timeout'] = 30;
+        $configEmail['smtp_timeout'] = 30;*/
 
         $this->load->library('email');
         $this->email->set_newline("\r\n");
