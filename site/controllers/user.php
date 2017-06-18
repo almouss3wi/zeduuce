@@ -1053,7 +1053,7 @@ class User extends MX_Controller
                         Har du spørgsmål kontakt info@zeduuce.com<br /><br />
                         Med venlig hilsen<br/>
                         <a href="'.base_url().'">Zeduuce.com®</a>';
-                $sent = $this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Zeduuce.com - Glemt adgangskode', $content);
+                $sent = $this->general_model->sendEmail([$user->email], 'Zeduuce.com - Glemt adgangskode', $content);
                 if($sent === true){
                     $data['password'] = md5($new_password[0]);
                     $this->user->saveUser($data, $user->id);
