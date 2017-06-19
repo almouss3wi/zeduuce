@@ -88,7 +88,7 @@
                                         <h3><?php echo $row['name']; ?></h3>
                                     </a>
                                     <p>Age: <?php echo $yearold; ?></p>
-                                    <p>Viborg</p>
+                                    <p>By: <?php echo $row['city']?$row['city']:'Ikke opdateret';?></p>
                                 </div>
                             </div>
                         <?php }

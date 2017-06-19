@@ -44,7 +44,7 @@
                         <div class="info">
                             <h3><?php echo $row['name'];?></h3>
                             <p>Age: <?php echo $yearold;?></p>
-                            <p><?php echo $row['city'];?></p>
+                            <p>By: <?php echo $row['city']?$row['city']:'Ikke opdateret';?></p>
                         </div>
                     </div>
                     <?php }}?>
