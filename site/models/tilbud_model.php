@@ -6,10 +6,12 @@ class Tilbud_model extends CI_Model{
     function getData($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL){
         $this->db->select('pp.*, b2b.name as company');
         $this->db->from('product_product as pp');
-        $this->db->join('user_b2b as b2b', 'b2b.id = pp.company_id', 'left');
+        $this->db->join('user_b2b as b2b', 'b2b.id = pp.company_id', 'inner');
         $this->db->where("pp.bl_active",1);
         if($search['category_id']){
             $this->db->where('pp.category_id', $search['category_id']);
+        }
+        if($search['postfrom']){
             $this->db->where('b2b.code >=', $search['postfrom']);
             $this->db->where('b2b.code <=', $search['postto']);
             $this->db->where('pp.price >=', $search['pricefrom']);
@@ -24,16 +26,19 @@ class Tilbud_model extends CI_Model{
         if($num || $offset){
             $this->db->limit($num,$offset);
         }
+
     	$query = $this->db->get()->result();
 	    return $query;
     }
     function getNum($search=NULL){
 		$this->db->select('pp.*');
         $this->db->from('product_product as pp');
-        $this->db->join('user_b2b as b2b', 'pp.company_id = b2b.id', 'left');
+        $this->db->join('user_b2b as b2b', 'pp.company_id = b2b.id', 'inner');
         $this->db->where("pp.bl_active",1);
         if($search['category_id']){
             $this->db->where('pp.category_id', $search['category_id']);
+        }
+        if($search['postfrom']){
             $this->db->where('b2b.code >=', $search['postfrom']);
             $this->db->where('b2b.code <=', $search['postto']);
             $this->db->where('pp.price >=', $search['pricefrom']);
