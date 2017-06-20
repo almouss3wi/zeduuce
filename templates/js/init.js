@@ -105,6 +105,7 @@ $(document).ready(function(){
         $.validator.reposition();
     });
 
+    //Check email field in forgot password page
     $("#forgotForm").validate({
         rules: {
             email: {
@@ -112,6 +113,15 @@ $(document).ready(function(){
                 email: true
             }
         }
+    });
+
+    // In tilbud page
+    $('ul.list-topic li .radio label').click(function() {
+        $('ul.list-topic li .radio label').removeClass('bg_active');
+        $(this).addClass('bg_active');
+    });
+    $(document).on("change","#frm_search input[type=radio]",function(){
+        $("#frm_search").submit();
     });
 
     /*$(window).scroll(function() {

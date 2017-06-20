@@ -14,7 +14,7 @@ class Tilbud extends MX_Controller {
         $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
         $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
         $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        
+
         $config['base_url'] = base_url().$this->language.'/tilbud/index/';
         $config['total_rows'] = $this->tilbud->getNum();
         $config['per_page'] = $this->config->item('numberpage');
@@ -56,13 +56,14 @@ class Tilbud extends MX_Controller {
 		$data['page'] = 'tilbud/index';
 		$this->load->view('templates', $data);
 	}
-    function search($page=0,$category_id=0){
+    function search($page=0){
         $meta = $this->general_model->getMetaData(3);
         $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
         $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
         $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
         $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        if($category_id){
+
+        /*if($category_id){
             $this->session->set_userdata('category_id', $category_id);
             $search['category_id'] = $category_id;
         }else{
@@ -75,28 +76,28 @@ class Tilbud extends MX_Controller {
             $priceto = $this->input->post('priceto');
             if($postfrom){
                 $this->session->set_userdata('postfrom', $postfrom);
-                $search['postfrom'] = $this->session->userdata('postfrom');
+                $search['postfrom'] = $postfrom;
             }else{
                 $this->session->unset_userdata('category');
                 $search['postfrom'] = "";
             }
             if($postto){
                 $this->session->set_userdata('postto', $postto);
-                $search['postto'] = $this->session->userdata('postto');
+                $search['postto'] = $postto;
             }else{
                 $this->session->unset_userdata('postto');
                 $search['postto'] = "";
             }
             if($pricefrom){
                 $this->session->set_userdata('pricefrom', $pricefrom);
-                $search['pricefrom'] = $this->session->userdata('pricefrom');
+                $search['pricefrom'] = $pricefrom;
             }else{
                 $this->session->unset_userdata('pricefrom');
                 $search['pricefrom'] = "";
             }
             if($priceto){
                 $this->session->set_userdata('priceto', $priceto);
-                $search['priceto'] = $this->session->userdata('priceto');
+                $search['priceto'] = $priceto;
             }else{
                 $this->session->unset_userdata('priceto');
                 $search['priceto'] = "";
@@ -106,18 +107,23 @@ class Tilbud extends MX_Controller {
             $search['postto'] = $this->session->userdata('postto');
             $search['pricefrom'] = $this->session->userdata('pricefrom');
             $search['priceto'] = $this->session->userdata('priceto');
-        }
-        $data['postfrom'] = $search['postfrom'];
-        $data['postto'] = $search['postto'];
-        $data['pricefrom'] = $search['pricefrom'];
-        $data['priceto'] = $search['priceto'];
+        }*/
+
+        $data['category_id']    = $this->input->get('category_id');
+        $data['postfrom']       = $this->input->get('postfrom');
+        $data['postto']         = $this->input->get('postto');
+        $data['pricefrom']      = $this->input->get('pricefrom');
+        $data['priceto']        = $this->input->get('priceto');
+
+        $config['reuse_query_string'] = FALSE;
         $config['base_url'] = base_url().$this->language.'/tilbud/search/';
-        $config['total_rows'] = $this->tilbud->getNum($search);
-        $config['per_page'] = $this->config->item('numberpage');
+        $config['total_rows'] = $this->tilbud->getNum($data);
+        //$config['per_page'] = $this->config->item('numberpage');
+        $config['per_page'] = 2;
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $data['list'] = $this->tilbud->getData($config['per_page'],(int)$page,$search);
+        $data['list'] = $this->tilbud->getData($config['per_page'], (int)$page, $data);
         $data['pagination'] = $this->pagination->create_links();
         $user = $this->session->userdata('user');
         $wishlist = array();
@@ -139,7 +145,6 @@ class Tilbud extends MX_Controller {
         $data['wishlist'] = $wishlist;
         
         $data['category'] = $this->tilbud->getCategory();
-        $data['category_id'] = $search['category_id'];
         $data['user'] = $this->session->userdata('user');
 		$data['page'] = 'tilbud/index';
 		$this->load->view('templates', $data);
