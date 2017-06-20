@@ -10,15 +10,15 @@ class Tilbud_model extends CI_Model{
         $this->db->where("pp.bl_active",1);
         if($search['category_id']){
             $this->db->where('pp.category_id', $search['category_id']);
+            $this->db->where('b2b.code >=', $search['postfrom']);
+            $this->db->where('b2b.code <=', $search['postto']);
+            $this->db->where('pp.price >=', $search['pricefrom']);
+            $this->db->where('pp.price <=', $search['priceto']);
         }
         if($ignore) {
             //$ignore = array(12, 13);
             $this->db->where_not_in('pp.id', $ignore);
         }
-        $this->db->where('b2b.code >=', $search['postfrom']);
-        $this->db->where('b2b.code <=', $search['postto']);
-        $this->db->where('pp.price >=', $search['pricefrom']);
-        $this->db->where('pp.price <=', $search['priceto']);
 
 		$this->db->order_by('pp.id','DESC');
         if($num || $offset){
@@ -34,11 +34,11 @@ class Tilbud_model extends CI_Model{
         $this->db->where("pp.bl_active",1);
         if($search['category_id']){
             $this->db->where('pp.category_id', $search['category_id']);
+            $this->db->where('b2b.code >=', $search['postfrom']);
+            $this->db->where('b2b.code <=', $search['postto']);
+            $this->db->where('pp.price >=', $search['pricefrom']);
+            $this->db->where('pp.price <=', $search['priceto']);
         }
-        $this->db->where('b2b.code >=', $search['postfrom']);
-        $this->db->where('b2b.code <=', $search['postto']);
-        $this->db->where('pp.price >=', $search['pricefrom']);
-        $this->db->where('pp.price <=', $search['priceto']);
 
     	$query = $this->db->get()->num_rows();
 	    return $query;
