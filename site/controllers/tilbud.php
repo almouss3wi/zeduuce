@@ -115,13 +115,17 @@ class Tilbud extends MX_Controller {
         $data['pricefrom']      = $this->input->get('pricefrom');
         $data['priceto']        = $this->input->get('priceto');
 
+        //paginate with GET parameters
         $config['reuse_query_string'] = FALSE;
-        $config['base_url'] = base_url().$this->language.'/tilbud/search/';
+        if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+
+        $config['base_url'] = base_url().$this->language.'/tilbud/search';
         $config['total_rows'] = $this->tilbud->getNum($data);
-        //$config['per_page'] = $this->config->item('numberpage');
-        $config['per_page'] = 2;
+        $config['per_page'] = $this->config->item('numberpage');
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
+        //To fix the first link
+        $config['first_url'] = $config['base_url'] . $config['suffix'];
         $this->pagination->initialize($config);
         $data['list'] = $this->tilbud->getData($config['per_page'], (int)$page, $data);
         $data['pagination'] = $this->pagination->create_links();
