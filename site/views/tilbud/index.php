@@ -10,8 +10,7 @@
 </section>
 <section class="tilbud">
     <div class="container">
-        <?php
-        echo form_open('tilbud/search', array('id' => 'frm_search', 'method' => 'GET')); ?>
+        <?php echo form_open('tilbud/search', array('id' => 'frm_search', 'method' => 'GET')); ?>
         <div class="row">
             <div class="col-lg-12">
                 <h2>Tilbud</h2>

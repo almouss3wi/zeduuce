@@ -232,18 +232,21 @@
                         <hr class="cc1c1c1"/>
                         <div class="row">
                             <div class="col-md-6">
+                                <?php echo form_open('user/changePerPage', array('id' => 'perPageForm')); ?>
                                 <div class="row">
-                                    <div class="col-xs-3">
-                                        <label class="mt5" for="">Sorter efter</label>
+                                    <div class="col-xs-5">
+                                        <label class="mt5" for="">Profiler i hver side</label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <select name="" class="form-control">
-                                            <option value="">20 profiler</option>
-                                            <option value="">10 profiler</option>
-                                            <option value="">5 profiler</option>
+                                        <select name="perPage" class="form-control" id="perPage">
+                                            <?php
+                                            for($i=4; $i<=20; $i+=4){?>
+                                            <option value="<?php echo $i;?>" <?php if($i==$perPage) echo 'selected';?>><?php echo $i;?> profiler</option>
+                                            <?php }?>
                                         </select>
                                     </div>
                                 </div>
+                                <?php echo form_close();?>
                             </div>
                             <div class="col-md-6">
                                 <ul class="pagination pagination-sm pull-right">

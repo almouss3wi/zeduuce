@@ -124,6 +124,10 @@ $(document).ready(function(){
         $("#frm_search").submit();
     });
 
+    $(document).on("change","#perPage",function(){
+        $("#perPageForm").submit();
+    });
+
     /*$(window).scroll(function() {
         var scroll = $(window).scrollTop();
         if (scroll >= 50) {

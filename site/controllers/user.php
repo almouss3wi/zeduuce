@@ -798,7 +798,11 @@ class User extends MX_Controller
 
         $config['base_url'] = base_url() . $this->language . '/user/browsing/';
         $config['total_rows'] = $this->user->getNum($search, $ignore);
-        $config['per_page'] = $this->config->item('numberpage');
+        if(!empty($this->session->userdata('perPage'))){
+            $data['perPage'] = $config['per_page'] = $this->session->userdata('perPage');
+        } else {
+            $data['perPage'] = $config['per_page'] = $this->config->item('numberpage');
+        }
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
@@ -844,6 +848,7 @@ class User extends MX_Controller
 
             }
         }
+
         $data['favorite'] = $favorite;
         $data['invita'] = $this->session->userdata('invita');
         $data['user'] = $user;
@@ -1561,6 +1566,12 @@ class User extends MX_Controller
 
         $data['page'] = 'user/receivedkisses';
         $this->load->view('templates', $data);
+    }
+
+    public function changePerPage(){
+        $perPage = $this->input->post('perPage');
+        $this->session->set_userdata('perPage', $perPage);
+        redirect($_SERVER['HTTP_REFERER']);
     }
 
     function testEmail()
