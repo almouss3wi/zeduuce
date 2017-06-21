@@ -33,8 +33,6 @@
                             <li <?php if ($this->input->get('category_id') == $row->category_id) {
                                 echo 'class="active"';
                             } ?>>
-                                <!--<a href="<?php /*echo site_url('tilbud/search/0/' . $row->category_id . '/' . seoUrl($row->name)); */?>"><?php /*echo $row->name; */?></a>-->
-                                <!--<a href="<?php /*echo site_url('tilbud/search.html?category_id=' . $row->category_id); */?>"><?php /*echo $row->name; */?></a>-->
                                 <div class="radio">
                                     <label class="<?php if ($this->input->get('category_id') == $row->category_id) {echo 'bg_active';} ?>">
                                         <input name="category_id" value="<?php echo $row->category_id?>" <?php if ($this->input->get('category_id') == $row->category_id) {echo 'checked';} ?> type="radio">
@@ -68,7 +66,7 @@
                                 <?php for($i = 1500; $i<=9500; $i += 500){?>
                                     <option value="<?php echo $i; ?>" <?php if($this->input->get("postto")==$i)echo 'selected';?>><?php echo $i; ?></option>
                                 <?php }?>
-                                <option value="9999" <?php if(!$this->input->get("postto"))echo 'selected';?>>9999</option>
+                                <option value="9999" <?php if(empty($this->input->get("postto")) || $this->input->get("postto")==9999)echo 'selected';?>>9999</option>
                             </select>
                         </div>
                     </div>
@@ -94,7 +92,7 @@
                                 <?php for($i = 0; $i<10000; $i += 200){?>
                                     <option value="<?php echo $i; ?>" <?php if($this->input->get("priceto")==$i)echo 'selected';?>><?php echo $i; ?></option>
                                 <?php }?>
-                                <option value="10000" <?php if(!$this->input->get("priceto"))echo 'selected';?>>10000</option>
+                                <option value="10000" <?php if(empty($this->input->get("priceto")) || $this->input->get("priceto")==10000)echo 'selected';?>>10000</option>
                             </select>
                         </div>
                     </div>

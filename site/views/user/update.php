@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="">Alder <span class="red">*</span></label>
+                                            <label for="">Fødselsdag <span class="red">*</span></label>
                                             <div class="row">
                                                 <?php 
                                                     $birthday = explode("/", $item->birthday);
