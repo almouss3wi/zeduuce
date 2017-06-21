@@ -206,7 +206,7 @@
                                     </a>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-9">
+                                    <div class="col-xs-10">
                                         <p class="name">
                                             <a href="<?php echo site_url('user/profile/'.$row['id'].'/'.seoUrl($row['name']))?>">
                                             <?php echo $row['name'];?>
@@ -217,7 +217,7 @@
                                         <p class="age">Age: <?php echo $yearold;?></p>
                                         <p class="postcode">Postnr. : <?php echo $row['code'];?></p>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2" style="padding-left: 0px;">
                                         <p class="pull-right mt10"><span class="status-online"></span></p>
                                     </div>
                                 </div>
