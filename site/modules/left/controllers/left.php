@@ -12,4 +12,9 @@ class Left extends MX_Controller {
         $data['numinvitaapproved'] = count($this->user->getDatingApproved($id));
         $this->load->view('index', $data);
     }
+
+    public function avatar($user){
+        $data['user'] = $user;
+        $this->load->view('avatar', $data);
+    }
 }

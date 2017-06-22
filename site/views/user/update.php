@@ -13,14 +13,8 @@
                                     <div class="col-xs-12">
                                         <div class="form-group">
                                             <label for="">Dit profilbillede</label>
+                                            <?php echo modules::run('left/left/avatar',$item);?>
 
-                                            <?php if($item->facebook){?>
-                                                <img src="https://graph.facebook.com/<?php echo $item->facebook;?>/picture?type=square" alt="" class="img-responsive"/>
-                                            <?php }else if($item->avatar){ ?>
-                                                <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/user/<?php echo $item->avatar;?>&w=270&h=270&q=100" alt="" class="img-responsive"/>
-                                            <?php }else{?>
-                                                <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
-                                            <?php }?>
                                             <?php if(empty($item->facebook)){?>
                                             <br>
                                             <?php if($item->avatar){ ?>
