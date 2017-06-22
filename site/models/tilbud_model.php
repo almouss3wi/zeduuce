@@ -11,7 +11,7 @@ class Tilbud_model extends CI_Model{
         if($search['category_id']){
             $this->db->where('pp.category_id', $search['category_id']);
         }
-        if($search['postfrom']){
+        if(!empty($search['postfrom'])){
             $this->db->where('b2b.code >=', $search['postfrom']);
             $this->db->where('b2b.code <=', $search['postto']);
             $this->db->where('pp.price >=', $search['pricefrom']);

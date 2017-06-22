@@ -129,7 +129,7 @@
                                     <?php }
                                     } else { ?> href="#Flogin" data-toggle="modal"
                                 <?php } ?>></a>
-                                <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/product/<?php echo $row->image; ?>&w=555&h=350&q=100" alt="" class="img-responsive">
+                                <a href="<?php echo site_url('tilbud/detail/' . $row->id . '/' . seoUrl($row->name)); ?>"><img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/product/<?php echo $row->image; ?>&w=555&h=350&q=100" alt="" class="img-responsive"></a>
                                 <span class="cate"><?php echo $row->company; ?></span>
                                 <div class="item-content clearfix">
                                     <div class="row">
