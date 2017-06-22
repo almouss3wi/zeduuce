@@ -120,9 +120,15 @@
                         }
                         ?>
                         <div class="col-md-6 item">
-                            <div class="item-img <?php if ($check) { echo 'active';} ?>">
-                                <a class="i_favourite" id="wishlist_<?php echo $row->id; ?>" <?php if ($user) { ?><?php if (!$check) { ?> href="javascript:void(0)" onclick="addWishlist('<?php echo $user->id; ?>','<?php echo $row->id; ?>');" <?php }
-                                } else { ?> href="#Flogin" data-toggle="modal" <?php } ?>></a>
+                            <div class="item-img">
+                                <a class="i_favourite <?php if ($check) { echo 'i_favourite_active';} ?>" id="wishlist_<?php echo $row->id; ?>"                                 <?php if ($user) { ?>
+                                    <?php if (!$check) { ?>
+                                        href="javascript:void(0)" onclick="addWishList('<?php echo $row->id; ?>');"
+                                    <?php } else {?>
+                                        href="javascript:void(0)" onclick="removeWishList('<?php echo $row->id; ?>');"
+                                    <?php }
+                                    } else { ?> href="#Flogin" data-toggle="modal"
+                                <?php } ?>></a>
                                 <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/product/<?php echo $row->image; ?>&w=555&h=350&q=100" alt="" class="img-responsive">
                                 <span class="cate"><?php echo $row->company; ?></span>
                                 <div class="item-content clearfix">

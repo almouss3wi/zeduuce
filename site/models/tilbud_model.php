@@ -105,6 +105,12 @@ class Tilbud_model extends CI_Model{
         $query = $this->db->set('userID', $userID)->set('productID', $productID)->insert('product_wishlist');
 		return $query;
     }
+    function removeWishlist($userID=NULL,$productID=NULL){
+        $this->db->where('userID', $userID);
+        $this->db->where('productID', $productID);
+        $query = $this->db->delete('product_wishlist');
+        return $query;
+    }
     function checkWishlist($userID=NULL,$productID=NULL){
         $query = $this->db->where('userID', $userID)->where('productID', $productID)->get('product_wishlist')->row();
 		return $query;

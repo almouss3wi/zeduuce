@@ -274,22 +274,34 @@ class Tilbud extends MX_Controller {
     
     
     /** Action function*/
-    function wishlist(){
-        $userID = $this->input->post('user');
-        $productID = $this->input->post('product');
+    function addWishList(){
+        $productId = $this->input->post('productId');
         if(checkLogin()){
             $user = $this->session->userdata('user');
-            if($user->id == $userID){
-                $this->tilbud->addWishlist($userID, $productID);
-                $data['status'] = true;
-            }else{
-                $data['status'] = false;
-            }
+            $this->tilbud->addWishlist($user->id, $productId);
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
         }
         header('Content-Type: application/json');
 		echo json_encode($data);
         return;
     }
+
+    function removeWishList(){
+        $productId = $this->input->post('productId');
+        if(checkLogin()){
+            $user = $this->session->userdata('user');
+            $this->tilbud->removeWishList($user->id, $productId);
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
+    }
+
     function insert(){
         $dataCart = array(
             'id'      => $this->input->post('id'),

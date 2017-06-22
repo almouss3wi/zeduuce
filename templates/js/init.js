@@ -292,20 +292,40 @@ function checkEMAIL(email){
     }
 }
 
-function addWishlist(user,product){
+function addWishList(productId){
     $('#loader').show();
     $.ajax({
     	type: 'POST',
-    	url: base_url+'tilbud/wishlist',
-        data: {user: user, product: product,'csrf_site_name':token_value},
+    	url: base_url+'tilbud/addWishList',
+        data: {productId: productId,'csrf_site_name':token_value},
         dataType: 'json',
     	success:function (data){
             if(data.status==true){
-                $("#wishlist_"+product).addClass("i_favourite_active");
+                $("#wishlist_"+productId).addClass("i_favourite_active");
+                $("#wishlist_"+productId).removeAttr("onclick");
+                $("#wishlist_"+productId).attr("onclick", "removeWishList('"+productId+"')");
             }
     	}			
     });
 }
+
+function removeWishList(productId){
+    $('#loader').show();
+    $.ajax({
+        type: 'POST',
+        url: base_url+'tilbud/removeWishlist',
+        data: {productId: productId,'csrf_site_name':token_value},
+        dataType: 'json',
+        success:function (data){
+            if(data.status==true){
+                $("#wishlist_"+productId).removeClass("i_favourite_active");
+                $("#wishlist_"+productId).removeAttr("onclick");
+                $("#wishlist_"+productId).attr("onclick", "addWishList('"+productId+"')");
+            }
+        }
+    });
+}
+
 function addFavorite(user){
     $('#loader').show();
     $.ajax({
