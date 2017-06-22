@@ -973,6 +973,36 @@ class User extends MX_Controller
         }
         $user = $this->session->userdata['user'];
         if ($this->input->post()) {
+            //Handle profile picture
+            if(isset($_FILES['newAvatar']['name'])&&$_FILES['newAvatar']['name']!=""){
+                $config['upload_path'] = $this->config->item('root')."uploads/user/";
+                $config['allowed_types'] = 'gif|jpg|jpeg|png';
+                $config['max_size']	= $this->config->item('maxupload');
+                $config['encrypt_name']	= TRUE;  //rename to random string image
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('newAvatar')){
+                    $data_img = $this->upload->data();
+                }else{
+                    $this->session->set_flashdata('error', $this->upload->error_msg);
+                    redirect(site_url('/user/update'));
+                }
+            }else {
+                if($this->input->post('avatar')){
+                    $data_img['file_name'] = $this->input->post('avatar');
+                } else {
+                    $data_img['file_name'] = '';
+                }
+            }
+
+            //Delete profile picture
+            if($this->input->post('deleteProfilePicture')){
+                unlink("uploads/user/".$this->input->post('avatar'));
+                $data_img['file_name'] = '';
+            }
+
+            $DB['avatar'] = $data_img['file_name'];
+
             $DB['name'] = $this->input->post('name');
             $DB['day'] = $this->input->post('day');
             $DB['month'] = $this->input->post('month');

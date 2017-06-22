@@ -10,6 +10,27 @@
                                     <div class="col-xs-12">
                                         <h3 class="text-uppercase mt0">Rediger profil</h3>
                                     </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">Dit profilbillede</label>
+
+                                            <?php if($item->facebook){?>
+                                                <img src="https://graph.facebook.com/<?php echo $item->facebook;?>/picture?type=square" alt="" class="img-responsive"/>
+                                            <?php }else if($item->avatar){ ?>
+                                                <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/user/<?php echo $item->avatar;?>&w=270&h=270&q=100" alt="" class="img-responsive"/>
+                                            <?php }else{?>
+                                                <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
+                                            <?php }?>
+                                            <?php if(empty($item->facebook)){?>
+                                            <br>
+                                            <?php if($item->avatar){ ?>
+                                            <input type="checkbox" name="deleteProfilePicture" value="1"> Slet profilbillede
+                                            <?php }?>
+                                            <input type="file" name="newAvatar"/>
+                                            <input type="hidden" name="avatar" value="<?php echo $item->avatar;?>"/>
+                                            <?php }?>
+                                        </div>
+                                    </div>
                                     <div class="col-xs-6">
                                         <div class="form-group">
                                             <label for="">Vælg dit profil navn <span class="red">*</span></label>
