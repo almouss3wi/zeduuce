@@ -32,19 +32,20 @@
                     <div class="item">
                         <div class="item-img">
                             <a href="<?php echo site_url('user/profile/'.$row['id'].'/'.seoUrl($row['name']));?>">
-                                <?php if($row['avatar']){if($row['facebook']){?>
+                                <?php echo modules::run('left/left/avatar',(object)$row, 180, 180);?>
+                                <?php /*if($row['avatar']){if($row['facebook']){?>
                                 <img src="https://graph.facebook.com/<?php echo $row['facebook'];?>/picture?type=square&w‌​idth=180&height=180" alt="" class="img-responsive"/>
                                 <?php }else{ ?>
                                 <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row['avatar'];?>&w=150&h=150&q=100" alt="" class="img-responsive"/>
                                 <?php }}else{?>
                                 <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
-                                <?php }?>
+                                <?php }*/?>
                             </a>
                         </div>
                         <div class="info">
                             <h3><?php echo $row['name'];?></h3>
                             <p>Age: <?php echo $yearold;?></p>
-                            <p>By: <?php echo $row['city']?$row['city']:'Ikke opdateret';?></p>
+                            <p>Postnr.: <?php echo $row['code'];?></p>
                         </div>
                     </div>
                     <?php }}?>
@@ -72,18 +73,20 @@
                         <div class="item">
                             <div class="item-img">
                                 <a href="<?php echo site_url('user/profile/'.$row['id'].'/'.seoUrl($row['name']));?>">
-                                    <?php if($row['avatar']){if($row['facebook']){?>
+                                    <?php echo modules::run('left/left/avatar',(object)$row, 268, 268);?>
+                                    <?php /*if($row['avatar']){if($row['facebook']){?>
                                         <img src="https://graph.facebook.com/<?php echo $row['facebook'];?>/picture?type=large" alt="" class="img-responsive"/>
                                     <?php }else{ ?>
                                         <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row['avatar'];?>&w=268&h=268&q=100" alt="" class="img-responsive"/>
                                     <?php }}else{?>
                                         <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
-                                    <?php }?>
+                                    <?php }*/?>
                                 </a>
                             </div>
                             <div class="info">
                                 <h3><?php echo $row['name'];?></h3>
                                 <p>Age: <?php echo $yearold;?></p>
+                                <p>Postnr.: <?php echo $row['code'];?></p>
                             </div>
                         </div>
                         <?php }}?>

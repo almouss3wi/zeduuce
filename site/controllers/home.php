@@ -38,8 +38,9 @@ class Home extends MX_Controller {
                 $users[$i]['name'] = $row->name;
                 $users[$i]['birthday'] = $row->birthday;
                 $users[$i]['facebook'] = $row->facebook;
-                $users[$i]['city'] = $row->city;
-                if($row->facebook && $row->avatar){
+                $users[$i]['code'] = $row->code;
+                $users[$i]['avatar'] = $row->avatar;
+                /*if($row->facebook && $row->avatar){
                     $users[$i]['avatar'] = $row->avatar;
                 }else{
                     $photo = $this->user->getPhoto($row->id);
@@ -48,7 +49,7 @@ class Home extends MX_Controller {
                     }else{
                         $users[$i]['avatar'] = "";
                     }
-                }
+                }*/
                 $i++;
             }
         }else{

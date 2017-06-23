@@ -69,7 +69,8 @@
                             <div class="item">
                                 <div class="item-img">
                                     <a <?php if ($user) { ?> href="<?php echo site_url('user/profile/' . $row['id'] . '/' . seoUrl($row['name'])); ?>" <?php } else { ?> onclick="noLogin()" href="javascript:void(0)" <?php } ?>>
-                                        <?php if ($row['avatar']) {
+                                        <?php echo modules::run('left/left/avatar',(object)$row, 150, 150);?>
+                                        <?php /*if ($row['avatar']) {
                                             if ($row['facebook']) { ?>
                                                 <img src="https://graph.facebook.com/<?php echo $row['facebook']; ?>/picture?type=square&w‌​idth=180&height=180"
                                                      alt="" class="img-responsive"/>
@@ -80,7 +81,7 @@
                                         } else { ?>
                                             <img src="<?php echo base_url(); ?>templates/img/no-avatar.jpg" alt=""
                                                  class="img-responsive"/>
-                                        <?php } ?>
+                                        <?php } */?>
                                     </a>
                                 </div>
                                 <div class="info">
@@ -88,7 +89,7 @@
                                         <h3><?php echo $row['name']; ?></h3>
                                     </a>
                                     <p>Age: <?php echo $yearold; ?></p>
-                                    <p>By: <?php echo $row['city']?$row['city']:'Ikke opdateret';?></p>
+                                    <p>Postnr.: <?php echo $row['code'];?></p>
                                 </div>
                             </div>
                         <?php }

@@ -632,7 +632,7 @@ padding-left:25px;
 
 #newest_profiles .item, #owl_latest_profiles .item, #owl_latest_offers .item {
 	margin-right: 10px;
-	background: #fff;
+	/*background: #fff;*/
     border-radius: 0px 0px 3px 3px; 
     -webkit-border-radius: 0px 0px 3px 3px; 
     -moz-border-radius: 0px 0px 3px 3px;
