@@ -13,8 +13,10 @@ class Left extends MX_Controller {
         $this->load->view('index', $data);
     }
 
-    public function avatar($user){
+    public function avatar($user, $width, $height){
         $data['user'] = $user;
+        $data['width'] = $width;
+        $data['height'] = $height;
         $this->load->view('avatar', $data);
     }
 }

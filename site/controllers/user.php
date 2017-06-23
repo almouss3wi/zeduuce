@@ -483,9 +483,11 @@ class User extends MX_Controller
                 if ($userApproved) {
                     $j = 0;
                     foreach ($userApproved as $rs) {
+                        $users[$j]['id'] = $rs->user;
                         $users[$j]['nameUser'] = $rs->nameUser;
                         $users[$j]['facebook'] = $rs->facebook;
-                        if ($rs->facebook && $rs->avatar) {
+                        $users[$j]['avatar'] = $rs->avatar;
+                        /*if ($rs->facebook && $rs->avatar) {
                             $users[$j]['avatar'] = $rs->avatar;
                         } else {
                             $photo = $this->user->getPhoto($rs->user);
@@ -494,7 +496,7 @@ class User extends MX_Controller
                             } else {
                                 $users[$j]['avatar'] = "";
                             }
-                        }
+                        }*/
                         $j++;
                     }
                 } else {
@@ -539,7 +541,8 @@ class User extends MX_Controller
                 $users[$i]['birthday'] = $row->birthday;
                 $users[$i]['code'] = $row->code;
                 $users[$i]['facebook'] = $row->facebook;
-                if ($row->facebook && $row->avatar) {
+                $users[$i]['avatar'] = $row->avatar;
+                /*if ($row->facebook && $row->avatar) {
                     $users[$i]['avatar'] = $row->avatar;
                 } else {
                     $photo = $this->user->getPhoto($row->id);
@@ -548,7 +551,7 @@ class User extends MX_Controller
                     } else {
                         $users[$i]['avatar'] = "";
                     }
-                }
+                }*/
                 $i++;
             }
         } else {
@@ -816,7 +819,8 @@ class User extends MX_Controller
                 $users[$i]['birthday'] = $row->birthday;
                 $users[$i]['code'] = $row->code;
                 $users[$i]['facebook'] = $row->facebook;
-                if ($row->facebook && $row->avatar) {
+                $users[$i]['avatar'] = $row->avatar;
+                /*if ($row->facebook && $row->avatar) {
                     $users[$i]['avatar'] = $row->avatar;
                 } else {
                     $photo = $this->user->getPhoto($row->id);
@@ -825,7 +829,7 @@ class User extends MX_Controller
                     } else {
                         $users[$i]['avatar'] = "";
                     }
-                }
+                }*/
                 $i++;
             }
         } else {

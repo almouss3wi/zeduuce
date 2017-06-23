@@ -4,38 +4,36 @@
         <div class="row">
             <div class="col-lg-12">
                 <div id="sync1" class="owl-carousel">
+                    <div class="item">
+                        <a href="javascript:void(0)">
+                            <?php echo modules::run('left/left/avatar',(object)$item, 263, 263);?>
+                        </a>
+                    </div>
                     <?php if($photo){ foreach($photo as $row){?>
                     <div class="item">
                         <a href="javascript:void(0)">
                             <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row->image;?>&w=263&h=263&q=100" alt="" class="img-responsive"/>
                         </a>
                     </div>
-                    <?php }}else{?>
-                    <div class="item">
-                        <a href="javascript:void(0)">
-                            <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
-                        </a>
-                    </div>
-                    <?php }?>
+                    <?php }}?>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div id="sync2" class="owl-carousel">
+                    <div class="item">
+                        <a href="javascript:void(0)">
+                            <?php echo modules::run('left/left/avatar',(object)$item, 63, 63);?>
+                        </a>
+                    </div>
                     <?php if($photo){ foreach($photo as $row){?>
                     <div class="item">
                         <a href="javascript:void(0)">
                             <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row->image;?>&w=63&h=63&q=100" alt="" class="img-responsive"/>
                         </a>
                     </div>
-                    <?php }}else{?>
-                    <div class="item">
-                        <a href="javascript:void(0)">
-                            <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" width="63" height="63" class="img-responsive"/>
-                        </a>
-                    </div>
-                    <?php }?>
+                    <?php }}?>
                 </div>
             </div>
         </div>

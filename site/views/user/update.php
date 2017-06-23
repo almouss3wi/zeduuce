@@ -13,7 +13,7 @@
                                     <div class="col-xs-12">
                                         <div class="form-group">
                                             <label for="">Dit profilbillede</label>
-                                            <?php echo modules::run('left/left/avatar',$item);?>
+                                            <?php echo modules::run('left/left/avatar',$item, 270, 270);?>
 
                                             <?php if(empty($item->facebook)){?>
                                             <br>

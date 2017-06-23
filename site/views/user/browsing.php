@@ -196,13 +196,8 @@
                                 <div class="img-people">
                                     <a id="favorite_<?php echo $row['id'];?>" <?php if($user){?> <?php if(!$check){?> href="javascript:void(0)" onclick="addFavorite('<?php echo $row['id'];?>');" <?php }}else{?> href="#Flogin" data-toggle="modal" <?php }?> class="i_favourite <?php if($check){echo 'i_favourite_active';}?>"></a>
                                     <a class="box_img_people" href="<?php echo site_url('user/profile/'.$row['id'].'/'.seoUrl($row['name']))?>">
-                                        <?php if($row['avatar']){if($row['facebook']){?>
-                                        <img src="https://graph.facebook.com/<?php echo $row['facebook'];?>/picture?type=large" alt="" class="img-responsive"/>
-                                        <?php }else{ ?>
-                                        <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row['avatar'];?>&w=150&h=150&q=100" alt="" class="img-responsive"/>
-                                        <?php }}else{?>
-                                        <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
-                                        <?php }?>
+                                        <?php echo modules::run('left/left/avatar',(object)$row, 150, 150);?>
+
                                     </a>
                                 </div>
                                 <div class="row">
