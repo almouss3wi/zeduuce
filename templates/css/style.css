@@ -2351,7 +2351,7 @@ ul.list_buy li:hover img {
     background: url('../img/i_heart.png') no-repeat 0 0;
 }
 .item_people {
-    min-height: 300px;
+    min-height: 360px;
 }
 .box_info_highline {
     background: #4B4A5A;
