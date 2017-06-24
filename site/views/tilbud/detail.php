@@ -115,20 +115,23 @@
                             } ?>">
                                 <div class="item">
                                     <div class="item-img">
-                                        <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/product/<?php echo $row->image; ?>&w=570&h=250&q=100"
-                                             alt="" class="img-responsive"/>
+                                        <a href="<?php echo site_url('tilbud/detail/' . $row->id . '/' . seoUrl($row->name)); ?>"><img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/product/<?php echo $row->image; ?>&w=570&h=350&q=100" alt="" class="img-responsive"></a>
                                         <span class="cate"><?php echo $row->company; ?></span>
-                                        <div class="item-content">
-                                            <h3><?php echo $row->name; ?></h3>
-                                            <div><?php echo $row->description; ?></div>
+                                        <div class="item-content clearfix">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <h3><?php echo $row->name; ?></h3>
+                                                    <p><?php echo $row->description; ?></p>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="price">Pris: <?php echo priceFormat($row->price); ?></div>
+                                                    <a href="<?php echo site_url('tilbud/detail/' . $row->id . '/' . seoUrl($row->name)); ?>" class="btn btnOderNow">Bestil nu</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="info-bottom clearfix">
-                                        <p class="price">Pris: <?php echo priceFormat($row->price); ?></p>
-                                        <a href="<?php echo site_url('tilbud/detail/' . $row->id . '/' . seoUrl($row->name)); ?>"
-                                           class="btn btnOderNow">Bestil nu</a>
-                                    </div>
                                 </div>
+
                             </div>
                             <?php $i++;
                         }
