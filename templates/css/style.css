@@ -2855,6 +2855,13 @@ ul.list_uploaded .fa {
     height: 300px !important;
 }
 
+.w_slider {
+    position: relative;
+}
+.w_slider .i_favourite {
+    top: 40px;
+}
+
 /*27-04*2017*/
 .positive_item img {
     width: 100%;

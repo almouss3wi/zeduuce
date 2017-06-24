@@ -159,7 +159,14 @@ class Tilbud extends MX_Controller {
         $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
         $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
         $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        
+
+        $data['user'] = $this->session->userdata('user');
+        if(empty($data['user'])){
+            $data['check'] = false;
+        } else {
+            $data['check'] = $this->tilbud->checkWishlist($data['user']->id,$id);
+        }
+
         $data['item'] = $this->tilbud->getItem($id);
         $data['image'] = $this->tilbud->getImage($id);
         $search['category_id'] = $data['item']->category_id;

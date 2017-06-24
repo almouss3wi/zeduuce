@@ -13,8 +13,15 @@
     <div class="container">
         <div class="row mt30 mb30">
             <div class="col-md-12">
-                <div id="ninja-slider" class="col-md-9 col-xs-12 col-sm-10">
+                <div id="ninja-slider" class="col-md-9 col-xs-12 col-sm-10 w_slider">
                     <div class="slider-inner">
+                        <a class="i_favourite <?php if ($check) { echo 'i_favourite_active';} ?>" id="wishlist_<?php echo $item->id; ?>"                                 <?php if ($user) { ?>
+                            <?php if (!$check) { ?>
+                                href="javascript:void(0)" onclick="addWishList('<?php echo $item->id; ?>');"
+                            <?php } else {?>
+                                href="javascript:void(0)" onclick="removeWishList('<?php echo $item->id; ?>');"
+                            <?php }
+                        } else { ?> href="#Flogin" data-toggle="modal" <?php } ?>></a>
                         <ul>
                             <li>
                                 <a class="ns-img"
