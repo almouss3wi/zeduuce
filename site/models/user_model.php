@@ -335,7 +335,11 @@ class User_model extends CI_Model{
         $status->isFavorite = $query?true:false;
 
         $query = $this->db->where('user_id', $user_id_1)->where('invited_user_id', $user_id_2)->get('user_dated')->num_rows();
-        $status->isDated = $query?true:false;
+        $isDated1 = $query?true:false;
+        $query = $this->db->where('user_id', $user_id_2)->where('invited_user_id', $user_id_1)->get('user_dated')->num_rows();
+        $isDated2 = $query?true:false;
+
+        $status->isDated = $isDated1||$isDated2?true:false;
 
         $query = $this->db->where('from_user_id', $user_id_1)->where('to_user_id', $user_id_2)->get('user_kisses')->num_rows();
         $status->isKissed = $query?true:false;

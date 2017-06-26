@@ -57,7 +57,7 @@ class User extends MX_Controller
             $data['photo'] = "";
         }
         actionUser($data['user']->id, $id, 'View', 1);
-        $data['favorite'] = $this->user->checkFavorite($data['user']->id, $id);
+        /*$data['favorite'] = $this->user->checkFavorite($data['user']->id, $id);*/
         $data['status'] = $this->user->checkStatus($data['user']->id, $id);
 
         $data['page'] = 'user/profile';

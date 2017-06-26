@@ -1,3 +1,16 @@
+<script type="text/javascript">
+    function checkstatus(data){
+        console.log(data); // To see output using Firebug
+        if (data.s == 'available') {
+            $("#isOnline").html('Online til chat');
+        } else {
+            $("#isOnline").html('Ikke online til chat');
+        }
+    }
+    window.onload = function() {
+        jqcc.cometchat.getUser('<?php echo $item->id;?>','checkstatus');
+    }
+</script>
 <section class="min-profile">
     <div class="container">
         <div class="row">
@@ -5,34 +18,40 @@
                 <div id="sync1" class="owl-carousel">
                     <div class="item">
                         <a href="javascript:void(0)">
-                            <?php echo modules::run('left/left/avatar',(object)$item, 263, 263);?>
+                            <?php echo modules::run('left/left/avatar', (object)$item, 263, 263); ?>
                         </a>
                     </div>
-                    <?php if($photo){ foreach($photo as $row){?>
-                        <div class="item">
-                            <a href="javascript:void(0)">
-                                <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row->image;?>&w=263&h=263&q=100" alt="" class="img-responsive"/>
-                            </a>
-                        </div>
-                    <?php }}?>
+                    <?php if ($photo) {
+                        foreach ($photo as $row) { ?>
+                            <div class="item">
+                                <a href="javascript:void(0)">
+                                    <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/photo/<?php echo $row->image; ?>&w=263&h=263&q=100"
+                                         alt="" class="img-responsive"/>
+                                </a>
+                            </div>
+                        <?php }
+                    } ?>
                 </div>
                 <div id="sync2" class="owl-carousel">
                     <div class="item">
                         <a href="javascript:void(0)">
-                            <?php echo modules::run('left/left/avatar',(object)$item, 63, 63);?>
+                            <?php echo modules::run('left/left/avatar', (object)$item, 63, 63); ?>
                         </a>
                     </div>
-                    <?php if($photo){ foreach($photo as $row){?>
-                        <div class="item">
-                            <a href="javascript:void(0)">
-                                <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row->image;?>&w=63&h=63&q=100" alt="" class="img-responsive"/>
-                            </a>
-                        </div>
-                    <?php }}?>
+                    <?php if ($photo) {
+                        foreach ($photo as $row) { ?>
+                            <div class="item">
+                                <a href="javascript:void(0)">
+                                    <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/photo/<?php echo $row->image; ?>&w=63&h=63&q=100"
+                                         alt="" class="img-responsive"/>
+                                </a>
+                            </div>
+                        <?php }
+                    } ?>
                 </div>
-                <?php if($item->slogan){?>
-                <p class="f12 profile_number2"><?php echo $item->slogan; ?></p>
-                <?php }?>
+                <?php if ($item->slogan) { ?>
+                    <p class="f12 profile_number2"><?php echo $item->slogan; ?></p>
+                <?php } ?>
             </div>
             <div class="col-md-8">
                 <div class="main_right">
@@ -84,14 +103,24 @@
                         <div class="row mt30">
                             <ol class="list-inline text-center step-indicator">
                                 <li>
-                                    <div class="step"><a
-                                                href="<?php echo site_url('user/messages/' . $item->id . '/' . seoUrl($item->name)); ?>"><i
-                                                    class="i_step1"></i></a></div>
+                                    <div class="step">
+                                        <?php if($status->isDated){?>
+                                        <a href="<?php echo site_url('user/messages/' . $item->id . '/' . seoUrl($item->name)); ?>"><i class="i_step1"></i></a>
+                                        <?php } else {?>
+                                            <a href="#notDatedModel" data-toggle="modal"><i class="i_step1 disable"></i></a>
+                                        <?php }?>
+                                    </div>
                                     <div class="caption hidden-xs hidden-sm">Send besked</div>
                                 </li>
                                 <li>
-                                    <div class="step"><i class="i_step2"></i></div>
-                                    <div class="caption hidden-xs hidden-sm">ikke online til chat</div>
+                                    <div class="step">
+                                        <?php if($status->isDated){?>
+                                            <a href="javascript:jqcc.cometchat.chatWith('<?php echo $item->id;?>');"><i class="i_step2"></i></a>
+                                        <?php } else {?>
+                                            <a href="#notDatedModel" data-toggle="modal"><i class="i_step2 disable"></i></a>
+                                        <?php }?>
+                                    </div>
+                                    <div class="caption hidden-xs hidden-sm" id="isOnline">Kontrol status</div>
                                 </li>
                                 <li>
                                     <div class="step">
@@ -160,14 +189,14 @@
                                 <div id="instagram_photo" class="owl-carousel mypicture">
                                     <div class="item">
                                         <a class="fancybox" rel="gallery2"
-                                           href="<?php /*echo base_url(); */?>templates/img/6_.jpg"><img
-                                                    src="<?php /*echo base_url(); */?>templates/img/6.jpg" alt=""
+                                           href="<?php /*echo base_url(); */ ?>templates/img/6_.jpg"><img
+                                                    src="<?php /*echo base_url(); */ ?>templates/img/6.jpg" alt=""
                                                     class="img-responsive"></a>
                                     </div>
                                     <div class="item">
                                         <a class="fancybox" rel="gallery2"
-                                           href="<?php /*echo base_url(); */?>templates/img/6_.jpg"><img
-                                                    src="<?php /*echo base_url(); */?>templates/img/6.jpg" alt=""
+                                           href="<?php /*echo base_url(); */ ?>templates/img/6_.jpg"><img
+                                                    src="<?php /*echo base_url(); */ ?>templates/img/6.jpg" alt=""
                                                     class="img-responsive"></a>
                                     </div>
                                 </div>
@@ -180,3 +209,26 @@
         </div>
     </div>
 </section>
+<div id="notDatedModel" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row mb15">
+                    <div class="col-md-2 pad0 i_warning">
+                        <img src="<?php echo base_url();?>/templates/img/i_warning.png" alt="" class="img-responsive">
+                    </div>
+                    <div class="col-md-10 text-center pad0">
+                        <p class="f19" id="error-content">Du skal dateret med denne person for at bruge denne funktion !!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <a href="javascript:void(0)" class="btnGray2 text-uppercase" data-dismiss="modal">&nbsp;&nbsp;JA&nbsp;&nbsp;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
