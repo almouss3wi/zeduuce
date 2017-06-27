@@ -23,14 +23,14 @@
                 <div class="loading"></div>
                 <div>
                     <script type="text/javascript">
-                        $(document).ready(function(){
+                        /*$(document).ready(function(){
                             $("#epayForm").submit();
-                        });
-                        function sendPayment(){
+                        });*/
+                        /*function sendPayment(){
                             $("#epayForm").submit();
-                        }
+                        }*/
                         setTimeout(function(){
-                            //location.href = base_url_lang+'tilbud/success';
+                            location.href = base_url_lang+'tilbud/success';
                         }, 5000);
                     </script>
                     <form id="epayForm" action="<?php echo $action;?>" method="post">

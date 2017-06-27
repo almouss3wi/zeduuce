@@ -24,13 +24,13 @@
                 <div>
                     <script type="text/javascript">
                         $(document).ready(function(){
-                            $("#epayForm").submit();
+                            //$("#epayForm").submit();
                         });
-                        function sendPayment(){
+                        /*function sendPayment(){
                             $("#epayForm").submit();
-                        }
+                        }*/
                         setTimeout(function(){
-                            //location.href = base_url_lang+'invitationer/success';
+                            location.href = base_url_lang+'invitationer/success';
                         }, 5000);
                     </script>
                     <form id="epayForm" action="<?php echo $action;?>" method="post">
