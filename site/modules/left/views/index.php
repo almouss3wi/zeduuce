@@ -47,7 +47,7 @@
         <li><a href="<?php echo site_url('user/profile/'.$item->id.'/'.seoUrl($item->name))?>">Se min Profil</a></li>
         <li><a href="<?php echo site_url('user/myphoto')?>">Mine Billeder (<span class="red" id="num-myphoto"><?php if($numphoto){echo $numphoto;}else{echo '0';}?></span>)</a></li>
         <li><a href="<?php echo site_url('user/mydeal')?>">Mine tilbud</a></li>
-        <li><a href="<?php echo site_url('user/mymessages')?>">Mine beskeder</a></li>
+        <li><a href="<?php echo site_url('user/mymessages')?>">Mine beskeder (<span class="red"><?php echo $numUnreadMessage;?></span>)</a></li>
         <li><a href="<?php echo site_url('user/myinvitationer')?>">Mine invitationer</a></li>
         <li><a href="<?php echo site_url('user/myinvitationerjoin')?>">Du skal forkæles! (<span class="red"><?php echo $numinvitajoin;?></span>)</a></li>
         <li><a href="<?php echo site_url('user/myinvitationerapproved')?>">Det er mig der forkæler! (<span class="red"><?php echo $numinvitaapproved;?></span>)</a></li>

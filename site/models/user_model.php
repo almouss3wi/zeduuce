@@ -248,6 +248,17 @@ class User_model extends CI_Model{
         $query = $this->db->get();
         return $query->row()->num;
     }
+
+    function getNumUnreadMessage($userId = NULL){
+        $this->db->distinct();
+        $this->db->select('id');
+        $this->db->from('user_messages');
+        $this->db->group_by('user_from');
+        $this->db->where('user_to', $userId);
+        $this->db->where('seen', 1);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
     
     function getLatestMessage($user=NULL,$userID=NULL){
         $this->db->select('message, dt_create');

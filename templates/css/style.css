@@ -3037,13 +3037,14 @@ ul.list_uploaded .fa {
     background: rgba(193, 39, 45, 1);
     display: block;
     position: absolute;
-    right: -5px;
-    top: 10px;
+    right: -10px;
+    top: -10px;
     border-radius: 50%;
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
     text-align: center;
     z-index: 10;
+    font-weight: bold;
 }
 .img_clear {
     min-height: auto !important;

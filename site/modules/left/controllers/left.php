@@ -10,6 +10,7 @@ class Left extends MX_Controller {
         $data['numphoto'] = $this->user->getNumPhoto($id);
         $data['numinvitajoin'] = count($this->user->getDatingByUser($id));
         $data['numinvitaapproved'] = count($this->user->getDatingApproved($id));
+        $data['numUnreadMessage'] = $this->user->getNumUnreadMessage($id);
         $this->load->view('index', $data);
     }
 
