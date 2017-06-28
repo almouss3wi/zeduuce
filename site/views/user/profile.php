@@ -10,6 +10,11 @@
     window.onload = function() {
         jqcc.cometchat.getUser('<?php echo $item->id;?>','checkstatus');
     }
+    $( document ).ready(function() {
+        $('#btnChat').click(function(){
+            jqcc.cometchat.chatWith('<?php echo $item->id;?>');
+        });
+    });
 </script>
 <section class="min-profile">
     <div class="container">
@@ -115,7 +120,7 @@
                                 <li>
                                     <div class="step">
                                         <?php if($status->isDated){?>
-                                            <a href="javascript:jqcc.cometchat.chatWith('<?php echo $item->id;?>');"><i class="i_step2"></i></a>
+                                            <a href="javascript:void(0);" id="btnChat"><i class="i_step2"></i></a>
                                         <?php } else {?>
                                             <a href="#notDatedModel" data-toggle="modal"><i class="i_step2 disable"></i></a>
                                         <?php }?>
