@@ -247,22 +247,19 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
 
 /**
  * T.Trung
- * @param int $user_id
- * @param int $invited_user_id
+ * @param int $user_id_1
+ * @param int $user_id_2
  * @return boolean
  */
-function isDated($user_id, $invited_user_id){
+function isDated($user_id_1, $user_id_2){
     $ci = &get_instance();
-    $query = $ci->db->select('id')
-        ->from('user_dated')
-        ->where('user_id', $user_id)
-        ->where('invited_user_id', $invited_user_id)
-        ->get();
-    if($query->num_rows()){
-        return true;
-    } else {
-        return false;
-    }
+    $query = $ci->db->where('user_id', $user_id_1)->where('invited_user_id', $user_id_2)->get('user_dated')->num_rows();
+    $isDated1 = $query?true:false;
+    $query = $ci->db->where('user_id', $user_id_2)->where('invited_user_id', $user_id_1)->get('user_dated')->num_rows();
+    $isDated2 = $query?true:false;
+
+    $isDated = $isDated1||$isDated2?true:false;
+    return $isDated;
 }
 
 /**

@@ -198,12 +198,22 @@ class User extends MX_Controller
 
     function messages($id)
     {
-        $data = array();
-        $this->user->addMeta($this->_meta, $data);
+        //Checking login
         if (!checkLogin()) {
             redirect(site_url('home/index'));
         }
-        $data['user'] = $this->session->userdata('user');
+
+        //Checking dated
+        $user = $this->session->userdata('user');
+        if(isDated($user->id, $id) === false){
+            $this->session->set_flashdata('message', 'Du skal dateret med denne person for at bruge denne funktion !!');
+            redirect(site_url('/user/index'));
+        }
+
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
+        $data['user'] = $user;
         $data['item'] = $this->user->getUser($id);
         $data['messages'] = $this->user->getMessages($data['user']->id, $id);
         $this->user->clearNotSeen($data['user']->id, $id);
