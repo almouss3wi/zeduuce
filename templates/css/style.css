@@ -2898,8 +2898,11 @@ ul.list_uploaded .fa {
     margin-bottom: 15px;
     border-bottom: 1px solid #939290;
 }
+.positive_item .name {
+    margin: 0 0 10px;
+}
 .avatar_positive {
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
 }
 .w_cart {
     position: relative;

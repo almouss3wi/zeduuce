@@ -173,8 +173,9 @@ function randomPassword(){
 }
 function actionUser($userFrom=NULL, $userTo=NULL, $name=NULL, $type=NULL){
     $ci = &get_instance();
+    //TODO: need to check session here
     //Check has action
-    $query1 = $ci->db->select('*')
+    /*$query1 = $ci->db->select('*')
                     ->from('user_action')
                     ->where('user_from',$userFrom)
                     ->where('user_to',$userTo)
@@ -189,7 +190,7 @@ function actionUser($userFrom=NULL, $userTo=NULL, $name=NULL, $type=NULL){
     if($query1 || $query2){
         //No thing to do
         return true;
-    }else{
+    }else{*/
         //Add new action
         $DB['user_from'] = $userFrom;
         $DB['user_to'] = $userTo;
@@ -199,7 +200,7 @@ function actionUser($userFrom=NULL, $userTo=NULL, $name=NULL, $type=NULL){
         $DB['bl_active'] = 1;
         $ci->db->insert('user_action',$DB);
         return true;
-    }  
+    //}
 }
 function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailType='html'){
    	$ci = &get_instance();

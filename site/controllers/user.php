@@ -589,54 +589,62 @@ class User extends MX_Controller
         $data['user'] = $this->session->userdata('user');
 
         $config['base_url'] = base_url() . $this->language . '/user/positiv/';
-        $config['total_rows'] = $this->user->getNumPositiv($data['user']->id);
-        $config['per_page'] = $this->config->item('numberpage');
+        $config['total_rows'] = count($this->user->getDatedUserIds($data['user']->id));
+        //$config['per_page'] = $this->config->item('numberpage');
+        $config['per_page'] = 5;
         $config['num_links'] = 2;
         $config['uri_segment'] = $this->uri->total_segments();
         $this->pagination->initialize($config);
-        $listUsers = $this->user->getPositiv($config['per_page'], (int)$page, $data['user']->id);
+        $userList = $this->user->getPositiv($config['per_page'], (int)$page, $data['user']->id);
         $data['pagination'] = $this->pagination->create_links();
-        if ($listUsers) {
+
+        if ($userList && $data['user']) {
             $i = 0;
-            foreach ($listUsers as $row) {
-                $users[$i]['id'] = $row->id;
-                $users[$i]['name'] = $row->name;
-                $users[$i]['birthday'] = $row->birthday;
-                $users[$i]['code'] = $row->code;
-                $users[$i]['facebook'] = $row->facebook;
-                if ($row->facebook && $row->avatar) {
-                    $users[$i]['avatar'] = $row->avatar;
+            foreach ($userList as $row) {
+                //Checking sent kiss
+                if($this->user->checkIsSentKiss($data['user']->id, $row->id)){
+                    $userList[$i]->sentKissStatus = true;
+                    $userList[$i]->sentKissTime = $this->user->checkIsSentKiss($data['user']->id, $row->id);
                 } else {
-                    $photo = $this->user->getPhoto($row->id);
-                    if ($photo) {
-                        $users[$i]['avatar'] = $photo[0]->image;
-                    } else {
-                        $users[$i]['avatar'] = "";
-                    }
-                }
-                $i++;
-            }
-        } else {
-            $users = "";
-        }
-        $data['list'] = $users;
-        $favorite = array();
-        if ($data['list'] && $data['user']) {
-            foreach ($data['list'] as $row) {
-                $check = $this->user->checkFavorite($data['user']->id, $row['id']);
-                if ($check) {
-                    $favorite[] = array(
-                        'id' => $row['id'],
-                    );
-                } else {
-                    $favorite[] = array(
-                        'id' => 0,
-                    );
+                    $userList[$i]->sentKissStatus = false;
                 }
 
+                if($this->user->checkIsApproved($data['user']->id, $row->id)){
+                    $userList[$i]->isDatedStatus = true;
+                    $userList[$i]->datedTime = $this->user->checkIsApproved($data['user']->id, $row->id);
+                } else {
+                    $userList[$i]->isDatedStatus = false;
+                }
+
+                if($this->user->checkAddedToFavorite($data['user']->id, $row->id)){
+                    $userList[$i]->addedToFavoriteStatus = true;
+                } else {
+                    $userList[$i]->addedToFavoriteStatus = false;
+                }
+
+                if($this->user->checkSentInvitation($data['user']->id, $row->id)){
+                    $userList[$i]->sentInvitationStatus = true;
+                } else {
+                    $userList[$i]->sentInvitationStatus = false;
+                }
+
+                if($this->user->checkSeeMore3Times($data['user']->id, $row->id)){
+                    $userList[$i]->seeMore3TimesStatus = true;
+                } else {
+                    $userList[$i]->seeMore3TimesStatus = false;
+                }
+
+                if($this->user->checkSentMessage($data['user']->id, $row->id)){
+                    $userList[$i]->sentMessageStatus = true;
+                } else {
+                    $userList[$i]->sentMessageStatus = false;
+                }
+
+                $i++;
             }
+            //print_r($userList);exit();
         }
-        $data['favorite'] = $favorite;
+        $data['userList'] = $userList;
 
         $data['page'] = 'user/positiv';
         $this->load->view('templates', $data);
@@ -1074,7 +1082,6 @@ class User extends MX_Controller
     }
 
     /**
-     * TODO: handle forgot password
      * @author T.Trung
      */
     public function forgotPassHandler()

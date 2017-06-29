@@ -386,7 +386,7 @@ class User_model extends CI_Model{
     }
     
     /** POSITIV*/
-    function getPositiv($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
+    /*function getPositiv($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
         $this->db->select('u.*');
         $this->db->from('user_action as ua');
         $this->db->join('user as u', 'u.id = ua.user_to', 'left');
@@ -407,6 +407,83 @@ class User_model extends CI_Model{
         $this->db->where("ua.bl_active",1);
     	$query = $this->db->get()->num_rows();
 	    return $query;
+    }*/
+
+    /**
+     * @param null $num
+     * @param null $offset
+     * @param null $userId
+     * @return mixed
+     */
+    function getPositiv($num = NULL, $offset = NULL, $userId = NULL){
+        $datedUserIds = $this->getDatedUserIds($userId);
+        $this->db->select('u.*');
+        $this->db->from('user as u');
+        $this->db->where("u.bl_active",1);
+        $this->db->where_in("id", $datedUserIds);
+        if($num || $offset){
+            $this->db->limit($num,$offset);
+        }
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+    /**
+     * @param $userId
+     * @return user ids array
+     */
+    public function getDatedUserIds($userId){
+        $userIdArr1 = $userIdArr2 = array();
+
+        $result1 = $this->db->distinct()->select("invited_user_id")->from("user_dated")->where("user_id", $userId)->get()->result();
+        foreach($result1 as $item){
+            $userIdArr1[] = $item->invited_user_id;
+        }
+
+        $result2 = $this->db->distinct()->select("user_id")->from("user_dated")->where("invited_user_id", $userId)->get()->result();
+        foreach($result2 as $item){
+            $userIdArr2[] = $item->user_id;
+        }
+        return array_unique (array_merge ($userIdArr1, $userIdArr2));
+    }
+
+    /**
+     * @param $userId
+     * @param $clientId
+     * @return bool
+     */
+    public function checkIsSentKiss($userId, $clientId){
+        $result = $this->db->where("from_user_id", $clientId)->where("to_user_id", $userId)->get("user_kisses")->row();
+        return $result ? $result->send_at : false;
+    }
+
+    public function checkIsApproved($userId, $clientId){
+        $result = $this->db->where("user_id", $userId)->where("invited_user_id", $clientId)->get("user_dated")->row();
+        return $result ? $result->accepted_time : false;
+    }
+
+    function checkAddedToFavorite($user = NULL, $userId = NULL){
+        $result = $this->db->where('user_from', $userId)->where('user_to', $user)->get('user_favorite')->row();
+        return $result ? true : false;
+    }
+
+    public function checkSentInvitation($userId, $clientId){
+        $this->db->select("id");
+        $this->db->from("dating_user");
+        $this->db->where("user", $userId);
+        $this->db->where_in("datingID IN (SELECT id FROM tb_dating WHERE userID = ".$clientId.")");
+        $result = $this->db->get()->result();
+        return $result ? true : false;
+    }
+
+    public function checkSeeMore3Times($userId, $clientId){
+        $result = $this->db->select("COUNT(id) num")->from("user_action")->where("user_from", $clientId)->where("user_to", $userId)->where("type", 1)->get()->row();
+        return $result->num > 3 ? true : false;
+    }
+
+    function checkSentMessage($user = NULL, $userId = NULL){
+        $result = $this->db->where('user_from', $userId)->where('user_to', $user)->get('user_messages')->row();
+        return $result ? true : false;
     }
     
     /** TILBUD*/
@@ -576,7 +653,7 @@ class User_model extends CI_Model{
         //check 2 person is dated
         $isDated = isDated($user_id, $invited_user_id);
         if($isDated === false){
-            $data = array('user_id'=>$user_id, 'invited_user_id'=>$invited_user_id);
+            $data = array('user_id'=>$user_id, 'invited_user_id'=>$invited_user_id, 'accepted_time'=>time());
             $isDated = $this->db->insert('user_dated', $data);
         }
         return $isDated;
@@ -682,7 +759,6 @@ class User_model extends CI_Model{
     }
 
     /**
-     * TODO: Getting images for top gallery
      * @param $category_id
      * @return mixed
      */
@@ -698,7 +774,6 @@ class User_model extends CI_Model{
     }
 
     /**
-     * TODO: getting new events
      * @return mixed
      */
     function getNewEvents(){
