@@ -464,7 +464,7 @@ class User_model extends CI_Model{
 
     function checkAddedToFavorite($user = NULL, $userId = NULL){
         $result = $this->db->where('user_from', $userId)->where('user_to', $user)->get('user_favorite')->row();
-        return $result ? true : false;
+        return $result ? $result->dt_create : false;
     }
 
     public function checkSentInvitation($userId, $clientId){

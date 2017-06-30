@@ -618,6 +618,7 @@ class User extends MX_Controller
 
                 if($this->user->checkAddedToFavorite($data['user']->id, $row->id)){
                     $userList[$i]->addedToFavoriteStatus = true;
+                    $userList[$i]->addedToFavoriteTime = strtotime($this->user->checkAddedToFavorite($data['user']->id, $row->id));
                 } else {
                     $userList[$i]->addedToFavoriteStatus = false;
                 }

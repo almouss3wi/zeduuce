@@ -50,7 +50,7 @@
                                                 <a class="btn btnPositive2"><span class="btnPositive_content">Har som favorit</span></a>
                                             <?php } else { ?>
                                                 <a class="btn btnPositive2 active">
-                                                    <span class="btnPositive_content">Har som favorit</span>
+                                                    <span class="btnPositive_content">Har som favorit <span class="timer"><?php echo date("d.m.Y", $item->addedToFavoriteTime) ?> Kl.<?php echo date("H:i", $item->addedToFavoriteTime) ?></span></span>
                                                 </a>
                                             <?php } ?>
                                         </div>
