@@ -77,7 +77,7 @@
                                                 <a class="btn btnPositive2"><span class="btnPositive_content">Har sendt en besked</span></a>
                                             <?php } else { ?>
                                                 <a class="btn btnPositive2 active">
-                                                    <span class="btnPositive_content">Har sendt en besked</span>
+                                                    <span class="btnPositive_content">Har sendt en besked <span class="timer"><?php echo date("d.m.Y", $item->lastMessageTime) ?> Kl.<?php echo date("H:i", $item->lastMessageTime) ?></span></span>
                                                 </a>
                                             <?php } ?>
                                         </div>
