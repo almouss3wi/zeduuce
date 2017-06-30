@@ -636,6 +636,7 @@ class User extends MX_Controller
 
                 if($this->user->checkSentMessage($data['user']->id, $row->id)){
                     $userList[$i]->sentMessageStatus = true;
+                    $userList[$i]->lastMessageTime = strtotime($this->user->checkSentMessage($data['user']->id, $row->id));
                 } else {
                     $userList[$i]->sentMessageStatus = false;
                 }

@@ -482,8 +482,8 @@ class User_model extends CI_Model{
     }
 
     function checkSentMessage($user = NULL, $userId = NULL){
-        $result = $this->db->where('user_from', $userId)->where('user_to', $user)->get('user_messages')->row();
-        return $result ? true : false;
+        $result = $this->db->where('user_from', $userId)->where('user_to', $user)->order_by('id DESC')->limit(1)->get('user_messages')->row();
+        return $result ? $result->dt_create : false;
     }
     
     /** TILBUD*/
