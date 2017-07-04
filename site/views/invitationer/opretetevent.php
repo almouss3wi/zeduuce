@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <label class="label_upload" for="">Upload billede (max. 5 billeder) PNG, JPG, JPEG</label>
-                                        <input name="image[]" id="image" style="cursor: pointer;" type="file" multiple="true" accept="image/*" class="form-control form-file-input" data-btnlabel="Vælg billede" data-btnclass="btn_select_img2" data-btnposition="left" />
+                                        <input name="image[]" id="eventImage" style="cursor: pointer;" type="file" multiple="true" accept="image/*" class="form-control form-file-input" data-btnlabel="Vælg billede" data-btnclass="btn_select_img2" data-btnposition="left" />
                                     </div>
                                 </div>
                             </div>

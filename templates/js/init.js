@@ -28,7 +28,7 @@ $(document).ready(function(){
     	}).submit();
     });
     //PHOTO opretetevent
-    $('#image').on('change',function(){
+    $('#eventImage').on('change',function(){
         var form = $('#frm_invitationer')[0];
     	var formData = new FormData(form);
         $('#loader').show();
@@ -44,7 +44,7 @@ $(document).ready(function(){
             success: function(html){
                 $('#loader').fadeOut();
                 if(html){
-                    $('#image').val('');
+                    $('#eventImage').val('');
                     $('#list_uploaded').html(html);
                 }else{
                     $('#error-content').html('Fejl-system, skal du handling igen!');
@@ -55,7 +55,7 @@ $(document).ready(function(){
         return false;
     });
     //PHOTO offentligevent
-    $('#image').on('change',function(){
+    $('#publicEventImage').on('change',function(){
         var form = $('#frm_invitationer')[0];
     	var formData = new FormData(form);
         $('#loader').show();
@@ -71,7 +71,7 @@ $(document).ready(function(){
             success: function(html){
                 $('#loader').fadeOut();
                 if(html){
-                    $('#image').val('');
+                    $('#publicEventImage').val('');
                     $('#list_uploaded').html(html);
                 }else{
                     $('#error-content').html('Fejl-system, skal du handling igen!');
