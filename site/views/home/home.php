@@ -141,6 +141,7 @@
         <div class="row latest-offers">
             <div class="col-lg-6">
                 <h2 class="title2">Nyeste events</h2>
+                <?php if($newEvents){?>
                 <div id="owl_latest_events" class="owl-carousel">
                     <?php foreach($newEvents as $event){
                         if($event->birthday){
@@ -178,6 +179,7 @@
                     </div>
                     <?php }?>
                 </div>
+                <?php }?>
             </div>
             <div class="col-lg-6">
                 <div class="latest_popular_events">
