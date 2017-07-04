@@ -249,6 +249,10 @@ class User_model extends CI_Model{
         return $query->row()->num;
     }
 
+    /**
+     * @param null $userId
+     * @return mixed
+     */
     function getNumUnreadMessage($userId = NULL){
         $this->db->distinct();
         $this->db->select('id');
@@ -259,7 +263,12 @@ class User_model extends CI_Model{
         $query = $this->db->get();
         return $query->num_rows();
     }
-    
+
+    /**
+     * @param null $user
+     * @param null $userID
+     * @return mixed
+     */
     function getLatestMessage($user=NULL,$userID=NULL){
         $this->db->select('message, dt_create');
         $this->db->from('user_messages');
@@ -462,8 +471,8 @@ class User_model extends CI_Model{
         return $result ? $result->accepted_time : false;
     }
 
-    function checkAddedToFavorite($user = NULL, $userId = NULL){
-        $result = $this->db->where('user_from', $userId)->where('user_to', $user)->get('user_favorite')->row();
+    function checkAddedToFavorite($userId1 = NULL, $userId2 = NULL){
+        $result = $this->db->where('user_from', $userId2)->where('user_to', $userId1)->get('user_favorite')->row();
         return $result ? $result->dt_create : false;
     }
 
@@ -481,9 +490,19 @@ class User_model extends CI_Model{
         return $result->num > 3 ? true : false;
     }
 
+    public function countSeeTimes($userId, $clientId){
+        $result = $this->db->select("COUNT(id) num")->from("user_action")->where("user_from", $clientId)->where("user_to", $userId)->where("type", 1)->get()->row();
+        return $result->num;
+    }
+
     function checkSentMessage($user = NULL, $userId = NULL){
         $result = $this->db->where('user_from', $userId)->where('user_to', $user)->order_by('id DESC')->limit(1)->get('user_messages')->row();
         return $result ? $result->dt_create : false;
+    }
+
+    public function getNumOfNotification($userId){
+        $result = $this->db->select("number_of_notification")->from("user")->where("id", $userId)->get()->row();
+        return $result->number_of_notification;
     }
     
     /** TILBUD*/
@@ -791,6 +810,12 @@ class User_model extends CI_Model{
             $i++;
         }
         return $result;
+    }
+
+    public function addNotification($userId){
+        $this->db->set('number_of_notification', '`number_of_notification`+1', FALSE);
+        $this->db->where('id', $userId);
+        return $this->db->update('user');
     }
 
     /** The End*/

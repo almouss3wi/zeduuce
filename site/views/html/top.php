@@ -2,6 +2,9 @@
 if(!empty($user)){
     $this->load->model('user_model', 'user');
     $numUnreadMessage = $this->user->getNumUnreadMessage($user->id);
+    $unreadMessageNotificationHTML = !empty($numUnreadMessage) ? '<i class="notify">' . $numUnreadMessage . '</i>' : '';
+    $numPositiveNotification = $this->user->getNumOfNotification($user->id);
+    $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';
 }
 ?>
 <?php if(!$user && $page == 'home/index'){?>
@@ -58,11 +61,11 @@ if(!empty($user)){
                 <?php if($user && $user->b2b){?>
                 <li id="menu_minprofil"><a href="<?php echo site_url('user/b2b');?>">Min profil</a></li>
                 <?php }else{?>
-                <li id="menu_minprofil"><a <?php if($user){?> href="<?php echo site_url('user/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Min profil <?php echo $numUnreadMessage?'<i class="notify">'.$numUnreadMessage.'</i>':'';?></a></li>
+                <li id="menu_minprofil"><a <?php if($user){?> href="<?php echo site_url('user/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Min profil <?php if(!empty($user)){ echo $unreadMessageNotificationHTML;}?></a></li>
                 <?php }?>
                 <li id="menu_favorit"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/favorit');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Favorit liste</a></li>
                 <li id="menu_browsing"><a href="<?php echo site_url('user/browsing');?>">Browsing</a></li>
-                <li id="menu_positiv"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/positiv');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Positiv liste</a></li>
+                <li id="menu_positiv"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/positiv');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Positiv liste <?php if(!empty($user)){echo $numPositiveNotificationHTML;}?></a></li>
                 <li id="menu_invitationer"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('invitationer/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Invitationer</a></li>
                 <li id="menu_tilbud"><a href="<?php echo site_url('tilbud/index');?>">Tilbud</a></li>
                 <li id="menu_kontakt"><a href="<?php echo site_url('kontakt');?>">Kontakt</a></li>

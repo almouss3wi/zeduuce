@@ -49,6 +49,13 @@ class User extends MX_Controller
             redirect(site_url('home/index'));
         }
 
+        //Adding positive notification
+        if($this->user->countSeeTimes($id, $data['user']->id) == 3){
+            $this->user->addNotification($id);
+        }
+        //Add action to log
+        actionUser($data['user']->id, $id, 'View', 1);
+
         $photo = $this->user->getPhoto($id);
         if ($photo) {
             /*$data['avatar'] = $photo[0]->image;*/
@@ -56,7 +63,7 @@ class User extends MX_Controller
         } else {
             $data['photo'] = "";
         }
-        actionUser($data['user']->id, $id, 'View', 1);
+
         /*$data['favorite'] = $this->user->checkFavorite($data['user']->id, $id);*/
         $data['status'] = $this->user->checkStatus($data['user']->id, $id);
 
@@ -225,6 +232,11 @@ class User extends MX_Controller
     {
         $user = $this->session->userdata('user');
         if ($user) {
+            //Adding positive notification
+            if($this->user->checkSentMessage($this->input->post('user_to'), $user->id) === false){
+                $this->user->addNotification($this->input->post('user_to'));
+            }
+
             $DB['user_from'] = $user->id;
             $DB['user_to'] = $this->input->post('user_to');
             $DB['message'] = $this->input->post('message');
@@ -1320,6 +1332,11 @@ class User extends MX_Controller
     {
         $userID = $this->input->post('user', true);
         $user = $this->session->userdata('user');
+
+        //Adding positive notification
+        if($this->user->checkAddedToFavorite($userID, $user->id) === false){
+            $this->user->addNotification($userID);
+        }
         if ($user && $userID) {
             $DB['user_from'] = $user->id;
             $DB['user_to'] = $userID;
@@ -1366,6 +1383,11 @@ class User extends MX_Controller
     {
         $userID = $this->input->post('user', true);
         $user = $this->session->userdata('user');
+
+        //Adding positive notification
+        if($this->user->checkIsSentKiss($userID, $user->id) === false){
+            $this->user->addNotification($userID);
+        }
         if ($user && $userID) {
             $DB['from_user_id'] = $user->id;
             $DB['to_user_id'] = $userID;
