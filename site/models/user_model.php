@@ -801,8 +801,12 @@ class User_model extends CI_Model{
         $this->db->join("user as u", "d.userID = u.id");
         $this->db->where("d.bl_active", 1);
         $this->db->where("d.times_end >= ", time());
+        $this->db->where("d.type", 4);
 
         $result = $this->db->get()->result();
+        if(empty($result)){
+            return false;
+        }
         $i = 0;
         foreach($result as $item){
             $images = $this->getImageDating($item->id);
