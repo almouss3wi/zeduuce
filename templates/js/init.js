@@ -603,6 +603,10 @@ function acceptDating(id){
         }
     });
 }
+/**
+ *
+ * @param id
+ */
 function getUserJoin(id){
     $('#loader').show();
     $.ajax({
@@ -616,6 +620,15 @@ function getUserJoin(id){
             $('#PUattending').modal('show');
         }
     });
+}
+
+function deleteShoutout(id){
+    if (confirm("Vil du virkelig slette denne shoutout?") == true) {
+        alert('OK');
+        return false;
+    } else {
+        return false;
+    }
 }
 
 //THE END-----------------------------------------------------------------------------

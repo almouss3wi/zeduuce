@@ -1649,6 +1649,29 @@ class User extends MX_Controller
         redirect($_SERVER['HTTP_REFERER']);
     }
 
+    // Shoutout
+    public function shoutouts($page = 0){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+        if (!checkLogin()) {
+            redirect(site_url('home/index'));
+        }
+
+        $data['user'] = $this->session->userdata('user');
+        $config['base_url'] = base_url() . $this->language . '/user/shoutouts/';
+        $config['total_rows'] = $this->user->getNumShoutouts($data['user']->id);
+        $config['per_page'] = 10;
+        $config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $shoutouts = $this->user->getShoutouts($config['per_page'], (int)$page, $data['user']->id);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $data['shoutouts'] = $shoutouts;
+        $data['page'] = 'user/shoutouts';
+        $this->load->view('templates', $data);
+    }
+
     function testEmail()
     {
         var_dump($this->general_model->sendEmail(['trung@mywebcreations.dk'], 'Test subject', 'Test content'));

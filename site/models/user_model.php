@@ -292,6 +292,13 @@ class User_model extends CI_Model{
         return true;
     }
     /** FAVORITE*/
+    /**
+     * @param null $num
+     * @param null $offset
+     * @param null $user
+     * @param null $search
+     * @return mixed
+     */
     function getFavorite($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
         $this->db->select('u.*');
         $this->db->from('user_favorite as uf');
@@ -426,15 +433,19 @@ class User_model extends CI_Model{
      */
     function getPositiv($num = NULL, $offset = NULL, $userId = NULL){
         $datedUserIds = $this->getDatedUserIds($userId);
-        $this->db->select('u.*');
-        $this->db->from('user as u');
-        $this->db->where("u.bl_active",1);
-        $this->db->where_in("id", $datedUserIds);
-        if($num || $offset){
-            $this->db->limit($num,$offset);
+        if(empty($datedUserIds)){
+            return false;
+        } else {
+            $this->db->select('u.*');
+            $this->db->from('user as u');
+            $this->db->where("u.bl_active",1);
+            $this->db->where_in("id", $datedUserIds);
+            if($num || $offset){
+                $this->db->limit($num,$offset);
+            }
+            $query = $this->db->get()->result();
+            return $query;
         }
-        $query = $this->db->get()->result();
-        return $query;
     }
 
     /**
@@ -820,6 +831,27 @@ class User_model extends CI_Model{
         $this->db->set('number_of_notification', '`number_of_notification`+1', FALSE);
         $this->db->where('id', $userId);
         return $this->db->update('user');
+    }
+
+    //Shoutouts
+    public function getNumShoutouts($userId){
+        $result = $this->db->select("COUNT(id) num")
+            ->from("user_shoutouts")
+            ->where("userId", $userId)
+            ->where("bl_active", 1)
+            ->get()->row();
+        return $result->num;
+    }
+
+    public function getShoutouts($num, $offset, $userId){
+        $result = $this->db->select("*")
+            ->from("user_shoutouts")
+            ->where("userId", $userId)
+            ->where("bl_active", 1)
+            ->order_by("status DESC, id DESC")
+            ->limit($num,$offset)
+            ->get()->result();
+        return $result;
     }
 
     /** The End*/
