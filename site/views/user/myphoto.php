@@ -39,7 +39,7 @@
             <div class="modal-body text-center pt10">
                 <?php echo form_open_multipart(site_url('user/uploadPhoto'), array('name'=>'frm_uploadPhoto','id'=>'frm_uploadPhoto'))?>
                 <label>Min computer</label>
-                <input name="myImage[]" id="myImage" type="file" multiple="true" accept="image/*" style="borer:none;"/>
+                <input name="myImage[]" id="myImage" type="file" multiple="true" accept="image/*" style="borer:none; width: 200px;"/>
                 <?php echo form_close();?>
                 <!--p class="mt15"><a href="javascript:void(0)"><img src="<?php echo base_url();?>/templates/img/btn_facebook.png" alt="" class="img-responsive btn-inline-block"/></a></p-->
             </div>
