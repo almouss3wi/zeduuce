@@ -1650,6 +1650,10 @@ class User extends MX_Controller
     }
 
     // Shoutout
+
+    /**
+     * @param int $page
+     */
     public function shoutouts($page = 0){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
@@ -1670,6 +1674,19 @@ class User extends MX_Controller
         $data['shoutouts'] = $shoutouts;
         $data['page'] = 'user/shoutouts';
         $this->load->view('templates', $data);
+    }
+
+    public function deleteShoutout($shoutoutId){
+        if (!checkLogin()) {
+            redirect(site_url('home/index'));
+        }
+        $user = $this->session->userdata('user');
+        if($this->user->checkShoutoutOwner($shoutoutId, $user->id)){
+            $this->user->deleteShoutout($shoutoutId);
+        } else {
+            redirect(site_url('home/index'));
+        }
+        redirect(site_url('user/shoutouts'));
     }
 
     function testEmail()
