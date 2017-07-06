@@ -35,8 +35,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="<?php echo site_url('user/createShoutout')?>" class="btn btn-block btnMore text-uppercase"><i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i> Opret en shoutout (koster kr. 10)</a>
                                 <?php } else {echo "Der er ingen data!";}?>
+                                <a href="<?php echo site_url('user/createShoutout')?>" class="btn btn-block btnMore text-uppercase"><i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i> Opret en shoutout (koster kr. 10)</a>
                             </div>
 
                         </div>
