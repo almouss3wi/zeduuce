@@ -1739,7 +1739,7 @@ class User extends MX_Controller
         if($this->user->saveShoutout($insertInfo)){
             //Sending email to admin
             $sendEmailInfo['name'] = $user->name;
-            $sendEmailInfo['created_time'] = date("d.y.Y", $time)." Kl.".date("H:i", $time);
+            $sendEmailInfo['created_time'] = date("d.m.Y", $time)." Kl.".date("H:i", $time);
             $sendEmailInfo['content'] = $content;
             $admin = $this->config->item('email');
             $emailTo = array($admin);
