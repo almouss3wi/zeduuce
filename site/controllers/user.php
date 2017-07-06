@@ -1728,25 +1728,25 @@ class User extends MX_Controller
         $content = $this->input->post('content');
         $user = $this->session->userdata('user');
 
-        $db['userId'] = $user->id;
-        $db['content'] = $content;
-        $db['status'] = 1;
+        $insertInfo['userId'] = $user->id;
+        $insertInfo['content'] = $content;
+        $insertInfo['status'] = 1;
         $time = time();
-        $db['dt_create'] = date('Y-m-d H:i:s', $time);
-        $db['dt_update'] = date('Y-m-d H:i:s', $time);
-        $db['bl_active'] = 0;
+        $insertInfo['dt_create'] = date('Y-m-d H:i:s', $time);
+        $insertInfo['dt_update'] = date('Y-m-d H:i:s', $time);
+        $insertInfo['bl_active'] = 0;
 
-        if($this->user->saveShoutout($db)){
-            $info['name'] = $user->name;
-            $info['created_time'] = date("d.y.Y", $time)." Kl.".date("H:i", $time);
-            $info['content'] = $content;
+        if($this->user->saveShoutout($insertInfo)){
+            //Sending email to admin
+            $sendEmailInfo['name'] = $user->name;
+            $sendEmailInfo['created_time'] = date("d.y.Y", $time)." Kl.".date("H:i", $time);
+            $sendEmailInfo['content'] = $content;
             $admin = $this->config->item('email');
             $emailTo = array($admin);
-            sendEmail($emailTo,'shoutoutConfirm',$info,'');
+            sendEmail($emailTo,'shoutoutConfirm',$sendEmailInfo,'');
 
             $this->session->set_flashdata('message', 'Din shoutout er sendt til os, vi vil kontrollere og godkende det ASAP');
             redirect(site_url('user/shoutouts'));
-            //Send email to admin
         }
     }
 

@@ -889,5 +889,17 @@ class User_model extends CI_Model{
         return $this->db->update('user');
     }
 
+    /**
+     * @param $info
+     * @return bool
+     */
+    public function saveShoutout($info){
+        if($this->db->insert('user_shoutouts',$info)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
+
     /** The End*/
 }
