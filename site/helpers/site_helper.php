@@ -238,7 +238,7 @@ function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailTy
             }
             $ci->email->subject($query->subject);
             $ci->email->message($str);
-            //$ci->email->send();
+            $ci->email->send();
         }
     }catch(Exception $e){
         return false;

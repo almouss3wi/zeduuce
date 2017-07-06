@@ -71,7 +71,7 @@ class Home extends MX_Controller {
             $DB['email'] = $this->input->post('email');
             $DB['besked'] = $this->input->post('besked');
             $admin = $this->config->item('email');
-            $emailTo = array($DB['email'],$admin);
+            $emailTo = array($admin);
             sendEmail($emailTo,'contact',$DB,'');
             //Save DB
             $DB['dt_create'] = date('Y-m-d H:i:s');
