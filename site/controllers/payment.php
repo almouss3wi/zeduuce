@@ -161,6 +161,29 @@ class Payment extends MX_Controller {
         $data['page'] = 'payment/invitationer';
 		$this->load->view('templates', $data);
     }
+
+    function shoutout(){
+        $meta = $this->general_model->getMetaData(1);
+        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
+        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
+        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
+        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        //Go payment Epay
+        $data['action'] = $this->action;
+        $data['merchantnumber'] = $this->merchantnumber;
+        $data['currency'] = $this->currency;
+        $data['windowstate'] = $this->windowstate;
+        $data['md5'] = $this->md5;
+
+        $data['amount'] = number_format(10*100, 0, '.', '');
+        $data['accepturl'] = site_url('user/shoutoutSuccess');
+        $data['cancelurl'] = site_url('invitationer/shoutoutCancel');
+        $data['callbackurl'] = site_url('invitationer/shoutoutCallback');
+        $data['orderid'] = 'SO-'.randomPassword();
+
+        $data['page'] = 'payment/shoutout';
+        $this->load->view('templates', $data);
+    }
     
 }
 

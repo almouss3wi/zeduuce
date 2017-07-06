@@ -115,6 +115,14 @@ $(document).ready(function(){
         }
     });
 
+    $("#createShoutoutForm").validate({
+        rules: {
+            content: {
+                required: true
+            }
+        }
+    });
+
     // In tilbud page
     $('ul.list-topic li .radio label').click(function() {
         $('ul.list-topic li .radio label').removeClass('bg_active');
@@ -624,8 +632,7 @@ function getUserJoin(id){
 
 function deleteShoutout(id){
     if (confirm("Vil du virkelig slette denne shoutout?") == true) {
-        alert('OK');
-        return false;
+        location.href = base_url+"user/deleteShoutout/"+id;
     } else {
         return false;
     }

@@ -1676,6 +1676,9 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
+    /**
+     * @param $shoutoutId
+     */
     public function deleteShoutout($shoutoutId){
         if (!checkLogin()) {
             redirect(site_url('home/index'));
@@ -1687,6 +1690,54 @@ class User extends MX_Controller
             redirect(site_url('home/index'));
         }
         redirect(site_url('user/shoutouts'));
+    }
+
+    public function createShoutout(){
+        if (!checkLogin()) {
+            redirect(site_url('home/index'));
+        }
+        $user = $this->session->userdata('user');
+        if($this->user->checkUncreateShoutout($user->id) == 0){
+            //Go to payment
+            redirect(site_url('payment/shoutout'));
+        } else {
+            $data['user'] = $user;
+            $data['page'] = 'user/createShoutout';
+            $this->load->view('templates', $data);
+        }
+    }
+
+    public function shoutoutSuccess(){
+        if (!checkLogin()) {
+            redirect(site_url('home/index'));
+        }
+        if($this->user->updateUncreateShoutout(1)){
+            redirect(site_url('user/createShoutout'));
+        }
+    }
+
+    public function shoutoutCancel(){
+        if (!checkLogin()) {
+            redirect(site_url('home/index'));
+        }
+        $this->session->set_flashdata('message', 'Din betaling er mislykket');
+        redirect(site_url('user/shoutouts'));
+    }
+
+    public function saveShoutout(){
+        $content = $this->input->post('content');
+        $user = $this->session->userdata('user');
+
+        $db['userId'] = $user->id;
+        $db['content'] = $content;
+        $db['status'] = 1;
+        $db['dt_create'] = date('Y-m-d H:i:s');
+        $db['dt_update'] = date('Y-m-d H:i:s');
+        $db['bl_active'] = 0;
+
+        if($this->user->saveShoutout($db)){
+            //Send email to admin
+        }
     }
 
     function testEmail()

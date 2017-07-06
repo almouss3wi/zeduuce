@@ -854,5 +854,40 @@ class User_model extends CI_Model{
         return $result;
     }
 
+    /**
+     * @param $shoutoutId
+     * @param $userId
+     * @return mixed
+     */
+    public function checkShoutoutOwner($shoutoutId, $userId){
+        $result = $this->db->where("userId", $userId)
+            ->where("id", $shoutoutId)
+            ->get("user_shoutouts")
+            ->num_rows();
+        return $result;
+    }
+
+    /**
+     * @param $shoutoutId
+     */
+    public function deleteShoutout($shoutoutId){
+        $this->db->where("id", $shoutoutId)->delete("user_shoutouts");
+    }
+
+    public function checkUncreateShoutout($userId){
+        $result = $this->db->select("uncreate_shoutout")->from("user")->where("id", $userId)->get()->row();
+        return $result->uncreate_shoutout;
+    }
+    /**
+     * @param $num
+     * @return mixed
+     */
+    public function updateUncreateShoutout($num){
+        $user = $this->session->userdata('user');
+        $this->db->set('uncreate_shoutout', '`uncreate_shoutout`+'.$num, FALSE);
+        $this->db->where('id', $user->id);
+        return $this->db->update('user');
+    }
+
     /** The End*/
 }
