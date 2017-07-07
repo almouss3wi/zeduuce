@@ -24,15 +24,14 @@ class Ajax extends CI_Controller{
 		 $this->db->update($table);
 
 		 //Sending email if table is user_shoutouts
-        if($table == 'user_shoutouts'){
+         if($table == 'user_shoutouts'){
             $info = $this->ajax->getShoutout($id);
             $sendEmailInfo['name'] = $info->name;
             $sendEmailInfo['created_time'] = date("d.m.Y", $time)." Kl.".date("H:i", $time);
             $sendEmailInfo['content'] = $content;
-            $admin = $this->config->item('email');
-            $emailTo = array($admin);
+            $emailTo = array($info->email);
             sendEmail($emailTo,'approveShoutout',$sendEmailInfo,'');
-        }
+         }
 
 		 echo icon_active("'$table'","'$field'",$id,$publish);
          return;
@@ -101,6 +100,17 @@ class Ajax extends CI_Controller{
         $table = $this->input->post('table');
         $id = $this->input->post('id');
         $query = $this->db->where('id',$id)->delete($table);
+
+        //Sending email if table is user_shoutouts
+        if($table == 'user_shoutouts'){
+            $info = $this->ajax->getShoutout($id);
+            $sendEmailInfo['name'] = $info->name;
+            $sendEmailInfo['created_time'] = date("d.m.Y", $time)." Kl.".date("H:i", $time);
+            $sendEmailInfo['content'] = $content;
+            $emailTo = array($info->email);
+            sendEmail($emailTo,'cancelShoutout',$sendEmailInfo,'');
+        }
+
         echo true;
         return;
 	}

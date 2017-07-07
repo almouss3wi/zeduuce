@@ -6,10 +6,10 @@ class Ajax_model extends CI_Model{
 	}
 
     function getShoutout($id = NULL){
-        $result = $this->db->select("us.*, u.name")
+        $result = $this->db->select("us.*, u.name, u.email")
             ->from("user_shoutouts as us")
             ->join("user as u", "us.userId = u.id")
-            ->where('id', $id)
+            ->where('us.id', $id)
             ->get()->row();
         return $result;
     }
