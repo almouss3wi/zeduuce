@@ -20,6 +20,7 @@ class Ajax extends CI_Controller{
 			  $publish = 0;
 		 }
          $this->db->set('bl_active',$publish);
+         $this->db->set('dt_update',date('Y-m-d H:i:s', time()));
 		 $this->db->where($field,$id);
 		 $this->db->update($table);
 
@@ -28,7 +29,7 @@ class Ajax extends CI_Controller{
             $info = $this->ajax->getShoutout($id);
             $sendEmailInfo['name'] = $info->name;
             $sendEmailInfo['created_time'] = date("d.m.Y", $time)." Kl.".date("H:i", $time);
-            $sendEmailInfo['content'] = $content;
+            $sendEmailInfo['content'] = $info->content;
             $emailTo = array($info->email);
             sendEmail($emailTo,'approveShoutout',$sendEmailInfo,'');
          }
