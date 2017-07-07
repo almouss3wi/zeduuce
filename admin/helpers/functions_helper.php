@@ -20,11 +20,13 @@
 		if($status==1){
 			$rep = 'ok';
             $title = 'Lock';
+            $btn = 'btn-success';
 		}else{
 			$rep ='remove';
             $title = 'Unlock';
+            $btn = 'btn-danger';
 		}
-        return '<a href="javascript:void(0);" onclick="publish('.$table.','.$field.','.$id.','.$status.');" class="btn btn-icon btn-xs btn-success waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$title.'">
+        return '<a href="javascript:void(0);" onclick="publish('.$table.','.$field.','.$id.','.$status.');" class="btn btn-icon btn-xs '.$btn.' waves-effect waves-light" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$title.'">
         <i class="icon glyphicon glyphicon-'.$rep.'" aria-hidden="true"></i></a>';
     }
     function icon_active_popup($table,$field,$id,$status){
@@ -51,4 +53,48 @@
             return $CI->config->slash_item('site');
         }
     }
+
+function sendEmail($emails=NULL, $template=NULL, $data=NULL, $from=NULL, $mailType='html'){
+    $ci = &get_instance();
+    $config['mailtype'] = $mailType;
+    /*$config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'smtp.gmail.com';
+    $config['smtp_user'] = 'cuongld0205@gmail.com';
+    $config['smtp_pass'] = '0976465090';
+    $config['smtp_port'] = 465;
+    $config['smtp_crypto'] = 'ssl';*/
+    $ci->load->library('email', $config);
+    $ci->email->set_newline("\r\n");
+    $ci->email->initialize($config);
+    /** Load email template from database */
+    $query = $ci->db->select('*')
+        ->from('email_template')
+        ->where('code',$template)
+        ->where('bl_active',1)
+        ->get()->row();
+    if(empty($query)){ return false;}
+    ob_start();
+    extract($data);
+    $str = $query->content;
+    eval("\$str = \"$str\";");
+    @ob_end_clean();
+    /** Send mail */
+    try{
+        foreach($emails as $email){
+            $ci->email->clear();
+            $ci->email->to($email);
+            if($from){
+                $ci->email->from($from,'Zeduuce.com');
+            }else{
+                $ci->email->from('info@zeduuce.com','Zeduuce.com');
+            }
+            $ci->email->subject($query->subject);
+            $ci->email->message($str);
+            $ci->email->send();
+        }
+    }catch(Exception $e){
+        return false;
+    }
+    return true;
+}
 ?>

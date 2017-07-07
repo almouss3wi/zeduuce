@@ -4,5 +4,14 @@ class Ajax_model extends CI_Model{
 	function __construct(){
         parent::__construct();
 	}
+
+    function getShoutout($id = NULL){
+        $result = $this->db->select("us.*, u.name")
+            ->from("user_shoutouts as us")
+            ->join("user as u", "us.userId = u.id")
+            ->where('id', $id)
+            ->get()->row();
+        return $result;
+    }
 }
 ?>
