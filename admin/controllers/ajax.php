@@ -28,7 +28,7 @@ class Ajax extends CI_Controller{
          if($table == 'user_shoutouts' && $publish = 1){
             $info = $this->ajax->getShoutout($id);
             $sendEmailInfo['name'] = $info->name;
-            $sendEmailInfo['created_time'] = date("d.m.Y", $time)." Kl.".date("H:i", $time);
+            $sendEmailInfo['created_time'] = date("d.m.Y", $info->dt_create)." Kl.".date("H:i", $info->dt_create);
             $sendEmailInfo['content'] = $info->content;
             $emailTo = array($info->email);
             sendEmail($emailTo,'approveShoutout',$sendEmailInfo,'');
