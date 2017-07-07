@@ -24,7 +24,7 @@ class Ajax extends CI_Controller{
 		 $this->db->update($table);
 
 		 //Sending email if table is user_shoutouts
-         if($table == 'user_shoutouts'){
+         if($table == 'user_shoutouts' && $publish = 1){
             $info = $this->ajax->getShoutout($id);
             $sendEmailInfo['name'] = $info->name;
             $sendEmailInfo['created_time'] = date("d.m.Y", $time)." Kl.".date("H:i", $time);
