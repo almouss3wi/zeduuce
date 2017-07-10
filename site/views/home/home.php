@@ -457,137 +457,46 @@
 
             <div class="col-md-6">
                 <h2>Shoutouts</h2>
+                <?php if(!empty($shoutouts)){?>
                 <div id="owl-demo4" class="owl-carousel owl-theme">
+                    <?php for($i = 0; $i <= count($shoutouts); $i = $i + 2){?>
                     <div class="item">
                         <div class="row border2">
                             <div class="box-info clearfix">
                                 <div class="col-md-3 col-xs-3">
                                     <div class="box-info-img">
-                                        <img src="<?php echo base_url();?>templates/img/peo12-mid.jpg" alt="" class="img-responsive">
+                                        <?php echo modules::run('left/left/avatar',(object)$shoutouts[$i], 122, 122);?>
                                     </div>
                                 </div>
                                 <div class="col-md-9 col-xs-9">
                                     <div class="box-info-detail">
-                                        <h4>Heidi H.</h4>
-                                        <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. ”</p>
+                                        <h4><?php echo $shoutouts[$i]->name?></h4>
+                                        <p>“ <?php echo $shoutouts[$i]->content?> ”</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <?php if(!empty($shoutouts[$i+1])){?>
                         <div class="row">
                             <div class="box-info clearfix">
                                 <div class="col-md-3 col-xs-3">
                                     <div class="box-info-img">
-                                        <img src="<?php echo base_url();?>templates/img/peo14-mid.jpg" alt="" class="img-responsive">
+                                        <?php echo modules::run('left/left/avatar',(object)$shoutouts[$i+1], 122, 122);?>
                                     </div>
                                 </div>
                                 <div class="col-md-9 col-xs-9">
                                     <div class="box-info-detail">
-                                        <h4>Joyfuldoe</h4>
-                                        <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. ”</p>
+                                        <h4><?php echo $shoutouts[$i+1]->name?></h4>
+                                        <p>“ <?php echo $shoutouts[$i+1]->content?> ”</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <?php }?>
                     </div>
-                    <div class="item">
-                        <div class="row border2">
-                            <div class="box-info clearfix">
-                                <div class="col-md-3 col-xs-3">
-                                    <div class="box-info-img">
-                                        <img src="<?php echo base_url();?>templates/img/peo12-mid.jpg" alt="" class="img-responsive">
-                                    </div>
-                                </div>
-                                <div class="col-md-9 col-xs-9">
-                                    <div class="box-info-detail">
-                                        <h4>Heidi H.</h4>
-                                        <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. ”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="box-info clearfix">
-                                <div class="col-md-3 col-xs-3">
-                                    <div class="box-info-img">
-                                        <img src="<?php echo base_url();?>templates/img/peo14-mid.jpg" alt="" class="img-responsive">
-                                    </div>
-                                </div>
-                                <div class="col-md-9 col-xs-9">
-                                    <div class="box-info-detail">
-                                        <h4>Joyfuldoe</h4>
-                                        <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. ”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="row border2">
-                            <div class="box-info clearfix">
-                                <div class="col-md-3 col-xs-3">
-                                    <div class="box-info-img">
-                                        <img src="<?php echo base_url();?>templates/img/peo12-mid.jpg" alt="" class="img-responsive">
-                                    </div>
-                                </div>
-                                <div class="col-md-9 col-xs-9">
-                                    <div class="box-info-detail">
-                                        <h4>Heidi H.</h4>
-                                        <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. ”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="box-info clearfix">
-                                <div class="col-md-3 col-xs-3">
-                                    <div class="box-info-img">
-                                        <img src="<?php echo base_url();?>templates/img/peo14-mid.jpg" alt="" class="img-responsive">
-                                    </div>
-                                </div>
-                                <div class="col-md-9 col-xs-9">
-                                    <div class="box-info-detail">
-                                        <h4>Joyfuldoe</h4>
-                                        <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. ”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="row border2">
-                            <div class="box-info clearfix">
-                                <div class="col-md-3 col-xs-3">
-                                    <div class="box-info-img">
-                                        <img src="<?php echo base_url();?>templates/img/peo12-mid.jpg" alt="" class="img-responsive">
-                                    </div>
-                                </div>
-                                <div class="col-md-9 col-xs-9">
-                                    <div class="box-info-detail">
-                                        <h4>Heidi H.</h4>
-                                        <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. ”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="box-info clearfix">
-                                <div class="col-md-3 col-xs-3">
-                                    <div class="box-info-img">
-                                        <img src="<?php echo base_url();?>templates/img/peo14-mid.jpg" alt="" class="img-responsive">
-                                    </div>
-                                </div>
-                                <div class="col-md-9 col-xs-9">
-                                    <div class="box-info-detail">
-                                        <h4>Joyfuldoe</h4>
-                                        <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. ”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <?php }?>
                 </div>
+                <?php }?>
             </div>
         </div>
     </div>

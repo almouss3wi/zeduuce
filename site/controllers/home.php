@@ -21,6 +21,7 @@ class Home extends MX_Controller {
             $data['rightBanner'] = $this->user->getImagesFromCatgoryId(8);
             $data['listImages'] = $this->user->getImagesFromCatgoryId(7);
             $data['newEvents'] = $this->user->getNewEvents();
+            $data['shoutouts'] = $this->user->getShoutoutsInHome(10);
             $data['page'] = 'home/home';
         }else{
             $data['page'] = 'home/index';

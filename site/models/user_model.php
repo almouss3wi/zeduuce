@@ -901,5 +901,21 @@ class User_model extends CI_Model{
         }
     }
 
+    /**
+     * @param $limit
+     * @return mixed
+     */
+    public function getShoutoutsInHome($limit){
+        $result = $this->db->select("us.*, u.name, u.avatar, u.facebook")
+            ->from("user_shoutouts as us")
+            ->join("user as u", "us.userId = u.id")
+            ->where("us.bl_active", 1)
+            ->where("time_to_sec(timediff(NOW(), us.dt_create )) / 3600 <", 72)
+            ->order_by('us.id','DESC')
+            ->limit($limit)
+            ->get()->result();
+        return $result;
+    }
+
     /** The End*/
 }

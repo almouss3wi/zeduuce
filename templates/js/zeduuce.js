@@ -244,9 +244,12 @@ $(document).ready(function () {
     var owl4 = $("#owl-demo4");
 
     owl4.owlCarousel({
-        navigation: false,
-        pagination: true,
-        singleItem: true,
+        navigation : true,
+        navigationText: [
+            "<i class='fa fa-chevron-left fa-3x'></i>",
+            "<i class='fa fa-chevron-right fa-3x'></i>"],
+        pagination: false,
+        singleItem : true,
     });
 
     var owl5 = $("#owl-gallery");
