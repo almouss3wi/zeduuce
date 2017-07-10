@@ -3287,3 +3287,6 @@ ul.list_uploaded .fa {
     height: 63px;
     display: inline-block;
 }
+#owl-demo4 .item {
+    overflow: hidden;
+}
