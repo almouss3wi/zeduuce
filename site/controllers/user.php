@@ -1744,7 +1744,7 @@ class User extends MX_Controller
             $sendEmailInfo['created_time'] = date("d.m.Y", $time)." Kl.".date("H:i", $time);
             $sendEmailInfo['content'] = $content;
             $admin = $this->config->item('email');
-            $emailTo = array($admin);
+            $emailTo = array($admin, "info@zeduuce.com");
             sendEmail($emailTo,'shoutoutConfirm',$sendEmailInfo,'');
 
             $this->user->updateUncreateShoutout(-1);
