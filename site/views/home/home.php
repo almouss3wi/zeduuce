@@ -465,12 +465,14 @@
                             <div class="box-info clearfix">
                                 <div class="col-md-3 col-xs-3">
                                     <div class="box-info-img">
+                                        <a href="<?php echo site_url('user/profile/'.$shoutouts[$i]->userId.'/'.seoUrl($shoutouts[$i]->name));?>">
                                         <?php echo modules::run('left/left/avatar',(object)$shoutouts[$i], 122, 122);?>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-md-9 col-xs-9">
                                     <div class="box-info-detail">
-                                        <h4><?php echo $shoutouts[$i]->name?></h4>
+                                        <h4><a href="<?php echo site_url('user/profile/'.$shoutouts[$i]->userId.'/'.seoUrl($shoutouts[$i]->name));?>"><?php echo $shoutouts[$i]->name?></a></h4>
                                         <p>“ <?php echo $shoutouts[$i]->content?> ”</p>
                                     </div>
                                 </div>
@@ -481,12 +483,14 @@
                             <div class="box-info clearfix">
                                 <div class="col-md-3 col-xs-3">
                                     <div class="box-info-img">
+                                        <a href="<?php echo site_url('user/profile/'.$shoutouts[$i+1]->userId.'/'.seoUrl($shoutouts[$i+1]->name));?>">
                                         <?php echo modules::run('left/left/avatar',(object)$shoutouts[$i+1], 122, 122);?>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-md-9 col-xs-9">
                                     <div class="box-info-detail">
-                                        <h4><?php echo $shoutouts[$i+1]->name?></h4>
+                                        <h4><a href="<?php echo site_url('user/profile/'.$shoutouts[$i+1]->userId.'/'.seoUrl($shoutouts[$i+1]->name));?>"><?php echo $shoutouts[$i+1]->name?></a></h4>
                                         <p>“ <?php echo $shoutouts[$i+1]->content?> ”</p>
                                     </div>
                                 </div>
