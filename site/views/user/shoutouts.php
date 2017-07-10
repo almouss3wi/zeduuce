@@ -15,13 +15,13 @@
                                         <thead>
                                         <tr>
                                             <th>Indhold</th>
-                                            <th>Skabelse tid</th>
+                                            <th>Aktiv tid</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <?php foreach($shoutouts as $shoutout){
-                                            $time = strtotime($shoutout->dt_create);
+                                            $time = strtotime($shoutout->dt_update);
                                             ?>
                                         <tr>
                                             <td width="50%">

@@ -911,10 +911,23 @@ class User_model extends CI_Model{
             ->join("user as u", "us.userId = u.id")
             ->where("us.bl_active", 1)
             ->where("time_to_sec(timediff(NOW(), us.dt_create )) / 3600 <", 72)
+            ->where("us.status", 1)
             ->order_by('us.id','DESC')
             ->limit($limit)
             ->get()->result();
         return $result;
+    }
+
+    public function checkShoutoutsStatus($userId){
+        $this->db->set('status', 0);
+        $this->db->where('userId', $userId);
+        $this->db->where('status', 1);
+        $this->db->where("time_to_sec(timediff(NOW(), dt_update )) / 3600 >", 72);
+        if($this->db->update('user_shoutouts')){
+            return true;
+        } else {
+            die('checkShoutoutsStatus is fail');
+        }
     }
 
     /** The End*/

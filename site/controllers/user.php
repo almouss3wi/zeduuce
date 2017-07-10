@@ -34,6 +34,8 @@ class User extends MX_Controller
         $data['user'] = $this->session->userdata('user');
         $data['item'] = $this->user->getUser($data['user']->id);
         $data['tilbud'] = $this->user->getMyTilbud($data['user']->id);
+        //Change status shoutouts if they are more than 72 hours
+        $this->user->checkShoutoutsStatus($data['user']->id);
         $data['page'] = 'user/index';
         $this->load->view('templates', $data);
     }
