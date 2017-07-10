@@ -496,7 +496,7 @@
                     </div>
                     <?php }?>
                 </div>
-                <?php }?>
+                <?php } else {echo 'Ingen shoutout at vise';}?>
             </div>
         </div>
     </div>
