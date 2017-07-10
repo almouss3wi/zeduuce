@@ -1747,6 +1747,8 @@ class User extends MX_Controller
             $emailTo = array($admin);
             sendEmail($emailTo,'shoutoutConfirm',$sendEmailInfo,'');
 
+            $this->user->updateUncreateShoutout(-1);
+
             $this->session->set_flashdata('message', 'Din shoutout er sendt til os, vi vil kontrollere og godkende det ASAP');
             redirect(site_url('user/shoutouts'));
         }
