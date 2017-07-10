@@ -459,7 +459,7 @@
                 <h2>Shoutouts</h2>
                 <?php if(!empty($shoutouts)){?>
                 <div id="owl-demo4" class="owl-carousel owl-theme">
-                    <?php for($i = 0; $i <= count($shoutouts); $i = $i + 2){?>
+                    <?php for($i = 0; $i < count($shoutouts); $i = $i + 2){?>
                     <div class="item">
                         <div class="row border2">
                             <div class="box-info clearfix">
