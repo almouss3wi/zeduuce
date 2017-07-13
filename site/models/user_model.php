@@ -515,8 +515,18 @@ class User_model extends CI_Model{
         $result = $this->db->select("number_of_notification")->from("user")->where("id", $userId)->get()->row();
         return $result->number_of_notification;
     }
+
+    public function resetNumOfNotification($userId){
+        $this->db->set('number_of_notification', 0);
+        $this->db->where('id', $userId);
+        return $this->db->update('user');
+    }
     
     /** TILBUD*/
+    /**
+     * @param $user
+     * @return mixed
+     */
     function getMyTilbud($user){
         $query = $this->db->select('po.*, pp.name, pp.image, pp.description, b2b.name as company')
                 ->from('product_order_item as po')
