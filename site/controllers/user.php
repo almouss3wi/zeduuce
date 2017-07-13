@@ -602,6 +602,9 @@ class User extends MX_Controller
 
         $data['user'] = $this->session->userdata('user');
 
+        //Reset number of notification in positive list = 0
+        $this->user->resetNumOfNotification($data['user']->id);
+
         $config['base_url'] = base_url() . $this->language . '/user/positiv/';
         $config['total_rows'] = count($this->user->getDatedUserIds($data['user']->id));
         //$config['per_page'] = $this->config->item('numberpage');

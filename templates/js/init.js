@@ -197,7 +197,7 @@ function login(){
                             location.reload();
                         }
                      }else{
-                         $('#error-content').html('Fejl-system, skal du handling igen!');
+                         $('#error-content').html('E-mail eller adgangskode er forkert, prøv igen!');
                          $('#PUerror').modal('show');
                      }
                  }
