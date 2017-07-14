@@ -18,8 +18,11 @@ class User extends MX_Controller
         $this->_meta = $this->general_model->getMetaDataFromUrl();
     }
 
-    function index()
-    {
+    protected function middleware(){
+        return array('admin_auth|only:index');
+    }
+
+    function index(){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
         if (!checkLogin()) {
