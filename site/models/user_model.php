@@ -544,14 +544,18 @@ class User_model extends CI_Model{
     /**
      * @param null $userId
      * @param int $type
+     * @param string $avatar
      * @return mixed
      */
-    function getPhoto($userId = NULL, $type = 1){
+    function getPhoto($userId = NULL, $type = 1, $avatar = ''){
         $this->db->select('*')->from('user_image');
         if($userId){
             $this->db->where("userID",$userId);
         }
         $this->db->where("type",$type);
+        if($avatar != ''){
+            $this->db->order_by('image = "'.$avatar.'"', 'DESC');
+        }
         $query = $this->db->get()->result();
         return $query;
     }

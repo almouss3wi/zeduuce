@@ -10,10 +10,18 @@
                                     <div class="col-xs-12">
                                         <h3 class="text-uppercase mt0">Rediger profil</h3>
                                     </div>
+                                    <?php if(empty($item->facebook)){?>
                                     <div class="col-xs-12">
                                         <div class="form-group">
                                             <label for="">Dit profilbillede</label>
-                                            <?php echo modules::run('left/left/avatar',$item, 270, 270);?>
+                                            <?php foreach($listProfilePictures as $pic){?>
+                                                <label class="avatar fl mr10">
+                                                    <input type="radio" name="avatar" value="<?php echo $pic->image;?>" <?php if($pic->image == $item->avatar) echo 'checked';?> />
+                                                    <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/user/<?php echo $pic->image;?>&w=150&h=150&q=100" alt="" class="img-responsive"/>
+                                                </label>
+                                            <?php }?>
+
+                                            <?php /*echo modules::run('left/left/avatar',$item, 270, 270);?>
 
                                             <?php if(empty($item->facebook)){?>
                                             <br>
@@ -22,9 +30,10 @@
                                             <?php }?>
                                             <input type="file" name="newAvatar"/>
                                             <input type="hidden" name="avatar" value="<?php echo $item->avatar;?>"/>
-                                            <?php }?>
+                                            <?php }*/?>
                                         </div>
                                     </div>
+                                    <?php }?>
                                     <div class="col-xs-6">
                                         <div class="form-group">
                                             <label for="">Vælg dit profil navn <span class="red">*</span></label>

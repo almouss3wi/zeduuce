@@ -3290,3 +3290,15 @@ ul.list_uploaded .fa {
 #owl-demo4 .item {
     overflow: hidden;
 }
+
+.avatar > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+.avatar > input + img{ /* IMAGE STYLES */
+    cursor:pointer;
+    border:2px solid transparent;
+}
+.avatar > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+    border:2px solid #f00;
+}

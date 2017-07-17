@@ -6,7 +6,7 @@ class Left extends MX_Controller {
     } 
     public function index($id){
         $data['item'] = $this->user->getUser($id);
-        $data['photo'] = $this->user->getPhoto($id);
+        $data['photo'] = $this->user->getPhoto($id, 2, $data['item']->avatar);
         $data['numphoto'] = $this->user->getNumPhoto($id);
         $data['numinvitajoin'] = count($this->user->getDatingByUser($id));
         $data['numinvitaapproved'] = count($this->user->getDatingApproved($id));

@@ -4,15 +4,15 @@
         <div class="row">
             <div class="col-lg-12">
                 <div id="sync1" class="owl-carousel">
-                    <div class="item">
+                    <!--<div class="item">
                         <a href="javascript:void(0)">
-                            <?php echo modules::run('left/left/avatar',(object)$item, 263, 263);?>
+                            <?php /*echo modules::run('left/left/avatar',(object)$item, 263, 263);*/?>
                         </a>
-                    </div>
+                    </div>-->
                     <?php if($photo){ foreach($photo as $row){?>
                     <div class="item">
                         <a href="javascript:void(0)">
-                            <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row->image;?>&w=263&h=263&q=100" alt="" class="img-responsive"/>
+                            <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/user/<?php echo $row->image;?>&w=263&h=263&q=100" alt="" class="img-responsive"/>
                         </a>
                     </div>
                     <?php }}?>
@@ -22,15 +22,15 @@
         <div class="row">
             <div class="col-lg-12">
                 <div id="sync2" class="owl-carousel">
-                    <div class="item">
+                    <!--<div class="item">
                         <a href="javascript:void(0)">
-                            <?php echo modules::run('left/left/avatar',(object)$item, 63, 63);?>
+                            <?php /*echo modules::run('left/left/avatar',(object)$item, 63, 63);*/?>
                         </a>
-                    </div>
+                    </div>-->
                     <?php if($photo){ foreach($photo as $row){?>
                     <div class="item">
                         <a href="javascript:void(0)">
-                            <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row->image;?>&w=63&h=63&q=100" alt="" class="img-responsive"/>
+                            <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/user/<?php echo $row->image;?>&w=63&h=63&q=100" alt="" class="img-responsive"/>
                         </a>
                     </div>
                     <?php }}?>

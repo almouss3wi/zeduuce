@@ -1029,7 +1029,7 @@ class User extends MX_Controller
         $user = $this->session->userdata['user'];
         if ($this->input->post()) {
             //Handle profile picture
-            if(isset($_FILES['newAvatar']['name'])&&$_FILES['newAvatar']['name']!=""){
+            /*if(isset($_FILES['newAvatar']['name'])&&$_FILES['newAvatar']['name']!=""){
                 $config['upload_path'] = $this->config->item('root')."uploads/user/";
                 $config['allowed_types'] = 'gif|jpg|jpeg|png';
                 $config['max_size']	= $this->config->item('maxupload');
@@ -1054,9 +1054,9 @@ class User extends MX_Controller
             if($this->input->post('deleteProfilePicture')){
                 unlink("uploads/user/".$this->input->post('avatar'));
                 $data_img['file_name'] = '';
-            }
+            }*/
 
-            $DB['avatar'] = $data_img['file_name'];
+            $DB['avatar'] = $this->input->post('avatar');
 
             $DB['name'] = $this->input->post('name');
             $DB['day'] = $this->input->post('day');
@@ -1092,7 +1092,9 @@ class User extends MX_Controller
                 redirect(site_url('user/update'));
             }
         }
+
         $data['user'] = $user;
+        $data['listProfilePictures'] = $this->user->getPhoto($user->id, 2);
         $data['item'] = $this->user->getUser($user->id);
         $data['page'] = 'user/update';
         $this->load->view('templates', $data);
