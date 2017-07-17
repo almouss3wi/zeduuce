@@ -27,6 +27,23 @@ $(document).ready(function(){
     		}
     	}).submit();
     });
+
+    $('#myProfilePicture').on('change',function(){
+        $('#frm_uploadProfilePicture').ajaxForm({
+            //target:'#list_myphoto',
+            beforeSubmit:function(e){
+                $('#loader').show();
+            },
+            success:function(html){
+                $('#loader').hide();
+                $('#f_Transfer_Profile_Picture').modal('hide');
+                $('#listMyProfilePicture').append(html);
+                $('#f_Transfer_Profile_Picture')[0].reset();
+            },
+            error:function(e){
+            }
+        }).submit();
+    });
     //PHOTO opretetevent
     $('#eventImage').on('change',function(){
         var form = $('#frm_invitationer')[0];

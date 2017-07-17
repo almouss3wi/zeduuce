@@ -541,11 +541,17 @@ class User_model extends CI_Model{
     }
     
     /** IMAGES*/
-    function getPhoto($user=NULL){
+    /**
+     * @param null $userId
+     * @param int $type
+     * @return mixed
+     */
+    function getPhoto($userId = NULL, $type = 1){
         $this->db->select('*')->from('user_image');
-        if($user){
-            $this->db->where("userID",$user);
+        if($userId){
+            $this->db->where("userID",$userId);
         }
+        $this->db->where("type",$type);
         $query = $this->db->get()->result();
         return $query;
     }

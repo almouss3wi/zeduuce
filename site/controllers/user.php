@@ -97,16 +97,25 @@ class User extends MX_Controller
             redirect(site_url('home/index'));
         }
         $data['user'] = $this->session->userdata('user');
-        $data['list'] = $this->user->getPhoto($data['user']->id);
+        $data['listImages'] = $this->user->getPhoto($data['user']->id, 1);
+        $data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
         $data['page'] = 'user/myphoto';
         $this->load->view('templates', $data);
     }
 
     function uploadPhoto()
     {
+        $type = $this->input->post('type');
+        if($type == 1){
+            $upload_path = "./uploads/photo/";
+            $imageFolder = "photo";
+        } else if($type == 2){
+            $upload_path = "./uploads/user/";
+            $imageFolder = "user";
+        }
         $user = $this->session->userdata('user');
         //$config['upload_path'] = $this->config->item('root') . "uploads/photo/";
-        $config['upload_path'] = "./uploads/photo/";
+        $config['upload_path'] = $upload_path;
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = $this->config->item('maxupload');
         $config['encrypt_name'] = TRUE;  //rename to random string image
@@ -126,6 +135,7 @@ class User extends MX_Controller
         $DB['userID'] = $user->id;
         $DB['dt_create'] = date('Y-m-d H:i:s');
         $DB['bl_active'] = 1;
+        $DB['type'] = $type;
         if ($data_img) {
             $i = 0;
             foreach ($data_img as $row) {
@@ -136,6 +146,7 @@ class User extends MX_Controller
                 $i++;
             }
         }
+        $data['imageFolder'] = $imageFolder;
         $data['list'] = $list;
         $this->load->view('ajax/myphoto', $data);
         /**
