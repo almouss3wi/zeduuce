@@ -554,7 +554,7 @@ class User_model extends CI_Model{
         }
         $this->db->where("type",$type);
         if($avatar != ''){
-            $this->db->order_by('image = "'.$avatar.'"', 'DESC');
+            $this->db->where('image != ',$avatar);
         }
         $query = $this->db->get()->result();
         return $query;

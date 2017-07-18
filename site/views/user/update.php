@@ -13,12 +13,18 @@
                                     <?php if(empty($item->facebook)){?>
                                     <div class="col-xs-12">
                                         <div class="form-group">
-                                            <label for="">Dit profilbillede</label>
-                                            <?php foreach($listProfilePictures as $pic){?>
-                                                <label class="avatar fl mr10">
-                                                    <input type="radio" name="avatar" value="<?php echo $pic->image;?>" <?php if($pic->image == $item->avatar) echo 'checked';?> />
-                                                    <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/user/<?php echo $pic->image;?>&w=150&h=150&q=100" alt="" class="img-responsive"/>
-                                                </label>
+                                            <?php if(!empty($listProfilePictures)) { ?>
+                                                <label for="">Dit profilbillede</label>
+                                                <?php foreach ($listProfilePictures as $pic) { ?>
+                                                    <label class="avatar fl mr10">
+                                                        <input type="radio" name="avatar"
+                                                               value="<?php echo $pic->image; ?>" <?php if ($pic->image == $item->avatar) echo 'checked'; ?> />
+                                                        <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/user/<?php echo $pic->image; ?>&w=150&h=150&q=100"
+                                                             alt="" class="img-responsive"/>
+                                                    </label>
+                                                <?php }
+                                            } else {?>
+                                                Du har ikke noget billede at vælge, <a href="<?php echo site_url('user/myphoto')?>">klik her</a> for at uploade
                                             <?php }?>
 
                                             <?php /*echo modules::run('left/left/avatar',$item, 270, 270);?>
