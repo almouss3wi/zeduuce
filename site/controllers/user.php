@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('admin_auth|only:index');
+        return array('CheckLogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,deletemyinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,acceptDating,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel');
     }
 
     function index(){
@@ -50,9 +50,6 @@ class User extends MX_Controller
         $data['item'] = $this->user->getUser($id);
 
         $this->user->addMeta($this->_meta, $data, $data['item']->name . ' - Zeduuce.com');
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
 
         //Adding positive notification
         if($this->user->countSeeTimes($id, $data['user']->id) == 3){
@@ -80,9 +77,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         $data['user'] = $this->session->userdata('user');
         $data['page'] = 'user/b2b';
         $this->load->view('templates', $data);
@@ -93,9 +88,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         $data['user'] = $this->session->userdata('user');
         $data['listImages'] = $this->user->getPhoto($data['user']->id, 1);
         $data['listProfilePictures'] = $this->user->getPhoto($data['user']->id, 2);
@@ -180,9 +173,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         $data['user'] = $this->session->userdata('user');
         $data['tilbud'] = $this->user->getMyTilbud($data['user']->id);
         $data['page'] = 'user/mydeal';
@@ -194,9 +185,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         $data['user'] = $this->session->userdata('user');
         $message = $this->user->getListMessage($data['user']->id);
         $list = "";
@@ -221,11 +210,6 @@ class User extends MX_Controller
 
     function messages($id)
     {
-        //Checking login
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
-
         //Checking dated
         $user = $this->session->userdata('user');
         if(isDated($user->id, $id) === false){
@@ -280,9 +264,6 @@ class User extends MX_Controller
 
     function deleteMessage($userID)
     {
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
         $user = $this->session->userdata('user');
         $this->user->deleteMessage_FT($user->id, $userID);
         $this->user->deleteMessage_TF($user->id, $userID);
@@ -294,9 +275,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         $data['user'] = $this->session->userdata('user');
         $dating = $this->user->getDating($data['user']->id);
         $list = "";
@@ -368,9 +347,6 @@ class User extends MX_Controller
 
     function deleteinvitationer($id)
     {
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
         //Delete dating - user - image
         $ok = $this->user->deleteDating($id);
         if ($ok) {
@@ -384,9 +360,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         $data['user'] = $this->session->userdata('user');
         $dating = $this->user->getDatingByUser($data['user']->id);
         $list = "";
@@ -460,9 +434,6 @@ class User extends MX_Controller
 
     function deletemyinvitationerjoin($id)
     {
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
         //Delete dating of user
         $this->user->deleteDatingUser($id);
         redirect(site_url('user/myinvitationerjoin'));
@@ -472,9 +443,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         $data['user'] = $this->session->userdata('user');
         $dating = $this->user->getDatingApproved($data['user']->id);
         $list = "";
@@ -553,9 +522,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         /** Clear session search USER */
         $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
         , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
@@ -605,9 +572,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         /** Clear session search USER */
         $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
         , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
@@ -1023,9 +988,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         $user = $this->session->userdata['user'];
         if ($this->input->post()) {
             //Handle profile picture
@@ -1505,9 +1468,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         /** Clear session search USER */
         $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
         , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
@@ -1560,9 +1521,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         /** Clear session search USER */
         $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
         , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
@@ -1616,9 +1575,7 @@ class User extends MX_Controller
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
         /** Clear session search USER */
         $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
         , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
@@ -1678,9 +1635,7 @@ class User extends MX_Controller
     public function shoutouts($page = 0){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
+
 
         $data['user'] = $this->session->userdata('user');
         $config['base_url'] = base_url() . $this->language . '/user/shoutouts/';
@@ -1701,9 +1656,6 @@ class User extends MX_Controller
      * @param $shoutoutId
      */
     public function deleteShoutout($shoutoutId){
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
         $user = $this->session->userdata('user');
         if($this->user->checkShoutoutOwner($shoutoutId, $user->id)){
             $this->user->deleteShoutout($shoutoutId);
@@ -1714,9 +1666,6 @@ class User extends MX_Controller
     }
 
     public function createShoutout(){
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
         $user = $this->session->userdata('user');
         if($this->user->checkUncreateShoutout($user->id) == 0){
             //Go to payment
@@ -1729,18 +1678,12 @@ class User extends MX_Controller
     }
 
     public function shoutoutSuccess(){
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
         if($this->user->updateUncreateShoutout(1)){
             redirect(site_url('user/createShoutout'));
         }
     }
 
     public function shoutoutCancel(){
-        if (!checkLogin()) {
-            redirect(site_url('home/index'));
-        }
         $this->session->set_flashdata('message', 'Din betaling er mislykket');
         redirect(site_url('user/shoutouts'));
     }

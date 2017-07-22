@@ -305,7 +305,7 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <a href="javascript:void(0)" class="btnGray2 text-uppercase" data-dismiss="modal">&nbsp;&nbsp;JA&nbsp;&nbsp;</a>
+                        <a href="javascript:void(0)" class="btnGray2 text-uppercase" data-dismiss="modal">&nbsp;&nbsp;LUK&nbsp;&nbsp;</a>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
  * Repository: https://github.com/davinder17s/codeigniter-middleware
  */
 
-class AdminAuthMiddleware {
+class CheckLoginMiddleware {
     protected $controller;
     protected $ci;
     public $roles = array();
@@ -16,7 +16,9 @@ class AdminAuthMiddleware {
     }
 
     public function run(){
-        //echo 'aaaa';
-        //$this->roles = array('somehting', 'view', 'edit');
+        if (!checkLogin()) {
+            $this->ci->session->set_flashdata('message', 'Du skal logge ind for at se det !!');
+            redirect(site_url('home/index'));
+        }
     }
 }

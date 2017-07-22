@@ -16,12 +16,12 @@
                                             <?php if(!empty($listProfilePictures)) { ?>
                                                 <label for="">Dit profilbillede</label>
                                                 <?php foreach ($listProfilePictures as $pic) { ?>
-                                                    <label class="avatar fl mr10">
-                                                        <input type="radio" name="avatar"
-                                                               value="<?php echo $pic->image; ?>" <?php if ($pic->image == $item->avatar) echo 'checked'; ?> />
-                                                        <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/user/<?php echo $pic->image; ?>&w=150&h=150&q=100"
-                                                             alt="" class="img-responsive"/>
-                                                    </label>
+                                                <label class="avatar fl mr10">
+                                                    <input type="radio" name="avatar"
+                                                           value="<?php echo $pic->image; ?>" <?php if ($pic->image == $item->avatar) echo 'checked'; ?> />
+                                                    <img src="<?php echo base_url(); ?>thumb/timthumb.php?src=<?php echo base_url(); ?>uploads/user/<?php echo $pic->image; ?>&w=150&h=150&q=100"
+                                                         alt="" class="img-responsive"/>
+                                                </label>
                                                 <?php }
                                             } else {?>
                                                 Du har ikke noget billede at vælge, <a href="<?php echo site_url('user/myphoto')?>">klik her</a> for at uploade
@@ -202,13 +202,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 col-xs-12">
                                         <div class="form-group">
                                             <label for="">Skriv et motto</label>
                                             <input type="text" name="slogan" class="form-control" value="<?php echo $item->slogan;?>"/>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 col-xs-12">
                                         <div class="form-group">
                                             <label for="">Personbeskrivelse</label>
                                             <textarea name="description" class="form-control" rows="5"><?php echo $item->description;?></textarea>
@@ -226,12 +226,12 @@
                                             <input type="password" class="form-control" name="repassword"/>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 col-xs-12">
                                         <div class="form-group">
                                             <p><i>Alle felter med  <span class="red">*</span> skal udfyldes</i></p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 col-xs-12">
                                         <div class="form-group box_gray">
                                             <div class="row">
                                                 <div class="col-xs-6">
@@ -251,7 +251,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 col-xs-12">
                                         <p class="mb0"><a href="javascript:void(0)"><strong>Forbind Instagram</strong></a></p>
                                     </div>
                                 </div>
