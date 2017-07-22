@@ -117,7 +117,8 @@
     var base_url = '<?php echo base_url();?>';
     var base_url_lang = '<?php echo base_url().$this->lang->lang();?>/';
     </script>
-
+    <?php if(checkLogin() && isGoldMember()){?>
     <link type="text/css" href="<?php echo base_url();?>cometchat/cometchatcss.php" rel="stylesheet" charset="utf-8">
     <script type="text/javascript" src="<?php echo base_url();?>cometchat/cometchatjs.php" charset="utf-8"></script>
+    <?php }?>
 </head>

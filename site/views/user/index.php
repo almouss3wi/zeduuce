@@ -16,8 +16,8 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <h4><i>Jeg søger: Kvinde</i></h4>
-                                <p>Jeg søger en gå-ibyen ven til lejlighedsvis sjov og ballade Running Sushi er mit helt store hit, så hér går du aldrig galt i byen Jeg er vant til at omgået mange mennesker. Er social og udvendt. Lidt af et party animal har je g hørt ;) Men også til hygge. I dén grad :)</p>
+                                <!--<h4><i>Jeg søger: Kvinde</i></h4>-->
+                                <p><?php echo $item->slogan;?></p>
                             </div>
                         </div>
                         <div class="row">

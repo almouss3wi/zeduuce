@@ -119,9 +119,12 @@
                                 </li>
                                 <li>
                                     <div class="step">
-                                        <?php if($status->isDated){?>
-                                            <a href="javascript:void(0);" id="btnChat"><i class="i_step2"></i></a>
-                                        <?php } else {?>
+                                        <?php if($status->isDated){
+                                            if(!isGoldMember()){?>
+                                                <a href="#PUupgrade" data-toggle="modal"><i class="i_step2"></i></a>
+                                                <?php } else {?>
+                                                <a href="javascript:void(0);" id="btnChat"><i class="i_step2"></i></a>
+                                        <?php }} else {?>
                                             <a href="#notDatedModel" data-toggle="modal"><i class="i_step2 disable"></i></a>
                                         <?php }?>
                                     </div>

@@ -1,3 +1,13 @@
+<?php
+if(isGoldMember()){
+    $shoutoutLink = 'href="'.site_url('user/shoutouts').'"';
+    $myInvitationLink = 'href="'.site_url('user/myinvitationer').'"';
+    $myJoinInvitationLink = 'href="'.site_url('user/myinvitationerjoin').'"';
+    $myApprovedInvitationLink = 'href="'.site_url('user/myinvitationerapproved').'"';
+} else {
+    $shoutoutLink = $myInvitationLink = $myJoinInvitationLink = $myApprovedInvitationLink = 'href="#PUupgrade" data-toggle="modal"';
+}
+?>
 <div class="col-md-3">
     <div class="img_product">
         <!--<p class="f12">Profilenr. <?php /*echo $item->id;*/?></p>-->
@@ -48,12 +58,12 @@
         <li><a href="<?php echo site_url('user/myphoto')?>">Mine Billeder (<span class="red" id="num-myphoto"><?php if($numphoto){echo $numphoto;}else{echo '0';}?></span>)</a></li>
         <li><a href="<?php echo site_url('user/mydeal')?>">Mine tilbud</a></li>
         <li><a href="<?php echo site_url('user/mymessages')?>">Mine beskeder (<span class="red"><?php echo $numUnreadMessage;?></span>)</a></li>
-        <li><a href="<?php echo site_url('user/myinvitationer')?>">Mine invitationer</a></li>
-        <li><a href="<?php echo site_url('user/myinvitationerjoin')?>">Du skal forkæles! (<span class="red"><?php echo $numinvitajoin;?></span>)</a></li>
-        <li><a href="<?php echo site_url('user/myinvitationerapproved')?>">Det er mig der forkæler! (<span class="red"><?php echo $numinvitaapproved;?></span>)</a></li>
+        <li><a <?php echo $myInvitationLink;?>>Mine invitationer</a></li>
+        <li><a <?php echo $myJoinInvitationLink;?>>Du skal forkæles! (<span class="red"><?php echo $numinvitajoin;?></span>)</a></li>
+        <li><a <?php echo $myApprovedInvitationLink;?>>Det er mig der forkæler! (<span class="red"><?php echo $numinvitaapproved;?></span>)</a></li>
         <li><a href="<?php echo site_url('user/mycontactperson')?>">Mine Kontaktpersoner</a></li>
         <li><a href="<?php echo site_url('user/sentkisses')?>">Sendt kys</a></li>
         <li><a href="<?php echo site_url('user/receivedkisses')?>">Modtaget kys</a></li>
-        <li><a href="<?php echo site_url('user/shoutouts')?>">Se shoutouts</a></li>
+        <li><a <?php echo $shoutoutLink;?>>Se shoutouts</a></li>
     </ul>
 </div>

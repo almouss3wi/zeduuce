@@ -276,7 +276,7 @@
                         <img src="<?php echo base_url();?>/templates/img/i_warning.png" alt="" class="img-responsive">
                     </div>
                     <div class="col-md-8 text-center pad0">
-                        <p class="f19"><?php echo $this->session->flashdata('goldMember');?></p>
+                        <p class="f19">Du skal være guldmedlem til at bruge denne funktion !!</p>
                     </div>
                 </div>
                 <div class="row mb30">

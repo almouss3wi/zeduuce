@@ -264,12 +264,15 @@ function isDated($user_id_1, $user_id_2){
 }
 
 /**
- * @param $url
- * @param $message
- * @return a controller
+ * @return bool
  */
-function customRedirectWithMessage($url, $message){
+function isGoldMember(){
     $ci = &get_instance();
-    $ci->session->set_flashdata('message', $message);
-    redirect($url);
+    $user = $ci->session->userdata('user');
+    $result = $ci->db->select('type')->from('user')->where('id', $user->id)->get()->row();
+    if ($result->type == 2) {
+        return true;
+    } else {
+        return false;
+    }
 }
