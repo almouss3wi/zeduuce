@@ -9,13 +9,7 @@
             <div class="row attending_row">
                 <div class="col-md-4">
                     <div class="info_people_attending">
-                        <?php if($row['avatar']){if($row['facebook']){?>
-                        <img src="https://graph.facebook.com/<?php echo $row['facebook'];?>/picture?type=large" alt="" width="48" height="48" class="img-responsive"/>
-                        <?php }else{ ?>
-                        <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row['avatar'];?>&w=48&h=48&q=100" alt="" class="img-responsive"/>
-                        <?php }}else{?>
-                        <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" width="48" height="48" class="img-responsive"/>
-                        <?php }?>
+                        <?php echo modules::run('left/left/avatar', (object)$row, 48, 48); ?>
                         <h4><?php echo $row['name'];?></h4>
                         <?php if($row['birthday']){$yearold = date('Y',time()) - explode('/',$row['birthday'])[2];}else{$yearold = "";}?>
                         <p><?php echo $yearold;?> år - <?php echo $row['code'];?></p>

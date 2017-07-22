@@ -276,12 +276,15 @@
                         <img src="<?php echo base_url();?>/templates/img/i_warning.png" alt="" class="img-responsive">
                     </div>
                     <div class="col-md-8 text-center pad0">
-                        <p class="f19">Opgradér venligst dit medlemskab, hvis du også vil lege med hér</p>
+                        <p class="f19"><?php echo $this->session->flashdata('goldMember');?></p>
                     </div>
                 </div>
                 <div class="row mb30">
-                    <div class="col-xs-12 text-center">
-                        <a href="#" class="btn btnUpgrade">OPGRADéR</a>
+                    <div class="col-xs-8 text-center">
+                        <a href="#" class="btn btnUpgrade">Opgradere til guldmedlem</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <a href="javascript:void(0)" class="btnGray2 text-uppercase" data-dismiss="modal">LUK</a>
                     </div>
                 </div>
             </div>
@@ -312,6 +315,7 @@
         </div>
     </div>
 </div>
+
 <div id="PUcart" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -340,6 +344,12 @@
     $( document ).ready(function() {
         $('#error-content').html(<?php $this->session->flashdata('message');?>);
         $('#PUerror').modal('show');
+    });
+    <?php }?>
+    <?php if($this->session->flashdata('goldMember')){?>
+    $( document ).ready(function() {
+        $('#error-content').html(<?php $this->session->flashdata('goldMember');?>);
+        $('#PUupgrade').modal('show');
     });
     <?php }?>
     function sendLoginFB(response){

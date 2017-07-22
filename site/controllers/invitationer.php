@@ -7,16 +7,19 @@ class Invitationer extends MX_Controller {
         $this->load->model('user_model', 'user');
         $this->load->library('user_agent');
         $this->language = $this->lang->lang();
+
+        //Get meta data from url
+        $this->_meta = $this->general_model->getMetaDataFromUrl();
     }
+
+    protected function middleware(){
+        return array('Checklogin|only:index,invitervip,opretetevent,offentliginvitation,offentligevent,slet', 'Checkgold|only:invitervip,opretetevent,offentliginvitation,offentligevent');
+    }
+
     function index(){
-        $meta = $this->general_model->getMetaData(2);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        if(!checkLogin()){
-            redirect(site_url('home/index'));
-        }
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
         //Clear session when created invitation
         $this->session->unset_userdata('invita');
         $this->session->unset_userdata('listUser');
@@ -30,14 +33,9 @@ class Invitationer extends MX_Controller {
 	}
     
     function invitervip(){
-        $meta = $this->general_model->getMetaData(4);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        if(!checkLogin()){
-            redirect(site_url('home/index'));
-        }
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
         $data['user'] = $this->session->userdata['user'];
         $this->form_validation->set_rules('userID[]','Opret en VIP invitation op til 5 personer','trim|required');
         $this->form_validation->set_rules('order_item','Vælg venligst en værdibevis','trim|required');
@@ -92,14 +90,9 @@ class Invitationer extends MX_Controller {
     }
     
     function opretetevent(){
-        $meta = $this->general_model->getMetaData(4);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        if(!checkLogin()){
-            redirect(site_url('home/index'));
-        }
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
         $data['user'] = $this->session->userdata['user'];
         /** Upload images*/
         if(isset($_FILES['image']['name'])&&$_FILES['image']['name'][0]!=""){
@@ -206,14 +199,9 @@ class Invitationer extends MX_Controller {
     }
     
     function offentliginvitation(){
-        $meta = $this->general_model->getMetaData(4);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        if(!checkLogin()){
-            redirect(site_url('home/index'));
-        }
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
         $data['user'] = $this->session->userdata['user'];
         $this->form_validation->set_rules('order_item','Vælg venligst en værdibevis','trim|required');
 		if($this->form_validation->run()== FALSE){
@@ -273,14 +261,9 @@ class Invitationer extends MX_Controller {
     }
     
     function offentligevent(){
-        $meta = $this->general_model->getMetaData(4);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        if(!checkLogin()){
-            redirect(site_url('home/index'));
-        }
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
         $data['user'] = $this->session->userdata['user'];
         if(isset($_FILES['image']['name'])&&$_FILES['image']['name'][0]!=""){
             $config['upload_path'] = $this->config->item('root')."uploads/invita/";
@@ -411,11 +394,8 @@ class Invitationer extends MX_Controller {
         redirect(site_url('user/myinvitationer'));
     }
     function cancel(){
-        $meta = $this->general_model->getMetaData(4);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
         
         $this->session->unset_userdata('datingID');
         $this->session->unset_userdata('invita');
@@ -430,14 +410,9 @@ class Invitationer extends MX_Controller {
     }
     /** END PAYMENT*/
     function slet(){
-        $meta = $this->general_model->getMetaData(4);
-        $data['title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_title'] = ($meta->meta_title)?$meta->meta_title:"";
-        $data['meta_keywords'] = ($meta->meta_keywords)?$meta->meta_keywords:"";
-        $data['meta_description'] = ($meta->meta_description)?$meta->meta_description:"";
-        if(!checkLogin()){
-            redirect(site_url('home/index'));
-        }
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
         $data['user'] = $this->session->userdata['user'];
         $data['tilbud'] = $this->invita->getMyTilbud($data['user']->id);
 		$data['page'] = 'invitationer/slet';

@@ -16,5 +16,5 @@
 <?php }else if($user->avatar){ ?>
     <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/user/<?php echo $user->avatar;?>&w=<?php echo $width;?>&h=<?php echo $height;?>&q=100" alt="" class="img-responsive"/>
 <?php }else{?>
-    <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
+    <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" width="<?php echo $width;?>" height="<?php echo $height;?>" class="img-responsive"/>
 <?php }?>

@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,deletemyinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,acceptDating,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel');
+        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,deletemyinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,acceptDating,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
     }
 
     function index(){
@@ -1441,7 +1441,8 @@ class User extends MX_Controller
                 $users[$i]['accept'] = $row->accept;
                 $users[$i]['time_end'] = $row->time_end;
                 $users[$i]['facebook'] = $row->facebook;
-                if ($row->facebook && $row->avatar) {
+                $users[$i]['avatar'] = $row->avatar;
+                /*if ($row->facebook && $row->avatar) {
                     $users[$i]['avatar'] = $row->avatar;
                 } else {
                     $photo = $this->user->getPhoto($row->user);
@@ -1450,7 +1451,7 @@ class User extends MX_Controller
                     } else {
                         $users[$i]['avatar'] = $photo;
                     }
-                }
+                }*/
                 $i++;
             }
         } else {
