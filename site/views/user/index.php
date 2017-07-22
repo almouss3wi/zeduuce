@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-9 box_info_highline col-xs-offset-right-2">
+                            <div class="col-md-9 box_info_highline col-xs-offset-right-2 col-xs-12">
                                 <div class="col-md-6 col-sm-6">
                                     <?php if($item->birthday){$yearold = date('Y',time()) - explode('/',$item->birthday)[2];}else{$yearold = "";}?>
                                     <p><strong>Alder</strong>: <?php echo $yearold;?> år</p>
