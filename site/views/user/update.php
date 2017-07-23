@@ -257,8 +257,8 @@
                                     <div class="col-xs-12">
                                         <hr/>
                                     </div>
-                                    <div class="col-xs-12 mb30">
-                                        <a href="javascript:void(0)" onclick="sendUpdate()"><img src="<?php echo base_url();?>/templates/img/btnSave2.png" alt="" class="img-responsive"/></a>
+                                    <div class="col-lg-12 col-xs-12 mb30">
+                                        <a href="javascript:void(0)" onclick="sendUpdate()" style="display: block;"><img src="<?php echo base_url();?>/templates/img/btnSave2.png" alt="" class="img-responsive"/></a>
                                     </div>
                                 </div>
                                 <!--<div class="row">
@@ -272,7 +272,7 @@
                                     </div>
                                 </div>-->
                             <input type="hidden" name="userID" value="<?php echo $item->id;?>" />
-                            <input type="submit" name="sendUpdate" id="sendUpdate" onclick="update()" style="display: none;" value="submit" />
+                            <input type="submit" id="btnUpdate" onclick="update()" style="display: none;" value="submit" />
                             <?php echo form_close();?>
                             
                         </div>
@@ -284,7 +284,7 @@
 </section>
 <script>
 function sendUpdate(){
-    $('#sendUpdate').click();
+    $('#btnUpdate').click();
 }
 $(document).ready(function(){
     $('#menu_minprofil').addClass('active');
