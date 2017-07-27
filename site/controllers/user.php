@@ -1079,7 +1079,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data);
 
         $payment = $this->session->userdata('payment');
-        $userid = $this->session->userdata('userid');
+        $user = $this->session->userdata('user');
         if ($payment) {
             //Update payment
             $DB['subscriptionid'] = $this->input->get('subscriptionid');
@@ -1091,7 +1091,7 @@ class User extends MX_Controller
         } else {
             $DB['bl_active'] = 1;
         }
-        $this->user->saveUser($DB, $userid);
+        $this->user->saveUser($DB, $user->id);
         $this->session->unset_userdata('userid');
         $this->session->unset_userdata('payment');
         $data['page'] = 'user/upgradeSuccess';
