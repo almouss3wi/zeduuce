@@ -43,9 +43,9 @@ class Payment extends MX_Controller {
 		$data['orderid'] = 'US-'.randomPassword();
         
         //Update user
-        $DB['orderid'] = $data['orderid'];
+        /*$DB['orderid'] = $data['orderid'];
         $DB['price'] = $this->config->item('priceuser');
-        $this->user->saveUser($DB,$userid);
+        $this->user->saveUser($DB,$userid);*/
         $data['page'] = 'payment/user';
 		$this->load->view('templates', $data);
 	}

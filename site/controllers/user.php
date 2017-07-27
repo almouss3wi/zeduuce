@@ -948,17 +948,20 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data);
 
         $payment = $this->session->userdata('payment');
-        $userid = $this->session->userdata('userid');
+        $user = $this->session->userdata('user');
         if ($payment) {
             //Update payment
+            $DB['subscriptionid'] = $this->input->get('subscriptionid');
+            $DB['orderid'] = $this->input->get('orderid');
+            $DB['price'] = $this->config->item('priceuser');
             $DB['type'] = 2;
             $DB['bl_active'] = 1;
             $DB['paymenttime'] = time();
         } else {
             $DB['bl_active'] = 1;
         }
-        $this->user->saveUser($DB, $userid);
-        $this->session->unset_userdata('userid');
+        $this->user->saveUser($DB, $user->id);
+
         $this->session->unset_userdata('payment');
         $data['page'] = 'user/success';
         $this->load->view('templates', $data);
