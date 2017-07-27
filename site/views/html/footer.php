@@ -281,7 +281,7 @@
                 </div>
                 <div class="row mb30">
                     <div class="col-xs-8 text-center">
-                        <a href="#" class="btn btnUpgrade">Opgradere til guldmedlem</a>
+                        <a href="<?php echo site_url('user/upgrade');?>" class="btn btnUpgrade">Opgradere til guldmedlem</a>
                     </div>
                     <div class="col-xs-4 text-center">
                         <a href="javascript:void(0)" class="btnGray2 text-uppercase" data-dismiss="modal">LUK</a>

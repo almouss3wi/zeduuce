@@ -184,6 +184,30 @@ class Payment extends MX_Controller {
         $data['page'] = 'payment/shoutout';
         $this->load->view('templates', $data);
     }
+
+    function upgrade(){
+        $userid = $this->session->userdata('userid');
+        //Go payment Epay
+        $data['action'] = $this->action;
+        $data['merchantnumber'] = $this->merchantnumber;
+        $data['currency'] = $this->currency;
+        $data['windowstate'] = $this->windowstate;
+        $data['md5'] = $this->md5;
+
+        $data['amount'] = number_format($this->config->item('priceuser')*100, 0, '.', '');
+        $data['accepturl'] = site_url('user/upgradeSuccess');
+        $data['cancelurl'] = site_url('user/upgradeCancel');
+        $data['callbackurl'] = site_url('user/upgradeCallback');
+        $data['orderid'] = 'US-'.randomPassword();
+
+        $this->session->set_userdata('payment', true);
+        //Update user
+        /*$DB['orderid'] = $data['orderid'];
+        $DB['price'] = $this->config->item('priceuser');
+        $this->user->saveUser($DB,$userid);*/
+        $data['page'] = 'payment/upgrade';
+        $this->load->view('templates', $data);
+    }
     
 }
 

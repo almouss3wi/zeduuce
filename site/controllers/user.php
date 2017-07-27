@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,deletemyinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,acceptDating,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
+        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,deletemyinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,acceptDating,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
     }
 
     function index(){
@@ -1063,9 +1063,46 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function upgrade()
-    {
+    /**
+     *upgrade to gold member
+     */
+    function upgrade(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
 
+        $data['page'] = 'user/upgrade';
+        $this->load->view('templates', $data);
+    }
+
+    public function upgradeSuccess(){
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
+        $payment = $this->session->userdata('payment');
+        $userid = $this->session->userdata('userid');
+        if ($payment) {
+            //Update payment
+            $DB['subscriptionid'] = $this->input->get('subscriptionid');
+            $DB['orderid'] = $this->input->get('orderid');
+            $DB['price'] = $this->config->item('priceuser');
+            $DB['type'] = 2;
+            $DB['bl_active'] = 1;
+            $DB['paymenttime'] = time();
+        } else {
+            $DB['bl_active'] = 1;
+        }
+        $this->user->saveUser($DB, $userid);
+        $this->session->unset_userdata('userid');
+        $this->session->unset_userdata('payment');
+        $data['page'] = 'user/upgradeSuccess';
+        $this->load->view('templates', $data);
+    }
+
+    public function upgradeCancel(){
+
+    }
+
+    public function upgradeCallback(){
 
     }
 
