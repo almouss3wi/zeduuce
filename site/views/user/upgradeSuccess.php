@@ -8,19 +8,13 @@
         </div>
     </div>
 </section>
-<section class="contact">
+<section class="forget-pass">
     <div class="container">
-        <div class="frm_resgister">
+        <div class="row mt30 mb30">
             <div class="row">
                 <div class="col-xs-12 col-sm-8">
                     <h2>Din konto er opgraderet til guldmedlemmet</h2>
-                </div>
-            </div>
-            <div class="row mt30 mb250">
-                <div class="col-xs-6 col-sm-6">
-                    <a href="<?php echo site_url('user/autoLogin');?>" class="btnBack">åbn min profil <i class="fa fa-angle-double-right fa-lg" aria-hidden="true"></i></a>
-                </div>
-                <div class="col-xs-6">
+                    <a href="<?php echo site_url('user/index');?>" class="btnBack">Gå til din profil <i class="fa fa-angle-double-right fa-lg" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

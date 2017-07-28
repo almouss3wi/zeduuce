@@ -6,8 +6,15 @@
                 <div class="main_right">
                     <div class="invitationer_box">
                         <div class="row">
-                            <div class="col-md-12 mb30">
+                            <div class="col-md-12 mb15">
                                 <h3 class="text-uppercase"><?php echo $item->name;?></h3>
+                            </div>
+                            <div class="col-md-12 mb15">
+                            <?php if(isGoldMember()){?>
+                                <img src="<?php echo base_url(); ?>uploads/btn_goldmember.png" alt="" class="img-responsive">
+                            <?php } else {?>
+                                <img src="<?php echo base_url(); ?>uploads/btn_freemember.png" alt="" class="img-responsive">
+                            <?php }?>
                             </div>
                             <div class="col-lg-12">
                                 <a href="<?php echo site_url('user/update');?>" class="btn btnGray3">Redigér min profil</a>
