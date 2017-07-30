@@ -506,7 +506,12 @@ class User_model extends CI_Model{
         return $result->num;
     }
 
-    function checkSentMessage($user = NULL, $userId = NULL){
+    function checkUnreadSentMessage($user = NULL, $userId = NULL){
+        $result = $this->db->where('user_from', $userId)->where('user_to', $user)->where('seen', 1)->order_by('id DESC')->limit(1)->get('user_messages')->row();
+        return $result ? $result->dt_create : false;
+    }
+
+    function getLastMessageTime($user = NULL, $userId = NULL){
         $result = $this->db->where('user_from', $userId)->where('user_to', $user)->order_by('id DESC')->limit(1)->get('user_messages')->row();
         return $result ? $result->dt_create : false;
     }

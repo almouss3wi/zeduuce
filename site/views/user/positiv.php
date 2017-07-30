@@ -73,13 +73,9 @@
                                             <?php } ?>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <?php if ($item->sentMessageStatus === false) { ?>
-                                                <a class="btn btnPositive2"><span class="btnPositive_content">Har sendt en besked</span></a>
-                                            <?php } else { ?>
-                                                <a class="btn btnPositive2 active">
-                                                    <span class="btnPositive_content">Har sendt en besked <span class="timer"><?php echo date("d.m.Y", $item->lastMessageTime) ?> Kl.<?php echo date("H:i", $item->lastMessageTime) ?></span></span>
+                                                <a href="<?php echo site_url('user/messages/' . $item->id . '/' . seoUrl($item->name)); ?>" class="btn btnPositive2 <?php if ($item->sentUnreadMessageStatus !== false) echo "active";?>">
+                                                    <span class="btnPositive_content">Har sendt en besked <?php if($item->lastMessageTime){?><span class="timer"><?php echo date("d.m.Y", $item->lastMessageTime) ?> Kl.<?php echo date("H:i", $item->lastMessageTime) ?></span><?php }?></span>
                                                 </a>
-                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>

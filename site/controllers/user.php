@@ -631,12 +631,12 @@ class User extends MX_Controller
                     $userList[$i]->seeMore3TimesStatus = false;
                 }
 
-                if($this->user->checkSentMessage($data['user']->id, $row->id)){
-                    $userList[$i]->sentMessageStatus = true;
-                    $userList[$i]->lastMessageTime = strtotime($this->user->checkSentMessage($data['user']->id, $row->id));
+                if($this->user->checkUnreadSentMessage($data['user']->id, $row->id)){
+                    $userList[$i]->sentUnreadMessageStatus = true;
                 } else {
-                    $userList[$i]->sentMessageStatus = false;
+                    $userList[$i]->sentUnreadMessageStatus = false;
                 }
+                $userList[$i]->lastMessageTime = strtotime($this->user->getLastMessageTime($data['user']->id, $row->id));
 
                 $i++;
             }
