@@ -64,13 +64,7 @@
                                             <?php } ?>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <?php if ($item->seeMore3TimesStatus === false) { ?>
-                                                <a class="btn btnPositive2"><span class="btnPositive_content">Har set din profil 3+ gange</span></a>
-                                            <?php } else { ?>
-                                                <a class="btn btnPositive2 active">
-                                                    <span class="btnPositive_content">Har set din profil 3+ gange</span>
-                                                </a>
-                                            <?php } ?>
+                                            <a href="<?php echo site_url('user/redirectToProfile/' . $item->id . '/' . seoUrl($item->name)) ?>" class="btn btnPositive2 <?php if ($item->seeMore3TimesStatus != false) echo 'active';?>"><span class="btnPositive_content">Har set din profil 3+ gange <?php if($item->lastSeeTime){?><span class="timer">Sidste set tid: <?php echo date("d.m.Y", $item->lastSeeTime) ?> Kl.<?php echo date("H:i", $item->lastSeeTime) ?></span><?php }?></span></a>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                 <a href="<?php echo site_url('user/messages/' . $item->id . '/' . seoUrl($item->name)); ?>" class="btn btnPositive2 <?php if ($item->sentUnreadMessageStatus !== false) echo "active";?>">

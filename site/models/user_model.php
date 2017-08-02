@@ -497,13 +497,19 @@ class User_model extends CI_Model{
     }
 
     public function checkSeeMore3Times($userId, $clientId){
-        $result = $this->db->select("COUNT(id) num")->from("user_action")->where("user_from", $clientId)->where("user_to", $userId)->where("type", 1)->get()->row();
-        return $result->num > 3 ? true : false;
+        $result = $this->db->select("id")->from("user_activity")->where("user_from", $clientId)->where("user_to", $userId)->where("action", "SeeMore3Times")->get()->num_rows();
+        $result = $this->db->select("id")->from("user_activity")->where("user_from", $clientId)->where("user_to", $userId)->where("action", "SeeMore3Times")->get()->num_rows();
+        return $result ? true : false;
     }
 
     public function countSeeTimes($userId, $clientId){
         $result = $this->db->select("COUNT(id) num")->from("user_action")->where("user_from", $clientId)->where("user_to", $userId)->where("type", 1)->get()->row();
         return $result->num;
+    }
+
+    function getLastSeeTime($user = NULL, $userId = NULL){
+        $result = $this->db->where('user_from', $userId)->where('user_to', $user)->where('type', 1)->order_by('id DESC')->limit(1)->get('user_action')->row();
+        return $result ? $result->dt_create : false;
     }
 
     function checkUnreadSentMessage($user = NULL, $userId = NULL){
@@ -856,6 +862,23 @@ class User_model extends CI_Model{
         $this->db->set('number_of_notification', '`number_of_notification`+1', FALSE);
         $this->db->where('id', $userId);
         return $this->db->update('user');
+    }
+
+    public function addStatus($user_from, $user_to, $action){
+        $data['user_from'] = $user_from;
+        $data['user_to'] = $user_to;
+        $data['action'] = $action;
+        $data['dt_create'] = date("Y-m-d H:i:s");
+        if($this->db->insert('user_activity',$data)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+
+    }
+
+    public function deleteStatus($user_from, $user_to, $action){
+        $this->db->where("user_from", $user_from)->where("user_to", $user_to)->where("action", $action)->delete("user_activity");
     }
 
     //Shoutouts

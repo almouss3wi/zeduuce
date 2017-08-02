@@ -43,6 +43,13 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
+    public function redirectToProfile($id, $name){
+        $user = $this->session->userdata('user');
+
+        $this->user->deleteStatus($id, $user->id, 'SeeMore3Times');
+
+        redirect(site_url('/user/profile/'.$id.'/'.$name));
+    }
     function profile($id)
     {
         $data = array();
@@ -54,6 +61,7 @@ class User extends MX_Controller
         //Adding positive notification
         if($this->user->countSeeTimes($id, $data['user']->id) == 3){
             $this->user->addNotification($id);
+            $this->user->addStatus($data['user']->id, $id, 'SeeMore3Times');
         }
         //Add action to log
         actionUser($data['user']->id, $id, 'View', 1);
@@ -630,6 +638,7 @@ class User extends MX_Controller
                 } else {
                     $userList[$i]->seeMore3TimesStatus = false;
                 }
+                $userList[$i]->lastSeeTime = strtotime($this->user->getLastSeeTime($data['user']->id, $row->id));
 
                 if($this->user->checkUnreadSentMessage($data['user']->id, $row->id)){
                     $userList[$i]->sentUnreadMessageStatus = true;
@@ -640,7 +649,7 @@ class User extends MX_Controller
 
                 $i++;
             }
-            //print_r($userList);exit();
+            //var_dump($userList);exit();
         }
         $data['userList'] = $userList;
 
