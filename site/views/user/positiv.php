@@ -37,9 +37,9 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <?php if ($item->isDatedStatus === false) { ?>
-                                                <a class="btn btnPositive2"><span class="btnPositive_content">Har sagt ja</span></a>
+                                                <a href="<?php echo site_url('user/approvedInvitation/' . $item->id . '/' . seoUrl($item->name)) ?>" class="btn btnPositive2"><span class="btnPositive_content">Har sagt ja</span></a>
                                             <?php } else { ?>
-                                                <a class="btn btnPositive2 active">
+                                                <a href="<?php echo site_url('user/approvedInvitation/' . $item->id . '/' . seoUrl($item->name)) ?>" class="btn btnPositive2 active">
                                                     <span class="btnPositive_content">Har sagt ja <i
                                                                 class="icon_lips"></i><span class="timer"><?php echo date("d.m.Y", $item->datedTime) ?> Kl.<?php echo date("H:i", $item->datedTime) ?></span></span>
                                                 </a>
@@ -56,9 +56,9 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <?php if ($item->sentInvitationStatus === false) { ?>
-                                                <a class="btn btnPositive2"><span class="btnPositive_content">Har sendt invitation</span></a>
+                                                <a href="<?php echo site_url('user/myinvitationer/' . $item->id . '/' . seoUrl($item->name)) ?>" class="btn btnPositive2"><span class="btnPositive_content">Har sendt invitation</span></a>
                                             <?php } else { ?>
-                                                <a class="btn btnPositive2 active">
+                                                <a href="<?php echo site_url('user/myinvitationer/' . $item->id . '/' . seoUrl($item->name)) ?>" class="btn btnPositive2 active">
                                                     <span class="btnPositive_content">Har sendt invitation</span>
                                                 </a>
                                             <?php } ?>

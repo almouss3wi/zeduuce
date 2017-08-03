@@ -657,6 +657,20 @@ class User_model extends CI_Model{
                 ->get()->result();
         return $query;
     }
+
+    function getApprovedDatingByUser($userID=NULL){
+        $query = $this->db->select('dt.*, du.id as datinguserID, du.time_start, du.time_end, du.accept, du.dt_update as accepted_time, u.name as nameUser, u.avatar, u.facebook')
+            ->from('dating_user as du')
+            ->join('dating as dt','dt.id = du.datingID','left')
+            ->join('user as u','u.id = dt.userID','left')
+            ->where('du.user',$userID)
+            ->where('du.accept ', 1)
+            ->where('du.bl_active ', 1)
+            ->order_by('dt.id','DESC')
+            ->get()->result();
+        return $query;
+    }
+
     function deleteDatingUser($id=NULL){
         $this->db->where('id',$id);
         if($this->db->delete('dating_user')){

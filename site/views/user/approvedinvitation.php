@@ -4,23 +4,7 @@
             <?php echo modules::run('left/left/index',$user->id);?>
             <div class="col-md-9">
                 <div class="w-item-deal mb0">
-                    <h3 class="text-uppercase mt0"><?php echo $page_heading?></h3>
-                    <div class="sort">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <form action="" method="POST" class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-2" for="">Sorter efter</label>
-                                        <div class="col-xs-5">
-                                            <select name="" id="input" class="form-control">
-                                                <option value="">Alle</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    <h3 class="text-uppercase mt0">Godkendt datering af <?php echo $friend->name;?></h3>
                     <div class="row">
                         <?php if($list){foreach($list as $row){?>
                         <div class="col-sm-6 item-deal">
@@ -65,19 +49,8 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="time">
-                                            <p><?php echo $row['time'];?> timer for hver person</p>
+                                            <?php echo date('d/m/Y H:i', $row['accepted_time'])?>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6 col-xs-6">
-                                        <p class="remaining"><?php echo $row['user'];?></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-6">
-                                        <a href="<?php echo site_url('user/deleteinvitationer/'.$row['id']);?>" class="btn_Delete">Slet</a>
-                                    </div>
-                                    <div class="col-sm-6 col-xs-6">
-                                        <a href="javascript:void(0)" class="btn_SeeMore" onclick="getUserJoin('<?php echo $row['id'];?>')">SE MERE</a>
                                     </div>
                                 </div>
                             </div>

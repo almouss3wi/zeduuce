@@ -279,13 +279,24 @@ class User extends MX_Controller
     }
 
     /** Invitation*/
-    function myinvitationer()
+    /**
+     * @param null $id
+     */
+    function myinvitationer($id = null)
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
 
         $data['user'] = $this->session->userdata('user');
-        $dating = $this->user->getDating($data['user']->id);
+        if($id == null){
+            $id = $data['user']->id;
+            $data['page_heading'] = "Mine invitationer";
+        } else {
+            $userTmp = $this->user->getUser($id);
+            $data['page_heading'] = $userTmp->name.' invitationer';
+        }
+        $dating = $this->user->getDating($id);
+
         $list = "";
         if ($dating) {
             $i = 0;
@@ -523,6 +534,78 @@ class User extends MX_Controller
         }
         $data['list'] = $list;
         $data['page'] = 'user/myinvitationerapproved';
+        $this->load->view('templates', $data);
+    }
+
+    function approvedInvitation($id)
+    {
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
+        $data['user'] = $this->session->userdata('user');
+        $dating = $this->user->getApprovedDatingByUser($id);
+        $data['friend'] = $this->user->getUser($id);
+        $list = "";
+        if ($dating) {
+            $i = 0;
+            foreach ($dating as $row) {
+                $images = $this->user->getImageDating($row->id);
+                if ($row->order_item) {
+                    $pro = $this->user->getDatingOrderItem($row->order_item);
+                    if ($pro) {
+                        $list[$i]['proID'] = $pro->product_id;
+                        $list[$i]['proName'] = $pro->name;
+                        $list[$i]['title'] = $pro->name;
+                        $list[$i]['description'] = $pro->description;
+                        $list[$i]['company'] = $pro->company;
+                        $list[$i]['image'] = $pro->image;
+                        $list[$i]['listimage'] = NULL;
+                    } else {
+                        $list[$i]['proID'] = "";
+                        $list[$i]['proName'] = "";
+                        $list[$i]['title'] = $row->title;
+                        $list[$i]['description'] = $row->content;
+                        $list[$i]['company'] = "";
+                        $list[$i]['image'] = "";
+                        $list[$i]['listimage'] = NULL;
+                    }
+                } else {
+                    $list[$i]['proID'] = "";
+                    $list[$i]['proName'] = "";
+                    $list[$i]['title'] = $row->title;
+                    $list[$i]['description'] = $row->content;
+                    $list[$i]['company'] = "";
+                    if ($images) {
+                        $list[$i]['image'] = $images[0]->image;
+                        $list[$i]['listimage'] = $images;
+                    } else {
+                        $list[$i]['image'] = NULL;
+                        $list[$i]['listimage'] = NULL;
+                    }
+                }
+                $list[$i]['id'] = $row->id;
+                $list[$i]['name'] = $row->name;
+                $list[$i]['nameUser'] = $row->nameUser;
+                $list[$i]['facebook'] = $row->facebook;
+                $list[$i]['avatar'] = $row->avatar;
+                /*if ($row->facebook && $row->avatar) {
+                    $list[$i]['avatar'] = $row->avatar;
+                } else {
+                    $photo = $this->user->getPhoto($row->userID);
+                    if ($photo) {
+                        $list[$i]['avatar'] = $photo[0]->image;
+                    } else {
+                        $list[$i]['avatar'] = "";
+                    }
+                }*/
+                $list[$i]['datinguserID'] = $row->datinguserID;
+                $list[$i]['accept'] = $row->accept;
+                $list[$i]['accepted_time'] = strtotime($row->accepted_time);
+                $i++;
+            }
+        }
+        $data['list'] = $list;
+        $data['page'] = 'user/approvedinvitation';
         $this->load->view('templates', $data);
     }
 
