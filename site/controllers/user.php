@@ -46,7 +46,7 @@ class User extends MX_Controller
     public function redirectToProfile($id, $name){
         $user = $this->session->userdata('user');
 
-        $this->user->deleteStatus($id, $user->id, 'SeeMore3Times');
+        $this->user->disableStatus($id, $user->id, 'SeeMore3Times');
 
         redirect(site_url('/user/profile/'.$id.'/'.$name));
     }
@@ -425,7 +425,8 @@ class User extends MX_Controller
                 $list[$i]['name'] = $row->name;
                 $list[$i]['nameUser'] = $row->nameUser;
                 $list[$i]['facebook'] = $row->facebook;
-                if ($row->facebook && $row->avatar) {
+                $list[$i]['avatar'] = $row->avatar;
+                /*if ($row->facebook && $row->avatar) {
                     $list[$i]['avatar'] = $row->avatar;
                 } else {
                     $photo = $this->user->getPhoto($row->userID);
@@ -434,7 +435,7 @@ class User extends MX_Controller
                     } else {
                         $list[$i]['avatar'] = "";
                     }
-                }
+                }*/
                 $list[$i]['datinguserID'] = $row->datinguserID;
                 $list[$i]['accept'] = $row->accept;
                 if ($row->type == 1 || $row->type == 3) {
@@ -544,6 +545,9 @@ class User extends MX_Controller
 
         $data['user'] = $this->session->userdata('user');
         $dating = $this->user->getApprovedDatingByUser($id);
+        //Disable accepted notification
+        $this->user->disableStatus($id, $data['user']->id, 'AcceptedDating');
+
         $data['friend'] = $this->user->getUser($id);
         $list = "";
         if ($dating) {
@@ -696,11 +700,12 @@ class User extends MX_Controller
                     $userList[$i]->sentKissStatus = false;
                 }
 
-                if($this->user->checkIsApproved($data['user']->id, $row->id)){
-                    $userList[$i]->isDatedStatus = true;
-                    $userList[$i]->datedTime = $this->user->checkIsApproved($data['user']->id, $row->id);
+                $acceptedTime = $this->user->checkIsApproved($data['user']->id, $row->id);
+                if($acceptedTime){
+                    $userList[$i]->acceptedStatus = true;
+                    $userList[$i]->acceptedTime = strtotime($acceptedTime);
                 } else {
-                    $userList[$i]->isDatedStatus = false;
+                    $userList[$i]->acceptedStatus = false;
                 }
 
                 if($this->user->checkAddedToFavorite($data['user']->id, $row->id)){
@@ -732,7 +737,7 @@ class User extends MX_Controller
 
                 $i++;
             }
-            //var_dump($userList);exit();
+            //print_r($userList);exit();
         }
         $data['userList'] = $userList;
 
@@ -1542,13 +1547,23 @@ class User extends MX_Controller
         return;
     }
 
+    function testAddAcceptedNotification(){
+        $user = $this->session->userdata('user');
+        $this->user->addAcceptedNotification($user->id);
+        die('ok');
+    }
+
     function acceptDating()
     {
         $id = $this->input->post('id', true);
         $DB['accept'] = 1;
         $DB['dt_update'] = date('Y-m-d H:i:s');
         $id = $this->user->acceptDating($DB, $id);
+        //add dated user
         $isDated = $this->user->checkOrCreateDatedUser($id);
+        //send notification to all dated friend
+        $user = $this->session->userdata('user');
+        $this->user->addAcceptedNotification($user->id);
         if ($id && $isDated == true) {
             $data['status'] = true;
         } else {

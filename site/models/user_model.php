@@ -478,8 +478,12 @@ class User_model extends CI_Model{
     }
 
     public function checkIsApproved($userId, $clientId){
-        $result = $this->db->where("user_id", $userId)->where("invited_user_id", $clientId)->get("user_dated")->row();
-        return $result ? $result->accepted_time : false;
+        $result = $this->db->where("user_to", $userId)
+            ->where("user_from", $clientId)
+            ->where('action', 'AcceptedDating')
+            ->where('bl_active', 1)
+            ->get("user_activity")->row();
+        return $result ? $result->dt_create : false;
     }
 
     function checkAddedToFavorite($userId1 = NULL, $userId2 = NULL){
@@ -497,8 +501,13 @@ class User_model extends CI_Model{
     }
 
     public function checkSeeMore3Times($userId, $clientId){
-        $result = $this->db->select("id")->from("user_activity")->where("user_from", $clientId)->where("user_to", $userId)->where("action", "SeeMore3Times")->get()->num_rows();
-        $result = $this->db->select("id")->from("user_activity")->where("user_from", $clientId)->where("user_to", $userId)->where("action", "SeeMore3Times")->get()->num_rows();
+        $result = $this->db->select("id")
+            ->from("user_activity")
+            ->where("user_from", $clientId)
+            ->where("user_to", $userId)
+            ->where("action", "SeeMore3Times")
+            ->where("bl_active", 1)
+            ->get()->num_rows();
         return $result ? true : false;
     }
 
@@ -883,6 +892,7 @@ class User_model extends CI_Model{
         $data['user_to'] = $user_to;
         $data['action'] = $action;
         $data['dt_create'] = date("Y-m-d H:i:s");
+        $data['bl_active'] = 1;
         if($this->db->insert('user_activity',$data)){
             return $this->db->insert_id();
         }else{
@@ -891,8 +901,12 @@ class User_model extends CI_Model{
 
     }
 
-    public function deleteStatus($user_from, $user_to, $action){
-        $this->db->where("user_from", $user_from)->where("user_to", $user_to)->where("action", $action)->delete("user_activity");
+    public function disableStatus($user_from, $user_to, $action){
+        $this->db->set('bl_active', 0)
+            ->where("user_from", $user_from)
+            ->where("user_to", $user_to)
+            ->where("action", $action)
+            ->update("user_activity");
     }
 
     //Shoutouts
@@ -980,6 +994,10 @@ class User_model extends CI_Model{
         return $result;
     }
 
+    /**
+     * @param $userId
+     * @return bool
+     */
     public function checkShoutoutsStatus($userId){
         $this->db->set('status', 0);
         $this->db->where('userId', $userId);
@@ -989,6 +1007,28 @@ class User_model extends CI_Model{
             return true;
         } else {
             die('checkShoutoutsStatus is fail');
+        }
+    }
+
+    public function addAcceptedNotification($userId){
+        $userIdArr = array();
+        $result = $this->db->select('invited_user_id')
+            ->from('user_dated')
+            ->where('user_id', $userId)
+            ->get()->result();
+        foreach($result as $user){
+            $userIdArr[] = $user->invited_user_id;
+        }
+        $result = $this->db->select('user_id')
+            ->from('user_dated')
+            ->where('invited_user_id', $userId)
+            ->get()->result();
+        foreach($result as $user){
+            $userIdArr[] = $user->user_id;
+        }
+
+        foreach ($userIdArr as $friendId){
+            $this->addStatus($userId, $friendId, 'AcceptedDating');
         }
     }
 
