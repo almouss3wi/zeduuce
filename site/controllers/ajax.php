@@ -2,9 +2,10 @@
 class Ajax extends CI_Controller{
 	function __construct(){
         parent::__construct();
+        $this->load->model('user_model', 'user');
 	}
 	function index(){
-		//No think
+		//Nothing to do
 	}
     function deleteimage(){
          $table = $this->input->post('table');
@@ -32,5 +33,38 @@ class Ajax extends CI_Controller{
         echo true;
         return;
 	}
+
+    /**
+     *
+     */
+	function getKissesLog(){
+        $friendId = $this->input->post('friendId');
+        $user = $this->session->userdata('user');
+
+        //Seen the kisses
+        $this->user->disableStatus($friendId, $user->id, 'Kiss');
+
+        //Load all kisses
+        $data['kisses'] = $this->db->where('user_from', $friendId)
+            ->where('user_to', $user->id)
+            ->where('action', 'Kiss')
+            ->where('status', 0)
+            ->get('user_activity')->result();
+
+        $this->load->view('ajax/kisseslog', $data);
+    }
+
+    public function deleteKissLog(){
+	    $id = $this->input->post('id');
+
+        $result = $this->db->set('status', -1)
+            ->where("id", $id)
+            ->update("user_activity");
+        if($result == false){
+            die('0');
+        } else {
+            die('1');
+        }
+    }
 }
 ?>

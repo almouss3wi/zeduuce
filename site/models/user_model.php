@@ -473,8 +473,14 @@ class User_model extends CI_Model{
      * @return bool
      */
     public function checkIsSentKiss($userId, $clientId){
-        $result = $this->db->where("from_user_id", $clientId)->where("to_user_id", $userId)->get("user_kisses")->row();
-        return $result ? $result->send_at : false;
+        $result = $this->db->where("user_from", $clientId)
+            ->where("user_to", $userId)
+            ->where("bl_active", 1)
+            ->where('action', 'Kiss')
+            ->order_by('id DESC')
+            ->limit(1)
+            ->get("user_activity")->row();
+        return $result ? $result->dt_create : false;
     }
 
     public function checkIsApproved($userId, $clientId){

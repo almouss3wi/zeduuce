@@ -750,9 +750,10 @@ class User extends MX_Controller
             $i = 0;
             foreach ($userList as $row) {
                 //Checking sent kiss
-                if($this->user->checkIsSentKiss($data['user']->id, $row->id)){
+                $kissTime = $this->user->checkIsSentKiss($data['user']->id, $row->id);
+                if($kissTime){
                     $userList[$i]->sentKissStatus = true;
-                    $userList[$i]->sentKissTime = $this->user->checkIsSentKiss($data['user']->id, $row->id);
+                    $userList[$i]->sentKissTime = strtotime($kissTime);
                 } else {
                     $userList[$i]->sentKissStatus = false;
                 }
@@ -1571,6 +1572,8 @@ class User extends MX_Controller
             $DB['to_user_id'] = $userID;
             $DB['send_at'] = time();
             $id = $this->user->sendKiss($DB);
+            //Log kiss
+            $this->user->addStatus($user->id, $userID, 'Kiss');
             if ($id) {
                 actionUser($user->id, $userID, 'Kiss', 4);
                 $data['status'] = true;

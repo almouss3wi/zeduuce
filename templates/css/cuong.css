@@ -7,7 +7,7 @@
     height: 100%;
     display: block;
     z-index: 9999;
-    background: url(../img/loading.gif) center no-repeat rgba(255, 255, 255, 0.9)
+    background: url(../img/loading.gif) center no-repeat rgba(0, 0, 0, 0.5)
 }
 input.valid{
 	background:#fff url('../img/pub-ico.png') no-repeat center right 5px  !important;

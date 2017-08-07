@@ -2,7 +2,7 @@
 <html lang="vn">
 <?php $this->load->view("html/header");?>
 <body>
-<!--div id="loader"></div-->
+<div id="loader"></div>
 <?php $this->load->view("html/top");?>
 <?php
 /*if($this->session->flashdata('message')){

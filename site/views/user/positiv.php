@@ -26,9 +26,9 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <?php if ($item->sentKissStatus === false) { ?>
-                                                <a class="btn btnPositive2"><span class="btnPositive_content">Har sendt dig et kys</span></a>
+                                                <a href="#PUKissesLog" data-toggle="modal" class="btn btnPositive2 btnKiss" value="<?php echo $item->id;?>"><span class="btnPositive_content">Har sendt dig et kys</span></a>
                                             <?php } else { ?>
-                                                <a class="btn btnPositive2 active">
+                                                <a class="btn btnPositive2 btnKiss active" value="<?php echo $item->id;?>">
                                                     <span class="btnPositive_content">Har sendt dig et kys <span
                                                                 class="timer"><?php echo date("d.m.Y", $item->sentKissTime) ?>
                                                             Kl.<?php echo date("H:i", $item->sentKissTime) ?></span></span>
@@ -97,5 +97,48 @@
 <script>
     $(document).ready(function () {
         $('#menu_positiv').addClass('active');
+
+        $('.btnKiss').click(function () {
+            var friendId = $(this).attr('value');
+            $('#loader').show();
+            $(this).removeClass('active');
+            $.ajax({
+                method: "POST",
+                url: "<?php echo base_url();?>ajax/getKissesLog",
+                data: { friendId: friendId, csrf_site_name:token_value }
+            }).done(function( html ) {
+                $('#loader').hide();
+                $('#PUKissesLog .modal-body').html(html);
+                $('#PUKissesLog').modal('show');
+            });
+        })
+        
+        $('#PUKissesLog .modal-body').on('click', '.btn_Delete1', function () {
+            var id = $(this).attr('value');
+            $.ajax({
+                method: "POST",
+                url: "<?php echo base_url();?>ajax/deleteKissLog",
+                data: { id: id, csrf_site_name:token_value }
+            }).done(function( status ) {
+                if(status == 1){
+                    $('#kiss'+id).fadeOut(500);
+                } else {
+                    alert('Noget gik galt');
+                }
+            });
+        });
     });
 </script>
+<div id="PUKissesLog" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <p>Har sendt kys</p>
+            </div>
+            <div class="modal-body pt10">
+
+            </div>
+        </div>
+    </div>
+</div>

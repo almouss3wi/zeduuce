@@ -3302,3 +3302,22 @@ ul.list_uploaded .fa {
 .avatar > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
     border:2px solid #f00;
 }
+.btn_Delete1 {
+    font-size: 12px;
+    font-weight: 600;
+    color: red;
+    background: #fff;
+    display: inline-block;
+    float: right;
+    padding: 3px 20px;
+    border-radius: 20px;
+    border: 2px solid red;
+}
+.kiss_log {
+    border-bottom: 1px solid #000;
+    padding: 10px 0;
+}
+.kiss_log:last-child {
+    border: none;
+    padding-bottom: 0;
+}
