@@ -1206,10 +1206,10 @@ class User extends MX_Controller
             }
             $id = $this->user->saveUser($DB, $user->id);
             if ($id) {
-                $this->session->set_flashdata('message', "Update sucessful");
+                $this->session->set_flashdata('message', "Opdater succesfuldt");
                 redirect(site_url('user/index'));
             } else {
-                $this->session->set_flashdata('message', "Update error!");
+                $this->session->set_flashdata('message', "Fejl ved opdatering");
                 redirect(site_url('user/update'));
             }
         }
