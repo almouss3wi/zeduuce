@@ -102,7 +102,7 @@ class Shoutouts extends CI_Controller{
             $id = $this->shoutouts->saveShoutout($DB,$id);
 			if($id){ 
 				$this->session->set_flashdata('message',lang('save_success'));
-				redirect(site_url($this->module_name.'/shoutouts'));
+				redirect(site_url('mod_shoutouts/shoutouts'));
 			}else{
                 $this->message = lang('admin.save_unsuccessful');
             }
