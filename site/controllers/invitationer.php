@@ -21,12 +21,12 @@ class Invitationer extends MX_Controller {
         $this->user->addMeta($this->_meta, $data);
 
         //Clear session when created invitation
-        if($this->session->userdata['invita']){
+        /*if($this->session->userdata['invita']){
             $this->session->unset_userdata('invita');
         }
         if($this->session->userdata['listUser']){
             $this->session->unset_userdata('listUser');
-        }
+        }*/
         $SearchUser = array('year_from' => '', 'year_to' => '', 'height_from' => '', 'height_to' => ''
                             , 'gender' => '', 'relationship' => '', 'children' => '', 'ethnic_origin' => ''
                             , 'religion' => '', 'training' => '', 'body' => '');
