@@ -92,29 +92,25 @@ class Shoutouts extends CI_Controller{
     }
 	function edit($id,$page=0){
         $this->check->check('edit','','',base_url());
-		$this->form_validation->set_rules('code','Code','trim|required');
-        $this->form_validation->set_rules('subject','Subject','trim|required');
 		$this->form_validation->set_rules('content','Content','trim|required');
 		if($this->form_validation->run()== FALSE){
 			$this->message = validation_errors();
 		}
 		else{
-            $DB['code'] = $this->input->post('code');
-            $DB['subject'] = $this->input->post('subject');
             $DB['content'] = $this->input->post('content');
             $DB['bl_active'] = $this->input->post('bl_active');
-            $id = $this->email->saveEmail($DB,$id);
+            $id = $this->shoutouts->saveShoutout($DB,$id);
 			if($id){ 
 				$this->session->set_flashdata('message',lang('save_success'));
-				redirect(site_url($this->module_name.'/email/index/'.$page));
+				redirect(site_url($this->module_name.'/shoutouts'));
 			}else{
                 $this->message = lang('admin.save_unsuccessful');
             }
 		}
-		$data['item'] = $this->email->getEmailByID($id);
-		$data['title'] = lang('admin.edit').': '.$data['item']->subject;
+        $data['item'] = $this->shoutouts->getShoutoutByID($id);
+		$data['title'] = lang('admin.edit').': Edit shoutout';
 		$data['message'] = $this->message;
-		$data['page'] = 'email/edit';
+		$data['page'] = 'shoutouts/edit';
         $this->load->view('templates', $data);
 	}
     function del(){

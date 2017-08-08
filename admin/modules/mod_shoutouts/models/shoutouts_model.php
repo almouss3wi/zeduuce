@@ -23,21 +23,21 @@ class Shoutouts_model extends CI_Model{
         $query = $this->db->get('user_shoutouts')->num_rows();
 		return $query;
 	}
-	function saveEmail($data=NULL,$id=NULL){
+	function saveShoutout($data=NULL,$id=NULL){
         if($id){
             $this->db->where('id',$id);
-            $this->db->update('email_template',$data);
+            $this->db->update('user_shoutouts',$data);
             return $id;
         }else{
-            if($this->db->insert('email_template',$data)){
+            if($this->db->insert('user_shoutouts',$data)){
                 return $this->db->insert_id();
             }else{
                 return false;
             }
         }
 	}
-	function getEmailByID($id=NULL){
-		 $query = $this->db->where('id',$id)->get('email_template')->row();
+	function getShoutoutByID($id=NULL){
+		 $query = $this->db->where('id',$id)->get('user_shoutouts')->row();
 		 return $query;
 	}
 	function delete($id=NULL){
