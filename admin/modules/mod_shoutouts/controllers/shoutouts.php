@@ -12,17 +12,17 @@ class Shoutouts extends CI_Controller{
         $this->language = $this->lang->lang();
 	}
 	function index($page=0){
-        $this->check->check('view','','',base_url());
+        //$this->check->check('view','','',base_url());
         /*if($this->check->check('add')){
             $data['add'] = $this->module_name.'/shoutouts/add';
         }*/
         //Xoa key khi search
-        $this->session->unset_userdata('search');
+        /*$this->session->unset_userdata('search');
         if($page > 0){
             $this->session->set_userdata('offset',$page);
         }else{
             $this->session->unset_userdata('offset');
-        }
+        }*/
         $data['title'] = lang('admin.list');
         $data['page'] = 'shoutouts/list';
         $this->load->view('templates', $data);
