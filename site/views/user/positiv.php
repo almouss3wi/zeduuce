@@ -107,7 +107,7 @@
                 url: "<?php echo base_url();?>ajax/getKissesLog",
                 data: { friendId: friendId, csrf_site_name:token_value }
             }).done(function( html ) {
-                $('#loader').hide();
+                $('#loader').fadeOut();
                 $('#PUKissesLog .modal-body').html(html);
                 $('#PUKissesLog').modal('show');
             });
