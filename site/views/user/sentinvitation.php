@@ -47,17 +47,23 @@
                             </div>
                             <div class="info-deal clearfix">
                                 <div class="row">
-                                    <div class="col-sm-8 col-xs-8">
-                                        <div class="time">
-                                            <?php echo date('d/m/Y H:i', $row['accepted_time'])?>
+                                    <div class="col-sm-7 col-xs-7">
+                                        <div class="profile_avatar">
+                                            <a href="<?php echo site_url('user/profile/'.$row['id'].'/'.seoUrl($row['nameUser']))?>">
+                                                <?php echo modules::run('left/left/avatar',(object)$row, 50, 50);?>
+                                            </a>
+                                            <p><?php echo $row['nameUser'];?></p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-xs-4">
+                                    <div class="col-sm-5 col-xs-5">
                                         <?php if($row['accept'] == 1){?>
-                                            <span class="pull-right approved"><i class="fa fa-check fa-lg" aria-hidden="true"></i> Accepted</span>
+                                            <span class="pull-right approved" style="margin-top: 0;"><i class="fa fa-check fa-lg" aria-hidden="true"></i> Accepted</span>
                                         <?php }else if($row['accept'] == 2){?>
                                             <span class="pull-right"><img src="<?php echo base_url();?>templates/img/pub-del.png" /> Afvis</span>
                                         <?php }?>
+                                        <div class="pull-right">
+                                            <?php echo date('d/m/Y H:i', $row['accepted_time'])?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

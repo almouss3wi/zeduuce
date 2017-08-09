@@ -59,7 +59,7 @@
                                                 <a href="<?php echo site_url('user/sentInvitation/' . $item->id . '/' . seoUrl($item->name)) ?>" class="btn btnPositive2"><span class="btnPositive_content">Har sendt invitation</span></a>
                                             <?php } else { ?>
                                                 <a href="<?php echo site_url('user/sentInvitation/' . $item->id . '/' . seoUrl($item->name)) ?>" class="btn btnPositive2 active">
-                                                    <span class="btnPositive_content">Har sendt invitation</span>
+                                                    <span class="btnPositive_content">Har sendt invitation <span class="timer"><?php echo date("d.m.Y", $item->invitedTime) ?> Kl.<?php echo date("H:i", $item->invitedTime) ?></span></span>
                                                 </a>
                                             <?php } ?>
                                         </div>

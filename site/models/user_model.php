@@ -498,12 +498,12 @@ class User_model extends CI_Model{
     }
 
     public function checkSentInvitation($userId, $clientId){
-        $this->db->select("id");
-        $this->db->from("dating_user");
-        $this->db->where("user", $userId);
-        $this->db->where_in("datingID IN (SELECT id FROM tb_dating WHERE userID = ".$clientId.")");
-        $result = $this->db->get()->result();
-        return $result ? true : false;
+        $result = $this->db->where("user_to", $userId)
+            ->where("user_from", $clientId)
+            ->where('action', 'Invite')
+            ->where('bl_active', 1)
+            ->get("user_activity")->row();
+        return $result ? $result->dt_create : false;
     }
 
     public function checkSeeMore3Times($userId, $clientId){

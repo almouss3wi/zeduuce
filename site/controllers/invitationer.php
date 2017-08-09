@@ -77,6 +77,7 @@ class Invitationer extends MX_Controller {
                             $DBu['bl_active'] = 1;
                             $this->invita->saveDatingUser($DBu);
                             $timeStart = $DBu['time_end'];
+                            $this->user->addStatus($data['user']->id, $userID[$i], 'Invite');
                         }
                     }
                     //Update order item
@@ -181,6 +182,7 @@ class Invitationer extends MX_Controller {
                             $DBu['bl_active'] = 1;
                             $this->invita->saveDatingUser($DBu);
                             $timeStart = $DBu['time_end'];
+                            $this->user->addStatus($data['user']->id, $userID[$i], 'Invite');
                         }
                     }
                     //Save image
@@ -241,6 +243,7 @@ class Invitationer extends MX_Controller {
                             $DBu['dt_create'] = date('Y-m-d H:i:s');
                             $DBu['bl_active'] = 1;
                             $this->invita->saveDatingUser($DBu);
+                            $this->user->addStatus($data['user']->id, $userID[$i], 'Invite');
                         }
                     }
                     //Update order item
@@ -350,6 +353,7 @@ class Invitationer extends MX_Controller {
                             $DBu['dt_create'] = date('Y-m-d H:i:s');
                             $DBu['bl_active'] = 1;
                             $this->invita->saveDatingUser($DBu);
+                            $this->user->addStatus($data['user']->id, $userID[$i], 'Invite');
                         }
                     }
                     //Save image
