@@ -75,7 +75,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-5 col-xs-5">
-                                                    <a href="<?php echo site_url('user/rejectmyinvitationerjoin/'.$row['datinguserID'])?>" class="btn_Delete pull-right">Slet</a>
+                                                    <a href="<?php echo site_url('user/rejectmyinvitationerjoin/'.$row['datinguserID'])?>" class="btn_Delete pull-right">Afvis</a>
                                                 </div>
                                             </div>
                                         </div>
