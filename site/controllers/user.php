@@ -615,6 +615,8 @@ class User extends MX_Controller
         $dating = $this->user->getSentDatingByUser($id, $data['user']->id);
 
         $data['friend'] = $this->user->getUser($id);
+
+        $this->user->disableStatus($data['friend']->id, $data['user']->id, 'Invite');
         $list = "";
         if ($dating) {
             $i = 0;
@@ -773,8 +775,10 @@ class User extends MX_Controller
                     $userList[$i]->addedToFavoriteStatus = false;
                 }
 
-                if($this->user->checkSentInvitation($data['user']->id, $row->id)){
+                $invitedTime = $this->user->checkSentInvitation($data['user']->id, $row->id);
+                if($invitedTime){
                     $userList[$i]->sentInvitationStatus = true;
+                    $userList[$i]->invitedTime = strtotime($invitedTime);
                 } else {
                     $userList[$i]->sentInvitationStatus = false;
                 }
