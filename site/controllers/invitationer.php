@@ -61,7 +61,7 @@ class Invitationer extends MX_Controller {
                 }else{
                     $DB['device'] = 'Desktop';
                 }
-                $DB['times_end'] = time()+$DB['times']*60*60*count();
+                $DB['times_end'] = time()+$DB['times']*60*60*count($userID);
                 $id = $this->invita->saveDating($DB);
                 //Save User
                 $timeNext = $DB['times']*60*60;
@@ -164,7 +164,7 @@ class Invitationer extends MX_Controller {
                 }else{
                     $DB['device'] = 'Desktop';
                 }
-                $DB['times_end'] = time()+$DB['times']*60*60*count();
+                $DB['times_end'] = time()+($DB['times']*60*60*count($userID));
                 $id = $this->invita->saveDating($DB);
                 $this->session->set_userdata('datingID',$id);
                 //Save User

@@ -687,7 +687,7 @@ class User_model extends CI_Model{
     }
 
     function getSentDatingByUser($friendId=NULL, $userId){
-        $query = $this->db->select('dt.*, du.id as datinguserID, du.time_start, du.time_end, du.accept, du.dt_update as accepted_time, u.name as nameUser, u.avatar, u.facebook')
+        $query = $this->db->select('dt.*, du.id as datinguserID, du.time_start, du.time_end, du.accept, du.dt_update as replied_time, u.name as nameUser, u.avatar, u.facebook')
             ->from('dating_user as du')
             ->join('dating as dt','dt.id = du.datingID','left')
             ->join('user as u','u.id = dt.userID','left')
@@ -699,9 +699,9 @@ class User_model extends CI_Model{
         return $query;
     }
 
-    function deleteDatingUser($id=NULL){
+    function rejectDatingUser($DB, $id=NULL){
         $this->db->where('id',$id);
-        if($this->db->delete('dating_user')){
+        if($this->db->update('dating_user', $DB)){
             return true;
         }else{
             return false;
@@ -710,7 +710,7 @@ class User_model extends CI_Model{
     function acceptDating($DB=NULL,$id=NULL){
         if($id){
             $this->db->where('id',$id);
-            $this->db->update('dating_user',$DB);
+            $this->db->update('dating_user', $DB);
             return $id;
         }else{
             return false;

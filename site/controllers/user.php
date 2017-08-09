@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,deletemyinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,acceptDating,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
+        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
     }
 
     function index(){
@@ -419,23 +419,9 @@ class User extends MX_Controller
                 $list[$i]['nameUser'] = $row->nameUser;
                 $list[$i]['facebook'] = $row->facebook;
                 $list[$i]['avatar'] = $row->avatar;
-                /*if ($row->facebook && $row->avatar) {
-                    $list[$i]['avatar'] = $row->avatar;
-                } else {
-                    $photo = $this->user->getPhoto($row->userID);
-                    if ($photo) {
-                        $list[$i]['avatar'] = $photo[0]->image;
-                    } else {
-                        $list[$i]['avatar'] = "";
-                    }
-                }*/
+
                 $list[$i]['datinguserID'] = $row->datinguserID;
                 $list[$i]['accept'] = $row->accept;
-                if ($row->type == 1 || $row->type == 3) {
-                    $list[$i]['time'] = number_format($row->times / count($user), 1, '.', '');
-                } else {
-                    $list[$i]['time'] = $row->times;
-                }
                 $list[$i]['time'] = $row->times;
                 $i++;
             }
@@ -445,11 +431,33 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function deletemyinvitationerjoin($id)
-    {
+    function rejectmyinvitationerjoin($id){
         //Delete dating of user
-        $this->user->deleteDatingUser($id);
+        $DB['accept'] = 2;
+        $DB['dt_update'] = date('Y-m-d H:i:s');
+        $this->user->rejectDatingUser($DB, $id);
         redirect(site_url('user/myinvitationerjoin'));
+    }
+
+    function acceptDating()
+    {
+        $id = $this->input->post('id', true);
+        $DB['accept'] = 1;
+        $DB['dt_update'] = date('Y-m-d H:i:s');
+        $id = $this->user->acceptDating($DB, $id);
+        //add dated user
+        $isDated = $this->user->checkOrCreateDatedUser($id);
+        //send notification to all dated friend
+        $user = $this->session->userdata('user');
+        $this->user->addAcceptedNotification($user->id);
+        if ($id && $isDated == true) {
+            $data['status'] = true;
+        } else {
+            $data['status'] = false;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return;
     }
 
     function myinvitationerapproved()
@@ -661,9 +669,12 @@ class User extends MX_Controller
                 $list[$i]['facebook'] = $row->facebook;
                 $list[$i]['avatar'] = $row->avatar;
 
+                $list[$i]['time_start'] = $row->time_start;
+                $list[$i]['time_end'] = $row->time_end;
                 $list[$i]['datinguserID'] = $row->datinguserID;
                 $list[$i]['accept'] = $row->accept;
-                $list[$i]['accepted_time'] = strtotime($row->accepted_time);
+                $list[$i]['replied_time'] = strtotime($row->replied_time);
+                $list[$i]['time'] = $row->times;
                 $i++;
             }
         }
@@ -1615,27 +1626,6 @@ class User extends MX_Controller
         $user = $this->session->userdata('user');
         $this->user->addAcceptedNotification($user->id);
         die('ok');
-    }
-
-    function acceptDating()
-    {
-        $id = $this->input->post('id', true);
-        $DB['accept'] = 1;
-        $DB['dt_update'] = date('Y-m-d H:i:s');
-        $id = $this->user->acceptDating($DB, $id);
-        //add dated user
-        $isDated = $this->user->checkOrCreateDatedUser($id);
-        //send notification to all dated friend
-        $user = $this->session->userdata('user');
-        $this->user->addAcceptedNotification($user->id);
-        if ($id && $isDated == true) {
-            $data['status'] = true;
-        } else {
-            $data['status'] = false;
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        return;
     }
 
     function getUserJoin()

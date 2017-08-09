@@ -92,7 +92,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4 col-xs-4">
-                                        <a href="<?php echo site_url('user/deletemyinvitationerjoin/'.$row['datinguserID'])?>" class="btn_Delete pull-right">Slet</a>
+                                        <a href="<?php echo site_url('user/rejectmyinvitationerjoin/'.$row['datinguserID'])?>" class="btn_Delete pull-right">Slet</a>
                                     </div>
                                 </div>
                             </div>
