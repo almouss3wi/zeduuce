@@ -210,27 +210,48 @@ class Payment extends MX_Controller {
     }
 
     public function getMonthlyFee(){
+        $users = $this->user->getExpiredUsers();
+        if($users){
+            foreach ($users as $user){
+                $orderId = 'US-'.randomPassword();
+                $expired = strtotime('+1 month', $user->expired_at );
+                //Call payment
+                $epay_params = array();
+                $epay_params['merchantnumber'] = $this->merchantnumber;
+                $epay_params['subscriptionid'] = $user->subscriptionid;
+                $epay_params['orderid'] = $orderId;
+                $epay_params['amount'] = $this->config->item('priceuser')*100;
+                $epay_params['currency'] = "208";
+                $epay_params['instantcapture'] = "0";
+                $epay_params['fraud'] = "0";
+                $epay_params['transactionid'] = "-1";
+                $epay_params['pbsresponse'] = "-1";
+                $epay_params['epayresponse'] = "-1";
 
-        $epay_params = array();
-        $epay_params['merchantnumber'] = $this->merchantnumber;
-        $epay_params['subscriptionid'] = '6718970';
-        $epay_params['orderid'] = 'US-'.randomPassword();
-        $epay_params['amount'] = $this->config->item('priceuser')*100;
-        $epay_params['currency'] = "208";
-        $epay_params['instantcapture'] = "0";
-        $epay_params['fraud'] = "0";
-        $epay_params['transactionid'] = "-1";
-        $epay_params['pbsresponse'] = "-1";
-        $epay_params['epayresponse'] = "-1";
+                $client = new SoapClient('https://ssl.ditonlinebetalingssystem.dk/remote/subscription.asmx?WSDL');
 
-        $client = new SoapClient('https://ssl.ditonlinebetalingssystem.dk/remote/subscription.asmx?WSDL');
+                $result = $client->authorize($epay_params);
 
-        $result = $client->authorize($epay_params);
+                if($result->authorizeResult == 1){
+                    //Update info in user table
+                    $DB['orderid'] = $orderId;
+                    $DB['paymenttime'] = time();
+                    $DB['expired_at'] = $expired;
+                    $this->user->saveUser($DB, $user->id);
 
-        if($result->authorizeResult == 1){
-            print_r($result);exit();
+                    //Add log
+                    $logDb['userId']    = $user->id;
+                    $logDb['txnid']     = $this->input->get('txnid');
+                    $logDb['orderId']   = $orderId;
+                    $logDb['amount']    = $this->config->item('priceuser');
+                    $id = $this->user->addLog($logDb);
+                } else {
+                    echo($user->id.': is failed');
+                }
+            }
+            print_r($users);exit();
         } else {
-            die('fail');
+            echo 'Nobody';
         }
     }
     

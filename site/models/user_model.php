@@ -1059,5 +1059,16 @@ class User_model extends CI_Model{
         }
     }
 
+    //Get monthly fee
+    public function getExpiredUsers(){
+        $time = time()+86400;
+        $result = $this->db->select('id, subscriptionid, expired_at')
+            ->from('user')
+            ->where('expired_at <', $time)
+            ->where('expired_at <>', 0)
+            ->get()->result();
+        return $result;
+    }
+
     /** The End*/
 }
