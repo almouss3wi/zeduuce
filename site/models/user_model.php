@@ -211,6 +211,14 @@ class User_model extends CI_Model{
             }
         }
     }
+
+    public function addLog($db){
+        if($this->db->insert('payment_log',$db)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
     /** MESSAGE*/
     function saveMessage($DB=NULL){
         if($this->db->insert('user_messages',$DB)){

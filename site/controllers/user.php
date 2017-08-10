@@ -1127,10 +1127,16 @@ class User extends MX_Controller
             $DB['type'] = 2;
             $DB['bl_active'] = 1;
             $DB['paymenttime'] = time();
+            $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
+
+            //Add to log
+            $this->addPaymentLog();
+
         } else {
             $DB['bl_active'] = 1;
         }
         $this->user->saveUser($DB, $user->id);
+
 
         $this->session->unset_userdata('payment');
         $data['page'] = 'user/success';
@@ -1261,6 +1267,10 @@ class User extends MX_Controller
             $DB['type'] = 2;
             $DB['bl_active'] = 1;
             $DB['paymenttime'] = time();
+            $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
+
+            //Add to log
+            $this->addPaymentLog();
         } else {
             $DB['bl_active'] = 1;
         }
@@ -1272,11 +1282,32 @@ class User extends MX_Controller
     }
 
     public function upgradeCancel(){
-
+        customRedirectWithMessage(site_url('user/index'), 'Din betaling mislykkedes');
     }
 
     public function upgradeCallback(){
 
+    }
+
+    public function addPaymentLog(){
+        if($this->input->get('txnid')){
+            $logDb['userId']    = $user->id;
+            $logDb['txnid']     = $this->input->get('txnid');
+            $logDb['orderId']   = $this->input->get('orderid');
+            $logDb['amount']    = $this->input->get('amount');
+            $logDb['currency']  = $this->input->get('currency');
+            $logDb['date']      = $this->input->get('date');
+            $logDb['time']      = $this->input->get('time');
+            $logDb['hash']      = $this->input->get('hash');
+            $logDb['txnfee']    = $this->input->get('txnfee');
+            $logDb['cardno']    = $this->input->get('cardno');
+            $id = $this->user->addLog($logDb);
+            if($id == false){
+                customRedirectWithMessage(site_url('user/index'), 'Fejl ved lagring af log');
+            }
+        } else {
+            customRedirectWithMessage(site_url('user/index'), 'Kan ikke finde betalingsoplysninger');
+        }
     }
 
     function forgotpass()
