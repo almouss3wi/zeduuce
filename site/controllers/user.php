@@ -1130,7 +1130,7 @@ class User extends MX_Controller
             $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
 
             //Add to log
-            $this->addPaymentLog();
+            $this->addPaymentLog($user->id);
 
         } else {
             $DB['bl_active'] = 1;
@@ -1270,7 +1270,7 @@ class User extends MX_Controller
             $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
 
             //Add to log
-            $this->addPaymentLog();
+            $this->addPaymentLog($user->id);
         } else {
             $DB['bl_active'] = 1;
         }
@@ -1289,9 +1289,9 @@ class User extends MX_Controller
 
     }
 
-    public function addPaymentLog(){
+    public function addPaymentLog($userId){
         if($this->input->get('txnid')){
-            $logDb['userId']    = $user->id;
+            $logDb['userId']    = $userId
             $logDb['txnid']     = $this->input->get('txnid');
             $logDb['orderId']   = $this->input->get('orderid');
             $logDb['amount']    = $this->input->get('amount');
