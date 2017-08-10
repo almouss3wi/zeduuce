@@ -1119,7 +1119,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data);
 
         $payment = $this->session->userdata('payment');
-        $user = $this->session->userdata('user');
+        $userId = $this->session->userdata('userId');
         if ($payment) {
             //Update payment
             $DB['subscriptionid'] = $this->input->get('subscriptionid');
@@ -1131,13 +1131,12 @@ class User extends MX_Controller
             $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
 
             //Add to log
-            $userId = $this->session->userdata('userId');
             $this->addPaymentLog($userId);
 
         } else {
             $DB['bl_active'] = 1;
         }
-        $id = $this->user->saveUser($DB, $user->id);
+        $this->user->saveUser($DB, $userId);
 
 
         $this->session->unset_userdata('payment');
