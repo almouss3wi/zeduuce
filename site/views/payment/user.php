@@ -40,6 +40,7 @@
                         <input type="hidden" name="callbackurl" value="<?php echo $callbackurl;?>"/>
                         <input type="hidden" name="cancelurl" value="<?php echo $cancelurl;?>" />
                         <input type="hidden" name="hash" value="<?php echo $md5;?>" />
+                        <input type="hidden" name="subscription" value="1">
                         <input type="hidden" type="submit" value="Go to payment"/>
                     </form>
                 </div>
