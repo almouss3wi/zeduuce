@@ -1291,7 +1291,7 @@ class User extends MX_Controller
 
     public function addPaymentLog($userId){
         if($this->input->get('txnid')){
-            $logDb['userId']    = $userId
+            $logDb['userId']    = $userId;
             $logDb['txnid']     = $this->input->get('txnid');
             $logDb['orderId']   = $this->input->get('orderid');
             $logDb['amount']    = $this->input->get('amount');
