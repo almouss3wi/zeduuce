@@ -1128,15 +1128,15 @@ class User extends MX_Controller
             $DB['bl_active'] = 1;
             $DB['paymenttime'] = time();
             $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
-
-            //Add to log
-            $this->addPaymentLog($user->id);
-
         } else {
             $DB['bl_active'] = 1;
         }
-        $this->user->saveUser($DB, $user->id);
+        $id = $this->user->saveUser($DB);
 
+        //Add to log
+        if ($payment) {
+            $this->addPaymentLog($id);
+        }
 
         $this->session->unset_userdata('payment');
         $data['page'] = 'user/success';
