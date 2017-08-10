@@ -1088,6 +1088,7 @@ class User extends MX_Controller
             $this->session->set_userdata('userid', $id);
             if ($DB['payment'] == 1 && $id) {
                 $this->session->set_userdata('payment', true);
+                $this->session->set_userdata('userId', $id);
                 $data['status'] = true;
                 $data['payment'] = true;
                 $data['message'] = '';
@@ -1118,6 +1119,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data);
 
         $payment = $this->session->userdata('payment');
+        $user = $this->session->userdata('user');
         if ($payment) {
             //Update payment
             $DB['subscriptionid'] = $this->input->get('subscriptionid');
@@ -1127,15 +1129,16 @@ class User extends MX_Controller
             $DB['bl_active'] = 1;
             $DB['paymenttime'] = time();
             $DB['expired_at'] = strtotime('+1 month',$DB['paymenttime']);
+
+            //Add to log
+            $userId = $this->session->userdata('userId');
+            $this->addPaymentLog($userId);
+
         } else {
             $DB['bl_active'] = 1;
         }
-        $id = $this->user->saveUser($DB);
+        $id = $this->user->saveUser($DB, $user->id);
 
-        //Add to log
-        if ($payment) {
-            $this->addPaymentLog($id);
-        }
 
         $this->session->unset_userdata('payment');
         $data['page'] = 'user/success';
