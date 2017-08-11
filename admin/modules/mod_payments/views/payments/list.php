@@ -3,10 +3,10 @@
         <div class="example">
             <form id="searchFrm" class="form-inline" method="post">
                 <div class="form-group">
-                    <input type="text" name="name" id="nameKey" autocomplete="off" placeholder="Search in content" class="form-control"/>
+                    <input type="text" name="name" id="nameKey" autocomplete="off" placeholder="Name" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <a id="bnt-searchDrm" onclick="searchFrm('searchFrm','<?php echo site_url($this->module_name.'/shoutouts/search/');?>')" class="btn btn-primary waves-effect waves-light"><?php echo lang('admin.search');?></a>
+                    <a id="bnt-searchDrm" onclick="searchFrm('searchFrm','<?php echo site_url($this->module_name.'/payments/search/');?>')" class="btn btn-primary waves-effect waves-light"><?php echo lang('admin.search');?></a>
                 </div>
             </form>
         </div>
@@ -26,20 +26,20 @@ jQuery(document).ready(function(){
     });
 });
 </script>
-<?php echo form_open($this->module_name.'/shoutouts', array('class' => 'admin', 'id' => 'adminfrm'));?>
+<?php echo form_open($this->module_name.'/payments', array('class' => 'admin', 'id' => 'adminfrm'));?>
 <div class="panel-body">
     <div class="row">
         <div class="col-sm-12">
-            <div id="toolbar">
-                <?php if($this->check->check('dels')){?>
-                <a class="btn btn-danger" onclick="deleteAllItem('<?php echo site_url($this->module_name."/shoutouts/dels/");?>');" >
-                    <?php echo lang('admin.deletes');?>
+            <!--<div id="toolbar">
+                <?php /*if($this->check->check('dels')){*/?>
+                <a class="btn btn-danger" onclick="deleteAllItem('<?php /*echo site_url($this->module_name."/payments/dels/");*/?>');" >
+                    <?php /*echo lang('admin.deletes');*/?>
                 </a>
-                <?php }?>
-            </div>
+                <?php /*}*/?>
+            </div>-->
             <table id="list_table"
                 data-toggle="table"
-                data-url="<?php echo site_url($this->module_name.'/shoutouts/getContent');?>"
+                data-url="<?php echo site_url($this->module_name.'/payments/getContent');?>"
                 data-toolbar="#toolbar"
                 data-side-pagination="server"
                 data-pagination="true"
@@ -54,8 +54,9 @@ jQuery(document).ready(function(){
                         <th data-field="state" data-checkbox="true"></th>
                         <th data-field="id">ID</th>
                         <th data-field="name">Name</th>
-                        <th data-field="content">Content</th>
-                        <th data-field="dt_create">Created time</th>
+                        <th data-field="orderId">Order id</th>
+                        <th data-field="amount">Amount</th>
+                        <th data-field="paymenttime">Paid time</th>
                         <th class="text-center action" data-field="action"><?php echo lang('admin.functions');?></th>
                     </tr>
                 </thead>

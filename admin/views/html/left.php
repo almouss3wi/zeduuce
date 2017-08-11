@@ -149,6 +149,12 @@
                                                                 class="site-menu-title"><?php echo lang('menu.user.shoutouts'); ?></span></a>
                                                 </li>
                                             <?php } ?>
+                                            <?php if ($this->check->check('view', 'mod_payments', 'payments')) { ?>
+                                                <li class="site-menu-item"><a class="animsition-link"
+                                                                              href="<?php echo site_url('mod_payments/payments') ?>"><span
+                                                                class="site-menu-title"><?php echo lang('menu.user.payments'); ?></span></a>
+                                                </li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>
