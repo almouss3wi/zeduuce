@@ -1295,7 +1295,7 @@ class User extends MX_Controller
             $logDb['userId']    = $userId;
             $logDb['txnid']     = $this->input->get('txnid');
             $logDb['orderId']   = $this->input->get('orderid');
-            $logDb['amount']    = $this->input->get('amount');
+            $logDb['amount']    = $this->input->get('amount')/100;
             $logDb['currency']  = $this->input->get('currency');
             $logDb['date']      = $this->input->get('date');
             $logDb['time']      = $this->input->get('time');

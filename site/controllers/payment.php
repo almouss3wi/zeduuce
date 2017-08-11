@@ -241,7 +241,7 @@ class Payment extends MX_Controller {
 
                     //Add log
                     $logDb['userId']    = $user->id;
-                    $logDb['txnid']     = $this->input->get('txnid');
+                    $logDb['txnid']     = $result->txnid;
                     $logDb['orderId']   = $orderId;
                     $logDb['amount']    = $this->config->item('priceuser');
                     $id = $this->user->addLog($logDb);
