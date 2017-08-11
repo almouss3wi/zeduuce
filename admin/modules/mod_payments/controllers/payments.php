@@ -70,7 +70,7 @@ class Payments extends CI_Controller{
                 $data->name = $row->name;
                 $data->orderId = $row->orderId;
                 $data->amount = $row->amount.' DKK';
-                $data->paymenttime = date("d.m.Y K\l.H:i", strtotime($row->paymenttime));
+                $data->paymenttime = date("d.m.Y K\l.H:i", $row->paymenttime);
                 //ACTION
                 $data->action = "";
                 /*$data->action .= ($this->check->check('edit'))?icon_edit($this->module_name.'/shoutouts/edit/'.$row->id.'/'.$offset):"";
