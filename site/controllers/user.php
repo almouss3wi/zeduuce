@@ -1126,7 +1126,7 @@ class User extends MX_Controller
         $this->user->addMeta($this->_meta, $data);
 
         $payment = $this->session->userdata('payment');
-        $userId = $this->session->userdata('userId');
+        $userId = $this->session->userdata('userid');
         if ($payment) {
             //Update payment
             $DB['subscriptionid'] = $this->input->get('subscriptionid');
