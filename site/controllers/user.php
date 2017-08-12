@@ -1097,6 +1097,13 @@ class User extends MX_Controller
                 return;
             }
             if ($id) {
+                //Send email
+                $sendEmailInfo['name'] = $DB['name'];
+                $sendEmailInfo['email'] = $DB['email'];
+                $sendEmailInfo['password'] = $this->input->post('password');
+                $emailTo = array($DB['email']);
+                sendEmail($emailTo,'registerFreeMember',$sendEmailInfo,'');
+
                 $data['status'] = true;
                 $data['message'] = '';
             } else {
