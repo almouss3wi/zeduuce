@@ -1082,6 +1082,7 @@ class User extends MX_Controller
             }
             $DB['dt_create'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = 1;
+            $this->session->set_userdata('name', $DB['name']);
             $this->session->set_userdata('email', $DB['email']);
             $this->session->set_userdata('password', $this->input->post('password'));
             $id = $this->user->saveUser($DB);
@@ -1127,6 +1128,7 @@ class User extends MX_Controller
 
         $payment = $this->session->userdata('payment');
         $userId = $this->session->userdata('userid');
+        $name = $this->session->userdata('name');
         $email = $this->session->userdata('email');
         $password = $this->session->userdata('password');
         if ($payment) {
@@ -1143,7 +1145,7 @@ class User extends MX_Controller
             $this->addPaymentLog($userId);
 
             //Send email
-            $sendEmailInfo['name']      = $DB['name'];
+            $sendEmailInfo['name']      = $name;
             $sendEmailInfo['email']     = $email;
             $sendEmailInfo['password']  = $password;
             $sendEmailInfo['orderId']   = $DB['orderid'];
