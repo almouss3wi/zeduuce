@@ -1149,8 +1149,8 @@ class User extends MX_Controller
             $sendEmailInfo['orderId']   = $DB['orderid'];
             $sendEmailInfo['price']     = $DB['price'].' DKK';
             $sendEmailInfo['expired']   = date('d/m/Y', $DB['expired_at']);
-            $emailTo = array($DB['email']);
-            sendEmail($emailTo,'registerFreeMember',$sendEmailInfo,'');
+            $emailTo = array($email);
+            sendEmail($emailTo,'registerGoldMember',$sendEmailInfo,'');
 
         } else {
             $DB['bl_active'] = 1;
