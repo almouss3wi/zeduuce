@@ -1083,7 +1083,7 @@ class User extends MX_Controller
             $DB['dt_create'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = 1;
             $this->session->set_userdata('email', $DB['email']);
-            $this->session->set_userdata('password', $DB['password']);
+            $this->session->set_userdata('password', $this->input->post('password'));
             $id = $this->user->saveUser($DB);
             $this->session->set_userdata('userid', $id);
             if ($DB['payment'] == 1 && $id) {
@@ -1127,6 +1127,8 @@ class User extends MX_Controller
 
         $payment = $this->session->userdata('payment');
         $userId = $this->session->userdata('userid');
+        $email = $this->session->userdata('email');
+        $password = $this->session->userdata('password');
         if ($payment) {
             //Update payment
             $DB['subscriptionid'] = $this->input->get('subscriptionid');
@@ -1139,6 +1141,16 @@ class User extends MX_Controller
 
             //Add to log
             $this->addPaymentLog($userId);
+
+            //Send email
+            $sendEmailInfo['name']      = $DB['name'];
+            $sendEmailInfo['email']     = $email;
+            $sendEmailInfo['password']  = $password;
+            $sendEmailInfo['orderId']   = $DB['orderid'];
+            $sendEmailInfo['price']     = $DB['price'].' DKK';
+            $sendEmailInfo['expired']   = date('d/m/Y', $DB['expired_at']);
+            $emailTo = array($DB['email']);
+            sendEmail($emailTo,'registerFreeMember',$sendEmailInfo,'');
 
         } else {
             $DB['bl_active'] = 1;
