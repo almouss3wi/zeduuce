@@ -1,5 +1,5 @@
 //Use CKEDITOR
-var areditor = Array('content', 'content_en');
+var areditor = Array('content', 'content_en', 'description', 'description_en');
 $.each(areditor, function (i, ar) {
     if($('#'+ar).length > 0){
         CKEDITOR.replace(ar,{

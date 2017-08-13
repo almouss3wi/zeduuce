@@ -59,7 +59,7 @@
         </div>
         <div class="col-sm-9">
             <div class="form-material">
-                <textarea class="form-control tinyeditor" id="description" name="description"><?php echo $item->description;?></textarea>
+                <textarea class="form-control" id="description" name="description"><?php echo $item->description;?></textarea>
             </div>
         </div>
     </div>
