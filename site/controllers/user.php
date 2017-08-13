@@ -1293,6 +1293,15 @@ class User extends MX_Controller
 
             //Add to log
             $this->addPaymentLog($user->id);
+
+            //Send email
+            $sendEmailInfo['name']      = $user->name;
+            $sendEmailInfo['email']     = $user->email;
+            $sendEmailInfo['orderId']   = $DB['orderid'];
+            $sendEmailInfo['price']     = $DB['price'].' DKK';
+            $sendEmailInfo['expired']   = date('d/m/Y', $DB['expired_at']);
+            $emailTo = array($user->email);
+            sendEmail($emailTo,'upgradeGoldMember',$sendEmailInfo,'');
         } else {
             $DB['bl_active'] = 1;
         }
