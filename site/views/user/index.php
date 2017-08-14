@@ -9,17 +9,19 @@
                             <div class="col-md-12 mb15">
                                 <h3 class="text-uppercase"><?php echo $item->name;?></h3>
                             </div>
-                            <div class="col-md-6 mb15">
-                            <?php if(isGoldMember()){?>
-                                <img src="<?php echo base_url(); ?>uploads/btn_goldmember.png" alt="" class="img-responsive">
-                            <?php } else {?>
-                                <img src="<?php echo base_url(); ?>uploads/btn_freemember.png" alt="" class="img-responsive">
-                            <?php }?>
-                            </div>
-                            <div class="col-md-6 mb15">
-                                <?php if(!isGoldMember()){?>
-                                    <a href="<?php echo site_url('user/upgrade');?>" class="btn btnPositive2 active"><span class="btnPositive_content">Upgrade to Gold Member</span></a>
+                            <div class="col-md-12 mb15">
+                                <div class="col-md-6">
+                                <?php if(isGoldMember()){?>
+                                    <img src="<?php echo base_url(); ?>uploads/btn_goldmember.png" alt="" class="img-responsive">
+                                <?php } else {?>
+                                    <img src="<?php echo base_url(); ?>uploads/btn_freemember.png" alt="" class="img-responsive">
                                 <?php }?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?php if(!isGoldMember()){?>
+                                        <a href="<?php echo site_url('user/upgrade');?>" class="btn btnPositive2 active"><span class="btnPositive_content">Upgrade to Gold Member</span></a>
+                                    <?php }?>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <a href="<?php echo site_url('user/update');?>" class="btn btnGray3">Redigér min profil</a>
