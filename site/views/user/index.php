@@ -9,7 +9,7 @@
                             <div class="col-md-12 mb15">
                                 <h3 class="text-uppercase"><?php echo $item->name;?></h3>
                             </div>
-                            <div class="col-md-12 mb15">
+                            <div class="col-md-12 mb15 pl0 pr0">
                                 <div class="col-md-6">
                                 <?php if(isGoldMember()){?>
                                     <img src="<?php echo base_url(); ?>uploads/btn_goldmember.png" alt="" class="img-responsive">
