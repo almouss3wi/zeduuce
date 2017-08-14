@@ -213,48 +213,69 @@ class Payment extends MX_Controller {
         $users = $this->user->getExpiredUsers();
         if($users){
             foreach ($users as $user){
-                $orderId = 'US-'.randomPassword();
-                $expired = strtotime('+1 month', $user->expired_at );
-                //Call payment
-                $epay_params = array();
-                $epay_params['merchantnumber'] = $this->merchantnumber;
-                $epay_params['subscriptionid'] = $user->subscriptionid;
-                $epay_params['orderid'] = $orderId;
-                $epay_params['amount'] = $this->config->item('priceuser')*100;
-                $epay_params['currency'] = "208";
-                $epay_params['instantcapture'] = "0";
-                $epay_params['fraud'] = "0";
-                $epay_params['transactionid'] = "-1";
-                $epay_params['pbsresponse'] = "-1";
-                $epay_params['epayresponse'] = "-1";
+                if($user->stand_by_payment == 0){
+                    $orderId = 'US-'.randomPassword();
+                    $expired = strtotime('+1 month', $user->expired_at );
+                    //Call payment
+                    $epay_params = array();
+                    $epay_params['merchantnumber'] = $this->merchantnumber;
+                    $epay_params['subscriptionid'] = $user->subscriptionid;
+                    $epay_params['orderid'] = $orderId;
+                    $epay_params['amount'] = $this->config->item('priceuser')*100;
+                    $epay_params['currency'] = "208";
+                    $epay_params['instantcapture'] = "0";
+                    $epay_params['fraud'] = "0";
+                    $epay_params['transactionid'] = "-1";
+                    $epay_params['pbsresponse'] = "-1";
+                    $epay_params['epayresponse'] = "-1";
 
-                $client = new SoapClient('https://ssl.ditonlinebetalingssystem.dk/remote/subscription.asmx?WSDL');
+                    $client = new SoapClient('https://ssl.ditonlinebetalingssystem.dk/remote/subscription.asmx?WSDL');
 
-                $result = $client->authorize($epay_params);
+                    $result = $client->authorize($epay_params);
 
-                if($result->authorizeResult == 1){
-                    //Update info in user table
-                    $DB['orderid'] = $orderId;
-                    $DB['paymenttime'] = time();
-                    $DB['expired_at'] = $expired;
-                    $this->user->saveUser($DB, $user->id);
+                    if($result->authorizeResult == 1){
+                        //Update info in user table
+                        $DB['orderid'] = $orderId;
+                        $DB['paymenttime'] = time();
+                        $DB['expired_at'] = $expired;
+                        $this->user->saveUser($DB, $user->id);
 
-                    //Add log
-                    $logDb['userId']    = $user->id;
-                    $logDb['txnid']     = $result->txnid;
-                    $logDb['orderId']   = $orderId;
-                    $logDb['amount']    = $this->config->item('priceuser');
-                    $id = $this->user->addLog($logDb);
+                        //Add log
+                        $logDb['userId']    = $user->id;
+                        $logDb['txnid']     = $result->txnid;
+                        $logDb['orderId']   = $orderId;
+                        $logDb['amount']    = $this->config->item('priceuser');
+                        $id = $this->user->addLog($logDb);
+
+                        //Send email
+                        $sendEmailInfo['name']      = $user->name;
+                        $sendEmailInfo['email']     = $user->email;
+                        $sendEmailInfo['orderId']   = $logDb['orderid'];
+                        $sendEmailInfo['price']     = $logDb['amount'].' DKK';
+                        $sendEmailInfo['expired']   = date('d/m/Y', $expired);
+
+                        $emailTo = array($user->email);
+                        sendEmail($emailTo, 'withdrawMonthly',$sendEmailInfo,'');
+                    } else {
+                        echo($user->id.': is failed');
+                    }
                 } else {
-                    echo($user->id.': is failed');
+                    $this->user->downgradeUser($user->id);
+                    //Send email
+                    $sendEmailInfo['name']      = $user->name;
+                    $sendEmailInfo['email']     = $user->email;
+
+                    $emailTo = array($user->email);
+                    sendEmail($emailTo, 'downgradeUser',$sendEmailInfo,'');
                 }
+
             }
             print_r($users);exit();
         } else {
             echo 'Nobody';
         }
     }
-    
+
 }
 
 /* End of file welcome.php */

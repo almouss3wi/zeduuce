@@ -1062,12 +1062,27 @@ class User_model extends CI_Model{
     //Get monthly fee
     public function getExpiredUsers(){
         $time = time()+86400;
-        $result = $this->db->select('id, subscriptionid, expired_at')
+        $result = $this->db->select('id, subscriptionid, expired_at, stand_by_payment, name, email')
             ->from('user')
             ->where('expired_at <', $time)
             ->where('expired_at <>', 0)
             ->get()->result();
         return $result;
+    }
+
+    public function downgradeUser($userId){
+        $data = array(
+            'type' => 1,
+            'orderid' => '',
+            'payment' => 0,
+            'paymenttime' => 0,
+            'expired_at' => 0,
+            'subscriptionid' => '',
+            'price' => 0,
+            'stand_by_payment' => 0
+        );
+        $this->db->where('id', $userId);
+        $this->db->update('user', $data);
     }
 
     /** The End*/
