@@ -261,6 +261,7 @@ class Payment extends MX_Controller {
                     }
                 } else {
                     $this->user->downgradeUser($user->id);
+
                     //Send email
                     $sendEmailInfo['name']      = $user->name;
                     $sendEmailInfo['email']     = $user->email;
