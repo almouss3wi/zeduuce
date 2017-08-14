@@ -9,26 +9,36 @@
                             <div class="col-md-12 mb15">
                                 <h3 class="text-uppercase"><?php echo $item->name;?></h3>
                             </div>
-                            <div class="col-md-12 mb15">
+                            <div class="col-md-6 mb15">
                             <?php if(isGoldMember()){?>
                                 <img src="<?php echo base_url(); ?>uploads/btn_goldmember.png" alt="" class="img-responsive">
                             <?php } else {?>
                                 <img src="<?php echo base_url(); ?>uploads/btn_freemember.png" alt="" class="img-responsive">
                             <?php }?>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-md-6 mb15">
+                                <?php if(!isGoldMember()){?>
+                                    <a href="<?php echo site_url('user/upgrade');?>" class="btn btnPositive2 active"><span class="btnPositive_content">Upgrade to Gold Member</span></a>
+                                <?php }?>
+                            </div>
+                            <div class="col-md-6">
                                 <a href="<?php echo site_url('user/update');?>" class="btn btnGray3">Redigér min profil</a>
+                            </div>
+                            <div class="col-md-6">
                                 <a href="<?php echo site_url('invitationer/index');?>" class="btn btnGray3">Opret invitation</a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <!--<h4><i>Jeg søger: Kvinde</i></h4>-->
+                                <?php if($item->expired_at){?>
+                                <h4><i>Udløbet: <?php echo date('d/m/Y', $item->expired_at);?></i></h4>
+                                <?php }?>
                                 <p><?php echo $item->slogan;?></p>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-9 box_info_highline col-xs-offset-right-2 col-xs-12">
+                            <!--<div class="col-md-9 box_info_highline col-xs-offset-right-2 col-xs-12">-->
+                            <div class="col-md-12 box_info_highline col-xs-12">
                                 <div class="col-md-6 col-sm-6">
                                     <?php if($item->birthday){$yearold = date('Y',time()) - explode('/',$item->birthday)[2];}else{$yearold = "";}?>
                                     <p><strong>Alder</strong>: <?php echo $yearold;?> år</p>
