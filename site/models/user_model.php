@@ -1055,7 +1055,10 @@ class User_model extends CI_Model{
         }
 
         foreach ($userIdArr as $friendId){
+            //Adding status in postive list
             $this->addStatus($userId, $friendId, 'AcceptedDating');
+            //Adding notification in top bar
+            $this->addNotification($friendId);
         }
     }
 
