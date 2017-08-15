@@ -33,7 +33,8 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <?php if($item->expired_at){?>
-                                <h4><i>Udløbet: <?php echo date('d/m/Y', $item->expired_at);?></i></h4>
+                                    <h4><i>Udløbet: <?php echo date('d/m/Y', $item->expired_at);?></i></h4>
+                                    <h4><i>Stå ved guld medlem: <?php echo $item->stand_by_payment?'Ja':'Nej';?></i></h4>
                                 <?php }?>
                                 <p><?php echo $item->slogan;?></p>
                             </div>

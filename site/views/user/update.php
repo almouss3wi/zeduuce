@@ -202,6 +202,21 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="">Stå ved guld medlem</label>
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-primary standby <?php if($item->stand_by_payment == 0) echo 'active';?>">
+                                                    <input type="radio" name="stand_by_payment"  value="0" autocomplete="off" checked> Nej
+                                                </label>
+                                                <label class="btn btn-primary standby <?php if($item->stand_by_payment == 1) echo 'active';?>">
+                                                    <input type="radio" name="stand_by_payment"  value="1" autocomplete="off"> Ja
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-lg-12 col-xs-12">
                                         <div class="form-group">
                                             <label for="">Skriv et motto</label>

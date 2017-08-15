@@ -1222,23 +1222,24 @@ class User extends MX_Controller
 
             $DB['avatar'] = $this->input->post('avatar');
 
-            $DB['name'] = $this->input->post('name');
-            $DB['day'] = $this->input->post('day');
-            $DB['month'] = $this->input->post('month');
-            $DB['year'] = $this->input->post('year');
-            $DB['birthday'] = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
-            $DB['code'] = $this->input->post('code');
-            $DB['gender'] = $this->input->post('gender');
-            $DB['height'] = $this->input->post('height');
-            $DB['relationship'] = $this->input->post('relationship');
-            $DB['children'] = $this->input->post('children');
-            $DB['ethnic_origin'] = $this->input->post('ethnic_origin');
-            $DB['religion'] = $this->input->post('religion');
-            $DB['training'] = $this->input->post('training');
-            $DB['body'] = $this->input->post('body');
-            $DB['smoking'] = $this->input->post('smoking');
-            $DB['slogan'] = $this->input->post('slogan');
-            $DB['description'] = $this->input->post('description');
+            $DB['name']             = $this->input->post('name');
+            $DB['day']              = $this->input->post('day');
+            $DB['month']            = $this->input->post('month');
+            $DB['year']             = $this->input->post('year');
+            $DB['birthday']         = $this->input->post('day') . '/' . $this->input->post('month') . '/' . $this->input->post('year');
+            $DB['code']             = $this->input->post('code');
+            $DB['gender']           = $this->input->post('gender');
+            $DB['height']           = $this->input->post('height');
+            $DB['relationship']     = $this->input->post('relationship');
+            $DB['children']         = $this->input->post('children');
+            $DB['ethnic_origin']    = $this->input->post('ethnic_origin');
+            $DB['religion']         = $this->input->post('religion');
+            $DB['training']         = $this->input->post('training');
+            $DB['body']             = $this->input->post('body');
+            $DB['smoking']          = $this->input->post('smoking');
+            $DB['stand_by_payment'] = $this->input->post('stand_by_payment');
+            $DB['slogan']           = $this->input->post('slogan');
+            $DB['description']      = $this->input->post('description');
             if ($this->input->post('password') && $this->input->post('repassword')) {
                 if ($this->input->post('password') != $this->input->post('repassword')) {
                     $this->session->set_flashdata('message', "Password incorrect");
