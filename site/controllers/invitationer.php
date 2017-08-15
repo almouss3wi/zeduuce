@@ -158,6 +158,7 @@ class Invitationer extends MX_Controller {
                 $DB['content'] = $this->input->post('content');
                 $DB['payment'] = 1;
                 $DB['dt_create'] = date('Y-m-d H:i:s');
+                $DB['bl_active'] = 1;
                 $mobile = $this->agent->mobile();
                 if($mobile){
                     $DB['device'] = 'Mobile';
@@ -197,7 +198,9 @@ class Invitationer extends MX_Controller {
                     } 
                 }
                 //Go to payment
-                redirect(site_url('payment/invitationer'));
+                //redirect(site_url('payment/invitationer'));
+                //Go to Mine invitationer
+                redirect(site_url('user/myinvitationer'));
             }
         }
 		$data['page'] = 'invitationer/opretetevent';
@@ -331,6 +334,7 @@ class Invitationer extends MX_Controller {
                 $DB['content'] = $this->input->post('content');
                 $DB['payment'] = 1;
                 $DB['dt_create'] = date('Y-m-d H:i:s');
+                $DB['bl_active'] = 1;
                 $mobile = $this->agent->mobile();
                 if($mobile){
                     $DB['device'] = 'Mobile';
@@ -370,7 +374,9 @@ class Invitationer extends MX_Controller {
                 //Go to payment
                 $this->session->unset_userdata('invita');
                 $this->session->unset_userdata('listUser');
-                redirect(site_url('payment/invitationer'));
+                //redirect(site_url('payment/invitationer'));
+                //Go to Mine invitationer
+                redirect(site_url('user/myinvitationer'));
             }
         }
         $list = $this->session->userdata('listUser');
