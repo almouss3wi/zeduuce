@@ -25,8 +25,9 @@
                         <?php if($list){foreach($list as $row){?>
                         <div class="col-sm-6 item-deal">
                             <div class="deal-img">
+                                <?php if($row['company']){ ?>
                                 <a href="<?php echo site_url('tilbud/detail/'.$row['proID'].'/'.seoUrl($row['proName']));?>">
-                                <?php if($row['company']){ ?><span class="cate-small"><?php echo $row['company'];?></span><?php }?>
+                                    <span class="cate-small"><?php echo $row['company'];?></span><?php }?>
                                 <span class="vip_invation"><?php echo $row['name'];?></span>
                                 <?php if($row['listimage']){?>
                                 <div class="sync3 owl-carousel">
@@ -43,7 +44,9 @@
                                 <?php }else{ ?>
                                 <div style="height: 185px; background: #252525;">&nbsp;</div> 
                                 <?php }}?>
+                            <?php if($row['company']){ ?>
                                 </a>
+                            <?php }?>
                             </div>
                             <?php if($row['listimage']){?>
                             <div class="sync4 owl-carousel">

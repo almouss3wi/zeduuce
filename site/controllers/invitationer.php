@@ -50,7 +50,7 @@ class Invitationer extends MX_Controller {
                 $userID = $this->input->post('userID');
                 $DB['times'] = $this->input->post('time');
                 $DB['userID'] = $data['user']->id;
-                $DB['name'] = 'INVITÈR VIP';
+                $DB['name'] = 'VIP INVITATION';
                 $DB['type'] = 1;
                 $DB['order_item'] = $this->input->post('order_item');
                 $DB['dt_create'] = date('Y-m-d H:i:s');
@@ -152,7 +152,7 @@ class Invitationer extends MX_Controller {
                 $images = $this->input->post('data_img');
                 $DB['times'] = $this->input->post('time');
                 $DB['userID'] = $data['user']->id;
-                $DB['name'] = 'OPRET ET EVENT';
+                $DB['name'] = 'BEGIVENHED';
                 $DB['type'] = 3;
                 $DB['title'] = $this->input->post('title');
                 $DB['content'] = $this->input->post('content');
@@ -328,7 +328,7 @@ class Invitationer extends MX_Controller {
                 $DB['times'] = $this->input->post('time');
                 $DB['times_end'] = time() + ($DB['times']*60*60);
                 $DB['userID'] = $data['user']->id;
-                $DB['name'] = 'OPRET OFFENTLIG EVENT';
+                $DB['name'] = 'OFFENTLIG HENDELSE';
                 $DB['type'] = 4;
                 $DB['title'] = $this->input->post('title');
                 $DB['content'] = $this->input->post('content');
