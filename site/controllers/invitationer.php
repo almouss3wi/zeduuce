@@ -475,7 +475,8 @@ class Invitationer extends MX_Controller {
                     $users[$i]['birthday'] = $row->birthday;
                     $users[$i]['code'] = $row->code;
                     $users[$i]['facebook'] = $row->facebook;
-                    if($row->facebook && $row->avatar){
+                    $users[$i]['avatar'] = $row->avatar;
+                    /*if($row->facebook && $row->avatar){
                         $users[$i]['avatar'] = $row->avatar;
                     }else{
                         $photo = $this->user->getPhoto($row->id);
@@ -484,7 +485,7 @@ class Invitationer extends MX_Controller {
                         }else{
                             $users[$i]['avatar'] = "";
                         }
-                    }
+                    }*/
                     $i++;
                 }
             }else{
@@ -502,7 +503,8 @@ class Invitationer extends MX_Controller {
                     $users[$i]['birthday'] = $row->birthday;
                     $users[$i]['code'] = $row->code;
                     $users[$i]['facebook'] = $row->facebook;
-                    if($row->facebook && $row->avatar){
+                    $users[$i]['avatar'] = $row->avatar;
+                    /*if($row->facebook && $row->avatar){
                         $users[$i]['avatar'] = $row->avatar;
                     }else{
                         $photo = $this->user->getPhoto($row->id);
@@ -511,7 +513,7 @@ class Invitationer extends MX_Controller {
                         }else{
                             $users[$i]['avatar'] = "";
                         }
-                    }
+                    }*/
                     $i++;
                 }
             }else{
