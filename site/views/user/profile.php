@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="row mt30">
-                            <div class="col-md-9 box_info_highline col-xs-offset-right-2">
+                            <div class="col-md-12 box_info_highline">
                                 <div class="col-md-6 col-sm-6">
                                     <?php if ($item->birthday) {
                                         $yearold = date('Y', time()) - explode('/', $item->birthday)[2];

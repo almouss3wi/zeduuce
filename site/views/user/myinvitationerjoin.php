@@ -86,13 +86,16 @@
                                 <div class="row">
                                     <div class="col-sm-8 col-xs-8">
                                         <div class="profile_avatar">
-                                            <?php if($row['avatar']){if($row['facebook']){?>
+                                            <a href="<?php echo site_url('user/profile/'.$row['userId'].'/'.seoUrl($row['nameUser']))?>">
+                                            <?php echo modules::run('left/left/avatar',(object)$row, 46, 46);?>
+                                            </a>
+                                            <?php /*if($row['avatar']){if($row['facebook']){?>
                                             <img src="https://graph.facebook.com/<?php echo $row['facebook'];?>/picture?type=large" alt="" class="img-responsive"/>
                                             <?php }else{ ?>
                                             <img src="<?php echo base_url();?>thumb/timthumb.php?src=<?php echo base_url();?>uploads/photo/<?php echo $row['avatar'];?>&w=48&h=48&q=100" alt="" class="img-responsive"/>
                                             <?php }}else{?>
                                             <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" width="48" height="48" class="img-responsive"/>
-                                            <?php }?>
+                                            <?php }*/?>
                                             <p><?php echo $row['nameUser'];?></p>
                                         </div>
                                     </div>

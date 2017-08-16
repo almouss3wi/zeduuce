@@ -415,6 +415,7 @@ class User extends MX_Controller
                     }
                 }
                 $list[$i]['id'] = $row->id;
+                $list[$i]['userId'] = $row->userID;
                 $list[$i]['name'] = $row->name;
                 $list[$i]['nameUser'] = $row->nameUser;
                 $list[$i]['facebook'] = $row->facebook;
