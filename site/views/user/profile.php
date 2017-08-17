@@ -4,7 +4,9 @@
         if (data.s == 'available') {
             $("#isOnline").html('Online til chat');
         } else {
-            $("#isOnline").html('Ikke online til chat');
+            var t = new Date( data.ls*1000 );
+            var str = t.getDate()+'/'+parseInt(t.getMonth()+1)+'/'+t.getUTCFullYear()+' '+t.getHours()+':'+t.getMinutes();
+            $("#isOnline").html('Ikke online til chat <br> Online: '+ str);
         }
     }
     window.onload = function() {
@@ -128,7 +130,7 @@
                                             <a href="#notDatedModel" data-toggle="modal"><i class="i_step2 disable"></i></a>
                                         <?php }?>
                                     </div>
-                                    <div class="caption hidden-xs hidden-sm" id="isOnline">Kontrol status</div>
+                                    <div class="caption hidden-xs hidden-sm" id="isOnline">Checking...</div>
                                 </li>
                                 <li>
                                     <div class="step">
