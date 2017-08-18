@@ -711,6 +711,7 @@ class User extends MX_Controller
                 $users[$i]['action'] = $this->user->checkAction($data['user']->id, $row->id);
                 $users[$i]['id'] = $row->id;
                 $users[$i]['name'] = $row->name;
+                $users[$i]['time_added'] = strtotime($row->time_added);
                 $users[$i]['birthday'] = $row->birthday;
                 $users[$i]['code'] = $row->code;
                 $users[$i]['facebook'] = $row->facebook;

@@ -29,7 +29,7 @@
                                                 <?php echo $row['name'];?>
                                             </a>
                                         </p>
-                                        <!--<p class="profile_number">Profilenr. : <?php /*echo $row['id'];*/?></p>-->
+                                        <p class="profile_number mb0">Tid tilføjet: <?php echo date('d/m/Y', $row['time_added']);?></p>
                                         <?php if($row['birthday']){$yearold = date('Y',time()) - explode('/',$row['birthday'])[2];}else{$yearold = "";}?>
                                         <p class="age">Age: <?php echo $yearold;?></p>
                                         <p class="postcode">Postnr. : <?php echo $row['code'];?></p>

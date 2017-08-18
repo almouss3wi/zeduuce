@@ -308,7 +308,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     function getFavorite($num=NULL,$offset=NULL,$user=NULL,$search=NULL){
-        $this->db->select('u.*');
+        $this->db->select('u.*, uf.dt_create as time_added');
         $this->db->from('user_favorite as uf');
         $this->db->join('user as u', 'u.id = uf.user_to', 'left');
         if($search['name']){
