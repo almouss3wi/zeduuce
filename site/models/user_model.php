@@ -1094,8 +1094,8 @@ class User_model extends CI_Model{
             ->where('user_from', $friendId)
             ->where('user_to', $userId)
             ->where('bl_active', 1)
-            ->get()->row();
-        return $result->id?true:false;
+            ->get()->num_rows();
+        return $result?true:false;
     }
 
     /** The End*/
