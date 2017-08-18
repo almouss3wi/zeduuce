@@ -366,6 +366,7 @@ function addFavorite(user){
     });
 }
 function removeFavorite(user){
+    $('#PUremoveFavouriteConfirm').modal('hide');
     $('#loader').show();
     $.ajax({
          type: "POST",
@@ -378,6 +379,10 @@ function removeFavorite(user){
              }
          }
     });
+}
+function removeFavoriteConfirm(userId){
+    $('#removeFavoriteBtn').attr('onclick', 'removeFavorite("'+userId+'")');
+    $('#PUremoveFavouriteConfirm').modal('show');
 }
 /**
  *

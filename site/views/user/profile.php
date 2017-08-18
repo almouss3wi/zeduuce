@@ -1,3 +1,9 @@
+<script type="text/javascript" src="<?php echo base_url();?>cometchat/cometchatjs.php" charset="utf-8"></script>
+<?php if(checkLogin() && !isGoldMember()){?>
+    <style>
+        #cometchat{display: none;}
+    </style>
+<?php }?>
 <script type="text/javascript">
     function checkstatus(data){
         console.log(data); // To see output using Firebug
@@ -150,7 +156,7 @@
                                 </li>
                                 <li>
                                     <div class="step">
-                                        <a href="javascript:void(0)" <?php if ($status->isFavorite) { ?> onclick="removeFavorite('<?php echo $item->id; ?>');" <?php } else { ?> onclick="addFavorite('<?php echo $item->id; ?>');"  <?php } ?>>
+                                        <a href="javascript:void(0)" <?php if ($status->isFavorite) { ?> onclick="removeFavoriteConfirm('<?php echo $item->id; ?>');" <?php } else { ?> onclick="addFavorite('<?php echo $item->id; ?>');"  <?php } ?>>
                                             <i class="<?php if ($status->isFavorite) {
                                                 echo 'i_step4 active';
                                             } else {

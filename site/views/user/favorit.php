@@ -19,8 +19,11 @@
                                         <?php }}else{?>
                                         <img src="<?php echo base_url();?>templates/img/no-avatar.jpg" alt="" class="img-responsive"/>
                                         <?php }*/?>
-                                        <span class="i_heart"></span>
+                                        <!--<span class="i_heart removeFavourite"></span>-->
                                     </a>
+                                    <button type="button" class="close" aria-label="Close" onclick="removeFavoriteConfirm(<?php echo $row['id'];?>)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-10">
