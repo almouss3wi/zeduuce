@@ -33,6 +33,7 @@
                                         <?php if($row['birthday']){$yearold = date('Y',time()) - explode('/',$row['birthday'])[2];}else{$yearold = "";}?>
                                         <p class="age">Age: <?php echo $yearold;?></p>
                                         <p class="postcode">Postnr. : <?php echo $row['code'];?></p>
+                                        <?php if($row['action']){?><p><a href="<?php echo site_url('user/positiv')?>">Positiv liste</a></p><?php }?>
                                     </div>
                                     <div class="col-xs-2">
                                         <p class="pull-right mt10"><span class="status-online"></span></p>

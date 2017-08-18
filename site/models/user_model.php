@@ -1088,5 +1088,15 @@ class User_model extends CI_Model{
         $this->db->update('user', $data);
     }
 
+    public function checkAction($userId, $friendId){
+        $result = $this->db->select('id')
+            ->from('user_activity')
+            ->where('user_from', $friendId)
+            ->where('user_to', $userId)
+            ->where('bl_active', 1)
+            ->get()->row();
+        return $result->id?true:false;
+    }
+
     /** The End*/
 }

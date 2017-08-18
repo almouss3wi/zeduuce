@@ -707,6 +707,8 @@ class User extends MX_Controller
         if ($listUsers) {
             $i = 0;
             foreach ($listUsers as $row) {
+                //Checking action to show below
+                $users[$i]['action'] = $this->user->checkAction($data['user']->id, $row->id);
                 $users[$i]['id'] = $row->id;
                 $users[$i]['name'] = $row->name;
                 $users[$i]['birthday'] = $row->birthday;
