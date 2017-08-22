@@ -71,6 +71,20 @@
                                                     <span class="btnPositive_content">Har sendt en besked <?php if($item->lastMessageTime){?><span class="timer"><?php echo date("d.m.Y", $item->lastMessageTime) ?> Kl.<?php echo date("H:i", $item->lastMessageTime) ?></span><?php }?></span>
                                                 </a>
                                         </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb15">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pl0">
+                                                <a href="http://localhost/zeduuce/dk/user/messages/127/tester2.html" class="btn btn-block">
+                                                    Bloker
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pr0">
+                                                <a href="javascript:void(0);" class="btn btn-block deleteUserFromPositiveListConfirm" value="<?php echo $item->id;?>">
+                                                    Slet
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -138,6 +152,34 @@
             </div>
             <div class="modal-body pt10">
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="PUdeleteFromPositiveConfirm" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb15">
+                    <div class="col-md-2 pad0 i_warning">
+                        <img src="<?php echo base_url();?>/templates/img/i_warning.png" alt="" class="img-responsive">
+                    </div>
+                    <div class="col-md-9 text-center pad0">
+                        <p class="f19">Er du sikker på, at du vil fjerne denne bruger?</p>
+                    </div>
+                </div>
+                <div class="row mb30">
+                    <div class="col-xs-6 text-center">
+                        <a href="" class="btn btnUpgrade" id="deleteUserFromPositiveList">JA</a>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                        <a href="javascript:void(0)" class="btn btnUpgrade" data-dismiss="modal">NEJ</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

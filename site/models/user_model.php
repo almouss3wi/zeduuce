@@ -1098,5 +1098,15 @@ class User_model extends CI_Model{
         return $result?true:false;
     }
 
+    public function removeUserFromPositveList($userId, $friendId){
+        $where = '(user_id = '.$userId.' AND invited_user_id = '.$friendId.') OR (invited_user_id = '.$userId.' AND user_id = '.$friendId.')';
+        $this->db->where($where);
+        if($this->db->delete('user_dated')){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /** The End*/
 }

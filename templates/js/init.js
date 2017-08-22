@@ -161,6 +161,14 @@ $(document).ready(function(){
             $(".navbar").removeClass("border_white");
         }
     });*/
+
+    //Positive list
+    $('.deleteUserFromPositiveListConfirm').click(function () {
+        var friendId = $(this).attr('value');
+        var href = base_url+'user/deleteUserFromPostiveList/'+friendId;
+        $('#deleteUserFromPositiveList').attr('href', href);
+        $('#PUdeleteFromPositiveConfirm').modal('show');
+    })
 });
 $(window).load(function(e){
     $('#loader').fadeOut();

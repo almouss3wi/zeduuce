@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
+        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
     }
 
     function index(){
@@ -820,6 +820,16 @@ class User extends MX_Controller
 
         $data['page'] = 'user/positiv';
         $this->load->view('templates', $data);
+    }
+
+    public function deleteUserFromPostiveList($friendId){
+        $user = $this->session->userdata('user');
+        $result = $this->user->removeUserFromPositveList($user->id, $friendId);
+        if($result){
+            redirect(site_url('/user/positiv'));
+        } else {
+            customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke slette denne bruger');
+        }
     }
 
     function browsing($page = 0, $invita = NULL)
