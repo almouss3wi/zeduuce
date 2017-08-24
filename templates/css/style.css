@@ -1219,6 +1219,9 @@ ul.list_info_profile li:nth-child(10) {
 ul.list_info_profile li:nth-child(11) {
     background: url('../img/i_view.png') no-repeat left center;
 }
+ul.list_info_profile li:nth-child(12) {
+    background: url('../img/i-blocked.png') no-repeat left center;
+}
 ul.list_info_editprofile {
     margin-top: 15px;
     padding: 20px;

@@ -458,21 +458,53 @@ class User_model extends CI_Model{
 
     /**
      * @param $userId
-     * @return user ids array
+     * @param int $blocked
+     * @return array
      */
-    public function getDatedUserIds($userId){
+    public function getDatedUserIds($userId, $blocked = 0){
         $userIdArr1 = $userIdArr2 = array();
 
-        $result1 = $this->db->distinct()->select("invited_user_id")->from("user_dated")->where("user_id", $userId)->get()->result();
+        $result1 = $this->db->distinct()->select("invited_user_id")->from("user_dated")->where("user_id", $userId)->where('blocked', $blocked)->get()->result();
         foreach($result1 as $item){
             $userIdArr1[] = $item->invited_user_id;
         }
 
-        $result2 = $this->db->distinct()->select("user_id")->from("user_dated")->where("invited_user_id", $userId)->get()->result();
+        $result2 = $this->db->distinct()->select("user_id")->from("user_dated")->where("invited_user_id", $userId)->where('blocked', $blocked)->get()->result();
         foreach($result2 as $item){
             $userIdArr2[] = $item->user_id;
         }
         return array_unique (array_merge ($userIdArr1, $userIdArr2));
+    }
+
+    /**
+     * @param null $num
+     * @param null $offset
+     * @param null $userId
+     * @return bool
+     */
+    public function getBlockedList($num = NULL, $offset = NULL, $userId = NULL){
+        $blockedUserIds = $this->getBlockedUserIds($userId);
+        if(empty($blockedUserIds)){
+            return false;
+        } else {
+            $this->db->select('u.*');
+            $this->db->from('user as u');
+            $this->db->where("u.bl_active",1);
+            $this->db->where_in("id", $blockedUserIds);
+            if($num || $offset){
+                $this->db->limit($num,$offset);
+            }
+            $query = $this->db->get()->result();
+            return $query;
+        }
+    }
+
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function getBlockedUserIds($userId){
+        return $this->getDatedUserIds($userId, 1);
     }
 
     /**
@@ -1073,6 +1105,9 @@ class User_model extends CI_Model{
         return $result;
     }
 
+    /**
+     * @param $userId
+     */
     public function downgradeUser($userId){
         $data = array(
             'type' => 1,
@@ -1088,6 +1123,11 @@ class User_model extends CI_Model{
         $this->db->update('user', $data);
     }
 
+    /**
+     * @param $userId
+     * @param $friendId
+     * @return bool
+     */
     public function checkAction($userId, $friendId){
         $result = $this->db->select('id')
             ->from('user_activity')
@@ -1098,7 +1138,12 @@ class User_model extends CI_Model{
         return $result?true:false;
     }
 
-    public function removeUserFromPositveList($userId, $friendId){
+    /**
+     * @param $userId
+     * @param $friendId
+     * @return bool
+     */
+    public function removeUser($userId, $friendId){
         $where = '(user_id = '.$userId.' AND invited_user_id = '.$friendId.') OR (invited_user_id = '.$userId.' AND user_id = '.$friendId.')';
         $this->db->where($where);
         if($this->db->delete('user_dated')){
@@ -1106,6 +1151,34 @@ class User_model extends CI_Model{
         }else{
             return false;
         }
+    }
+
+    /**
+     * @param $userId
+     * @param $friendId
+     * @param int $status
+     * @return bool
+     */
+    public function blockUser($userId, $friendId, $status = 1){
+        $where = '(user_id = '.$userId.' AND invited_user_id = '.$friendId.') OR (invited_user_id = '.$userId.' AND user_id = '.$friendId.')';
+        $this->db->set('blocked', $status);
+        $this->db->set('blocked_time', time());
+        $this->db->where($where);
+        $query = $this->db->update('user_dated');
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * @param $userId
+     * @param $friendId
+     * @return bool
+     */
+    public function unblockUser($userId, $friendId){
+        return $this->blockUser($userId, $friendId, 0);
     }
 
     /** The End*/

@@ -163,12 +163,18 @@ $(document).ready(function(){
     });*/
 
     //Positive list
-    $('.deleteUserFromPositiveListConfirm').click(function () {
+    $('.deleteUserConfirm').click(function () {
         var friendId = $(this).attr('value');
-        var href = base_url+'user/deleteUserFromPostiveList/'+friendId;
-        $('#deleteUserFromPositiveList').attr('href', href);
-        $('#PUdeleteFromPositiveConfirm').modal('show');
-    })
+        var href = base_url+'user/deleteUser/'+friendId;
+        $('#deleteUserBtn').attr('href', href);
+        $('#PUdeleteUserConfirm').modal('show');
+    });
+    $('.blockUserConfirm').click(function () {
+        var friendId = $(this).attr('value');
+        var href = base_url+'user/blockUser/'+friendId;
+        $('#blockUserBtn').attr('href', href);
+        $('#PUblockUserConfirm').modal('show');
+    });
 });
 $(window).load(function(e){
     $('#loader').fadeOut();

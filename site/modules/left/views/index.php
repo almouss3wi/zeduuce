@@ -65,5 +65,6 @@ if(isGoldMember()){
         <li><a href="<?php echo site_url('user/sentkisses')?>">Sendt kys</a></li>
         <li><a href="<?php echo site_url('user/receivedkisses')?>">Modtaget kys</a></li>
         <li><a <?php echo $shoutoutLink;?>>Se shoutouts</a></li>
+        <li><a href="<?php echo site_url('user/blocked')?>">Blokeret liste</a></li>
     </ul>
 </div>

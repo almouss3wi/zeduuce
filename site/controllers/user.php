@@ -19,7 +19,7 @@ class User extends MX_Controller
     }
 
     protected function middleware(){
-        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
+        return array('Checklogin|only:profile,b2b,myphoto,uploadPhoto,mydeal,mymessages,messages,deleteMessage,myinvitationer,deleteinvitationer,myinvitationerjoin,myinvitationerapproved,favorit,positiv,update,addFavorite,removeFavorite,sendKiss,removeKiss,getUserJoin,mycontactperson,sentkisses,receivedkisses,shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,upgrade,sentInvitation,approvedInvitation,deleteUserFromPostiveList,blocked', 'Checkgold|only:shoutouts,deleteShoutout,createShoutout,shoutoutSuccess,shoutoutCancel,saveShoutout,myinvitationerapproved,myinvitationerjoin');
     }
 
     function index(){
@@ -822,14 +822,57 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    public function deleteUserFromPostiveList($friendId){
+    public function deleteUser($friendId){
         $user = $this->session->userdata('user');
-        $result = $this->user->removeUserFromPositveList($user->id, $friendId);
+        $result = $this->user->removeUser($user->id, $friendId);
         if($result){
             redirect(site_url('/user/positiv'));
         } else {
             customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke slette denne bruger');
         }
+    }
+
+    public function blockUser($friendId){
+        $user = $this->session->userdata('user');
+        $result = $this->user->blockUser($user->id, $friendId);
+        if($result){
+            redirect(site_url('/user/positiv'));
+        } else {
+            customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke blokere denne bruger');
+        }
+    }
+
+    public function unblockUser($friendId){
+        $user = $this->session->userdata('user');
+        $result = $this->user->unblockUser($user->id, $friendId);
+        if($result){
+            redirect(site_url('/user/blocked'));
+        } else {
+            customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke fjerne blokeringen denne bruger');
+        }
+    }
+
+    function blocked($page = 0)
+    {
+        $data = array();
+        $this->user->addMeta($this->_meta, $data);
+
+        $data['user'] = $this->session->userdata('user');
+
+        $config['base_url'] = base_url() . $this->language . '/user/blocked/';
+        $config['total_rows'] = count($this->user->getBlockedUserIds($data['user']->id));
+        //$config['per_page'] = $this->config->item('numberpage');
+        $config['per_page'] = 5;
+        $config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $userList = $this->user->getBlockedList($config['per_page'], (int)$page, $data['user']->id);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $data['userList'] = $userList;
+
+        $data['page'] = 'user/blocked';
+        $this->load->view('templates', $data);
     }
 
     function browsing($page = 0, $invita = NULL)
