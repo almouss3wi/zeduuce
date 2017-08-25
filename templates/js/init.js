@@ -171,7 +171,8 @@ $(document).ready(function(){
     });
     $('.blockUserConfirm').click(function () {
         var friendId = $(this).attr('value');
-        var href = base_url+'user/blockUser/'+friendId;
+        var from = $(this).attr('from');
+        var href = base_url+'user/blockUser/'+friendId+'/'+from;
         $('#blockUserBtn').attr('href', href);
         $('#PUblockUserConfirm').modal('show');
     });

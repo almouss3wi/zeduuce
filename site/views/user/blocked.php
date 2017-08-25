@@ -15,7 +15,7 @@
                                     </a>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-12">
                                         <p class="name">
                                             <a href="<?php echo site_url('user/profile/'.$row->id.'/'.seoUrl($row->name))?>">
                                                 <?php echo $row->name;?>
@@ -25,7 +25,7 @@
                                         <p class="age">Age: <?php echo $yearold;?></p>
                                         <p class="postcode">Postnr. : <?php echo $row->code;?></p>
                                         <a href="<?php echo site_url('user/unblockUser/'.$row->id)?>" class="btn btn-block" value="<?php echo $row->id;?>">
-                                            Bloker
+                                            Fjerne blokeringen
                                         </a>
                                     </div>
                                 </div>

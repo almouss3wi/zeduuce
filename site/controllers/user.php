@@ -832,10 +832,21 @@ class User extends MX_Controller
         }
     }
 
-    public function blockUser($friendId){
+    /**
+     * @param $friendId
+     * @param $from 1: positive list, 2: profile
+     */
+    public function blockUser($friendId, $from){
         $user = $this->session->userdata('user');
-        $result = $this->user->blockUser($user->id, $friendId);
-        if($result){
+        $result1 = $this->user->addUserToBlockedList($user->id, $friendId);
+        //disable user in positive list
+        if($from == 1){
+            $result2 = $this->user->blockUser($user->id, $friendId);
+        } else {
+            $result2 = true;
+        }
+
+        if($result1 && $result2){
             redirect(site_url('/user/positiv'));
         } else {
             customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke blokere denne bruger');
@@ -844,8 +855,10 @@ class User extends MX_Controller
 
     public function unblockUser($friendId){
         $user = $this->session->userdata('user');
-        $result = $this->user->unblockUser($user->id, $friendId);
-        if($result){
+        $result1 = $this->user->removeUserToBlockedList($user->id, $friendId);
+        //enable the user in positive list
+        $result2 = $this->user->unblockUser($user->id, $friendId);
+        if($result1 && $result2){
             redirect(site_url('/user/blocked'));
         } else {
             customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke fjerne blokeringen denne bruger');

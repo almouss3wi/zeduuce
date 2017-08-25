@@ -74,8 +74,8 @@
                                 <h3 class="text-uppercase"><?php echo $item->name; ?></h3>
                             </div>
                             <div class="col-xs-6">
-                                <a class="pull-right" href="<?php echo site_url('user/browsing') ?>">Tilbage til
-                                    søgeresultatet</a>
+                                <!--<a class="pull-right" href="<?php /*echo site_url('user/browsing') */?>">Tilbage til søgeresultatet</a>-->
+                                <a class="btn btn-block pull-right blockUserConfirm" href="javascript:void(0);" value="<?php echo $item->id;?>" from="2">Bloker</a>
                             </div>
                         </div>
                         <div class="row">

@@ -320,6 +320,34 @@
     </div>
 </div>
 
+<div id="PUblockUserConfirm" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb15">
+                    <div class="col-md-2 pad0 i_warning">
+                        <img src="<?php echo base_url();?>/templates/img/i_warning.png" alt="" class="img-responsive">
+                    </div>
+                    <div class="col-md-9 text-center pad0">
+                        <p class="f19">Er du sikker på, at du vil blokere denne bruger?</p>
+                    </div>
+                </div>
+                <div class="row mb30">
+                    <div class="col-xs-6 text-center">
+                        <a href="" class="btn btnUpgrade" id="blockUserBtn">JA</a>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                        <a href="javascript:void(0)" class="btn btnUpgrade" data-dismiss="modal">NEJ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="PUerror" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
