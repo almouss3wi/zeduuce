@@ -241,8 +241,10 @@ class User extends MX_Controller
         $user = $this->session->userdata('user');
         if ($user) {
             //Adding positive notification
-            if($this->user->checkSentMessage($this->input->post('user_to'), $user->id) === false){
-                $this->user->addNotification($this->input->post('user_to'));
+            if($this->user->checkSentMessage($user->id, $this->input->post('user_to')) === false){
+                //if($this->user->isBlocked($user->id, $this->input->post('user_to')) == false){
+                    $this->user->addNotification($this->input->post('user_to'));
+                //}
             }
 
             $DB['user_from'] = $user->id;
@@ -847,7 +849,7 @@ class User extends MX_Controller
         }
 
         if($result1 && $result2){
-            redirect(site_url('/user/positiv'));
+            redirect($_SERVER['HTTP_REFERER']);
         } else {
             customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke blokere denne bruger');
         }
@@ -859,7 +861,7 @@ class User extends MX_Controller
         //enable the user in positive list
         $result2 = $this->user->unblockUser($user->id, $friendId);
         if($result1 && $result2){
-            redirect(site_url('/user/blocked'));
+            redirect($_SERVER['HTTP_REFERER']);
         } else {
             customRedirectWithMessage(site_url('user/positiv'), 'Kan ikke fjerne blokeringen denne bruger');
         }

@@ -299,6 +299,16 @@ class User_model extends CI_Model{
         $this->db->where('user_to', $user)->where('user_from', $userID)->delete('user_messages');
         return true;
     }
+
+    public function checkSentMessage($userId, $friendId){
+        $this->db->select('id');
+        $this->db->from('user_messages');
+        $this->db->where('user_from', $userId);
+        $this->db->where('user_to', $friendId);
+        $this->db->where('seen', 1);
+        $query = $this->db->get()->num_rows();
+        return $query?true:false;
+    }
     /** FAVORITE*/
     /**
      * @param null $num
@@ -378,6 +388,9 @@ class User_model extends CI_Model{
 
         $query = $this->db->where('from_user_id', $user_id_1)->where('to_user_id', $user_id_2)->get('user_kisses')->num_rows();
         $status->isKissed = $query?true:false;
+
+        $query = $this->db->where('user_from', $user_id_1)->where('user_to', $user_id_2)->get('user_blocked')->num_rows();
+        $status->isBlocked = $query?true:false;
 
         return $status;
     }
@@ -947,6 +960,10 @@ class User_model extends CI_Model{
         return $result;
     }
 
+    public function isBlocked($userId, $friendId){
+        $query = $this->db->where('user_from', $friendId)->where('user_to', $userId)->get('user_blocked')->num_rows();
+        return $query?true:false;
+    }
     public function addNotification($userId){
         $this->db->set('number_of_notification', '`number_of_notification`+1', FALSE);
         $this->db->where('id', $userId);

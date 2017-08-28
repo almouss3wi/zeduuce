@@ -75,7 +75,11 @@
                             </div>
                             <div class="col-xs-6">
                                 <!--<a class="pull-right" href="<?php /*echo site_url('user/browsing') */?>">Tilbage til søgeresultatet</a>-->
-                                <a class="btn btn-block pull-right blockUserConfirm" href="javascript:void(0);" value="<?php echo $item->id;?>" from="2">Bloker</a>
+                                <?php if($status->isBlocked){?>
+                                    <a class="btn btn-block pull-right" href="<?php echo site_url('user/unblockUser/'.$item->id)?>">Fjerne blokeringen</a>
+                                <?php } else {?>
+                                    <a class="btn btn-block pull-right blockUserConfirm" href="javascript:void(0);" value="<?php echo $item->id;?>" from="2">Bloker</a>
+                                <?php }?>
                             </div>
                         </div>
                         <div class="row">
