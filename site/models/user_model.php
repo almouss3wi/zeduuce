@@ -816,9 +816,19 @@ class User_model extends CI_Model{
         //check 2 person is dated
         $isDated = isDated($user_id, $invited_user_id);
         if($isDated === false){
-            $data = array('user_id'=>$user_id, 'invited_user_id'=>$invited_user_id, 'accepted_time'=>time());
-            $isDated = $this->db->insert('user_dated', $data);
+            $isDated = $this->createDatedUser($user_id, $invited_user_id);
         }
+        return $isDated;
+    }
+
+    /**
+     * @param $user_id
+     * @param $invited_user_id
+     * @return mixed
+     */
+    public function createDatedUser($user_id, $invited_user_id){
+        $data = array('user_id'=>$user_id, 'invited_user_id'=>$invited_user_id, 'accepted_time'=>time());
+        $isDated = $this->db->insert('user_dated', $data);
         return $isDated;
     }
 

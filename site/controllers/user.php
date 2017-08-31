@@ -62,6 +62,8 @@ class User extends MX_Controller
         if($this->user->countSeeTimes($id, $data['user']->id) == 3){
             $this->user->addNotification($id);
             $this->user->addStatus($data['user']->id, $id, 'SeeMore3Times');
+            //Check to add to dated
+            $this->checkToAddDated($data['user']->id, $id);
         }
         //Add action to log
         actionUser($data['user']->id, $id, 'View', 1);
@@ -1672,12 +1674,15 @@ class User extends MX_Controller
             $DB['dt_create'] = date('Y-m-d H:i:s');
             $DB['bl_active'] = 1;
             $id = $this->user->addFavorite($DB);
+
             if ($id) {
                 actionUser($user->id, $userID, 'Favorite', 2);
                 $data['status'] = true;
             } else {
                 $data['status'] = false;
             }
+            //Check to add to dated
+            $this->checkToAddDated($user->id, $userID);
         } else {
             $data['status'] = false;
         }
@@ -1730,6 +1735,8 @@ class User extends MX_Controller
             } else {
                 $data['status'] = false;
             }
+            //Check to add to dated
+            $this->checkToAddDated($user->id, $userID);
         } else {
             $data['status'] = false;
         }
@@ -2050,6 +2057,17 @@ class User extends MX_Controller
 
             $this->session->set_flashdata('message', 'Din shoutout er sendt til os, vi vil kontrollere og godkende det ASAP');
             redirect(site_url('user/shoutouts'));
+        }
+    }
+
+    public function checkToAddDated($userId, $friendId){
+        $kissTime       = $this->user->checkIsSentKiss($friendId, $userId);
+        $added          = $this->user->checkAddedToFavorite($friendId, $userId);
+        //$invitedTime    = $this->user->checkSentInvitation($friendId, $userId);
+        $seen           = $this->user->checkSeeMore3Times($friendId, $userId);
+        //var_dump($kissTime);echo '-';var_dump($added);echo '-';var_dump($seen);exit();
+        if($kissTime != false && $added != false /*&& $invitedTime != false*/ && $seen != false){
+            $this->user->createDatedUser($friendId, $userId);
         }
     }
 
