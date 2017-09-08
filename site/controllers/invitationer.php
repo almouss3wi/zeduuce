@@ -41,13 +41,21 @@ class Invitationer extends MX_Controller {
         $this->user->addMeta($this->_meta, $data);
 
         $data['user'] = $this->session->userdata['user'];
-        $this->form_validation->set_rules('userID[]','Opret en VIP invitation op til 5 personer','trim|required');
+        //$this->form_validation->set_rules('userID[]','Opret en VIP invitation op til 5 personer','trim|required');
         $this->form_validation->set_rules('order_item','Vælg venligst en værdibevis','trim|required');
 		if($this->form_validation->run()== FALSE){
 			$data['message'] = validation_errors();
 		}else{
             if($this->input->post()){
-                $userID = $this->input->post('userID');
+                $userID1 = $this->input->post('userID');
+                $userID2 = $this->session->userdata('listUser');
+                if(empty($userID1)){
+                    $userID1 = array();
+                }
+                if(empty($userID2)){
+                    $userID2 = array();
+                }
+                $userID = array_unique (array_merge ($userID1, $userID2));
                 $DB['times'] = $this->input->post('time');
                 $DB['userID'] = $data['user']->id;
                 $DB['name'] = 'VIP INVITATION';
@@ -90,6 +98,12 @@ class Invitationer extends MX_Controller {
         }
         
         $data['orderitem'] = $this->invita->getOrderItem($data['user']->id);
+        $list = $this->session->userdata('listUser');
+        if($list){
+            $data['numUser'] = count($list);
+        }else{
+            $data['numUser'] = "";
+        }
 		$data['page'] = 'invitationer/invitervip';
 		$this->load->view('templates', $data);
     }
@@ -601,6 +615,14 @@ class Invitationer extends MX_Controller {
         }
         $data['list'] = $this->user->getList(NULL,NULL,NULL,NULL,$inUser);
         $this->load->view('ajax/userchoose', $data);
+    }
+
+    function isBetween($from, $till, $input) {
+        $f = DateTime::createFromFormat('!H:i', $from);
+        $t = DateTime::createFromFormat('!H:i', $till);
+        $i = DateTime::createFromFormat('!H:i', $input);
+        if ($f > $t) $t->modify('+1 day');
+        return ($f <= $i && $i <= $t) || ($f <= $i->modify('+1 day') && $i <= $t);
     }
     
 }

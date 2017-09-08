@@ -22,13 +22,15 @@
                                     </a>
                                 </div>
                                 <div class="col-xs-5 col-sm-7 pad0">
-                                    <a href="javascript:void(0)" onclick="listUser(0)">
+                                    <!--<a href="javascript:void(0)" onclick="listUser(0)">-->
+                                    <a href="<?php echo site_url('user/browsing/0/3');?>">
                                         <img src="<?php echo base_url();?>templates/img/btn_find_invite.png" alt="" class="img-responsive"/>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
+                            <?php if($numUser){echo $numUser." personer";}?>
                             <div class="row" id="list-user-choose">
                                 &nbsp;
                             </div>

@@ -591,6 +591,8 @@ function sendUserSearch(invita){
                 location.href = base_url_lang+'invitationer/offentliginvitation';
             }else if(invita == '2'){
                 location.href = base_url_lang+'invitationer/offentligevent';
+            }else if(invita == '3'){
+                location.href = base_url_lang+'invitationer/invitervip';
             }else{
                 location.reload();
             }
