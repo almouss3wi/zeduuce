@@ -54,6 +54,11 @@ class Invita_model extends CI_Model{
         $this->db->where('id', $id)->delete('product_order_item');
     }
     /** INVITATION*/
+    /**
+     * @param null $data
+     * @param null $id
+     * @return bool|null
+     */
     function saveDating($data=NULL,$id=NULL){
         if($id){
             $this->db->where('id',$id);

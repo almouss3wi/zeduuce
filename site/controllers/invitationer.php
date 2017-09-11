@@ -79,6 +79,14 @@ class Invitationer extends MX_Controller {
                         for($i=0;$i<count($userID);$i++){
                             $DBu['time_start'] = $timeStart;
                             $DBu['time_end'] = $DBu['time_start']+$timeNext;
+                            if($DBu['time_start'] < strtotime('7am')){
+                                $DBu['time_start'] = strtotime('7am');
+                                $DBu['time_end'] = $DBu['time_start']+$timeNext;
+                            }
+                            if($DBu['time_end'] > strtotime('11pm')){
+                                $DBu['time_start'] = strtotime('tomorrow 7am');
+                                $DBu['time_end'] = $DBu['time_start']+$timeNext;
+                            }
                             $DBu['datingID'] = $id;
                             $DBu['user'] = $userID[$i];
                             $DBu['dt_create'] = date('Y-m-d H:i:s');
@@ -91,6 +99,10 @@ class Invitationer extends MX_Controller {
                     //Update order item
                     $DBo['used'] = 1;
                     $this->invita->saveOrderItem($DBo,$DB['order_item']);
+
+                    //Update end time of dating
+                    $updateDB['times_end'] = $timeStart;
+                    $this->invita->saveDating($updateDB, $id);
                 }
                 //Go to Mine invitationer
                 redirect(site_url('user/myinvitationer'));
@@ -616,15 +628,6 @@ class Invitationer extends MX_Controller {
         $data['list'] = $this->user->getList(NULL,NULL,NULL,NULL,$inUser);
         $this->load->view('ajax/userchoose', $data);
     }
-
-    function isBetween($from, $till, $input) {
-        $f = DateTime::createFromFormat('!H:i', $from);
-        $t = DateTime::createFromFormat('!H:i', $till);
-        $i = DateTime::createFromFormat('!H:i', $input);
-        if ($f > $t) $t->modify('+1 day');
-        return ($f <= $i && $i <= $t) || ($f <= $i->modify('+1 day') && $i <= $t);
-    }
-    
 }
 
 /* End of file welcome.php */
