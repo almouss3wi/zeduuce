@@ -601,6 +601,8 @@
                                                     profiler
                                                 </option>
                                             <?php } ?>
+                                            <option value="50" <?php if (50 == $perPage) echo 'selected'; ?>>50 profiler</option>
+                                            <option value="100" <?php if (100 == $perPage) echo 'selected'; ?>>100 profiler</option>
                                         </select>
                                     </div>
                                 </div>

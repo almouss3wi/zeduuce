@@ -236,7 +236,6 @@ class Invitationer extends MX_Controller {
     function offentliginvitation(){
         $data = array();
         $this->user->addMeta($this->_meta, $data);
-
         $data['user'] = $this->session->userdata['user'];
         $this->form_validation->set_rules('order_item','Vælg venligst en værdibevis','trim|required');
 		if($this->form_validation->run()== FALSE){
