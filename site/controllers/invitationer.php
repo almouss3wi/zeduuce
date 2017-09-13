@@ -243,6 +243,7 @@ class Invitationer extends MX_Controller {
 		}else{
             if($this->input->post()){
                 $userID = $this->session->userdata('listUser');
+                $userID = json_decode($userID);
                 $DB['times'] = $this->input->post('time');
                 $DB['times_end'] = time() + ($DB['times']*60*60);
                 $DB['userID'] = $data['user']->id;
@@ -286,6 +287,7 @@ class Invitationer extends MX_Controller {
         }
         $data['orderitem'] = $this->invita->getOrderItem($data['user']->id);
         $list = $this->session->userdata('listUser');
+        $list = json_decode($list);
         if($list){
             $data['numUser'] = count($list);
         }else{
@@ -349,6 +351,7 @@ class Invitationer extends MX_Controller {
 		}else{
             if($this->input->post()){
                 $userID = $this->session->userdata('listUser');
+                $userID = json_decode($userID);
                 $images = $this->input->post('data_img');
                 $DB['times'] = $this->input->post('time');
                 $DB['times_end'] = time() + ($DB['times']*60*60);
@@ -405,6 +408,7 @@ class Invitationer extends MX_Controller {
             }
         }
         $list = $this->session->userdata('listUser');
+		$list = json_decode($list);
         if($list){
             $data['numUser'] = count($list);
         }else{
@@ -415,6 +419,7 @@ class Invitationer extends MX_Controller {
     }
     function chooseUserSearch(){
         $listUser = $this->input->post('listUser');
+        $listUser = json_encode($listUser);
         $this->session->set_userdata('listUser',$listUser);
         return true;
     }
@@ -626,6 +631,10 @@ class Invitationer extends MX_Controller {
         }
         $data['list'] = $this->user->getList(NULL,NULL,NULL,NULL,$inUser);
         $this->load->view('ajax/userchoose', $data);
+    }
+
+    function session_destroy(){
+        var_dump($this->session->sess_destroy());exit();
     }
 }
 
