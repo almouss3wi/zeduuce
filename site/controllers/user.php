@@ -1500,8 +1500,7 @@ class User extends MX_Controller
         return $passwords; // return the generated password
     }
 
-    function login()
-    {
+    function login(){
         $email = $this->input->post('email', true);
         $password = md5($this->input->post('password', true));
         //Login b2b
