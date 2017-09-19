@@ -170,6 +170,13 @@ class User_model extends CI_Model{
         $query = $this->db->get()->row();
 	    return $query;
     }
+
+    /**
+     * @param null $id
+     * @param null $email
+     * @param null $password
+     * @return mixed
+     */
     function getB2b($id=NULL,$email=NULL,$password=NULL){
         $this->db->select('*')->from('user_b2b');
         if($id){
@@ -184,6 +191,13 @@ class User_model extends CI_Model{
         $query = $this->db->get()->row();
         return $query;
 	}
+
+    function updateB2B($DB=NULL,$id=NULL){
+        if($id){
+            $this->db->where('id',$id);
+            return $this->db->update('user_b2b',$DB);
+        }
+    }
 
     function getQuantityB2BDeals($company_id){
         $query = $this->db->select('po.*')

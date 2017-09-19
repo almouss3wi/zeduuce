@@ -61,6 +61,6 @@
 </section>
 <script>
 $(document).ready(function(){
-    $('#menu_minprofil').addClass('active');
+    $('#menu_sold').addClass('active');
 });
 </script>

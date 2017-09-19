@@ -64,16 +64,17 @@ if(!empty($user)){
           <div class="container">
             <ul class="nav navbar-nav">
                 <?php if($user && $user->b2b){?>
-                <li id="menu_minprofil"><a href="<?php echo site_url('user/b2b');?>">Min profil</a></li>
+                    <li id="menu_sold"><a href="<?php echo site_url('b2b/sold');?>">Solgt</a></li>
+                    <li id="menu_minprofil"><a href="<?php echo site_url('b2b/profile');?>">Min profil</a></li>
                 <?php }else{?>
-                <li id="menu_minprofil"><a <?php if($user){?> href="<?php echo site_url('user/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Min profil <?php if(!empty($user)){ echo $unreadMessageNotificationHTML;}?></a></li>
+                    <li id="menu_minprofil"><a <?php if($user){?> href="<?php echo site_url('user/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Min profil <?php if(!empty($user)){ echo $unreadMessageNotificationHTML;}?></a></li>
+                    <li id="menu_favorit"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/favorit');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Favorit liste</a></li>
+                    <li id="menu_browsing"><a href="<?php echo site_url('user/browsing');?>">Browsing</a></li>
+                    <li id="menu_positiv"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/positiv');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Positiv liste <?php if(!empty($user)){echo $numPositiveNotificationHTML;}?></a></li>
+                    <li id="menu_invitationer"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('invitationer/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Invitationer</a></li>
+                    <li id="menu_tilbud"><a href="<?php echo site_url('tilbud/index');?>">Tilbud</a></li>
+                    <li id="menu_kontakt"><a href="<?php echo site_url('kontakt');?>">Kontakt</a></li>
                 <?php }?>
-                <li id="menu_favorit"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/favorit');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Favorit liste</a></li>
-                <li id="menu_browsing"><a href="<?php echo site_url('user/browsing');?>">Browsing</a></li>
-                <li id="menu_positiv"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('user/positiv');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Positiv liste <?php if(!empty($user)){echo $numPositiveNotificationHTML;}?></a></li>
-                <li id="menu_invitationer"><a <?php if($user && !$user->b2b){?> href="<?php echo site_url('invitationer/index');?>" <?php }else{?> href="#Flogin" data-toggle="modal" <?php }?>>Invitationer</a></li>
-                <li id="menu_tilbud"><a href="<?php echo site_url('tilbud/index');?>">Tilbud</a></li>
-                <li id="menu_kontakt"><a href="<?php echo site_url('kontakt');?>">Kontakt</a></li>
             </ul>
           </div>
         </div>

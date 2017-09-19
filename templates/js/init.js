@@ -192,6 +192,25 @@ $(document).ready(function(){
             }
         });
     })
+
+    // Checking validation of b2b form
+    $("#b2bUpdateForm").validate({
+        rules: {
+            name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            repassword: {
+                equalTo: "#password"
+            },
+            company: {
+                required: true
+            }
+        }
+    });
 });
 $(window).load(function(e){
     $('#loader').fadeOut();
@@ -239,7 +258,7 @@ function login(){
                      $('#loader').fadeOut();
                      if(data.status ==true){
                         if(data.b2b ==true){
-                            location.href = base_url_lang+'user/b2b';
+                            location.href = base_url_lang+'b2b/sold';
                         }else{
                             $('#Flogin').modal('hide');
                             location.reload();
@@ -691,6 +710,10 @@ function deleteShoutout(id){
     } else {
         return false;
     }
+}
+
+function updateB2B(){
+    $('#b2bUpdateForm').submit();
 }
 
 //THE END-----------------------------------------------------------------------------

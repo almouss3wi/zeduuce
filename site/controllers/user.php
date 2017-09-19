@@ -1327,7 +1327,7 @@ class User extends MX_Controller
             $DB['description']      = $this->input->post('description');
             if ($this->input->post('password') && $this->input->post('repassword')) {
                 if ($this->input->post('password') != $this->input->post('repassword')) {
-                    $this->session->set_flashdata('message', "Password incorrect");
+                    $this->session->set_flashdata('message', "Genadgangskode er forkert");
                     redirect(site_url('user/update'));
                 } else {
                     $DB['password'] = md5($this->input->post('password'));

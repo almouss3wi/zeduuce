@@ -56,6 +56,9 @@ $route['payment/(:any)']                 = "payment/$1";
 $route['^dk/ajax/(:any)']                = "ajax/$1";
 $route['ajax/(:any)']                    = "ajax/$1";
 
+$route['^dk/b2b/(:any)']                = "b2b/$1";
+$route['b2b/(:any)']                    = "b2b/$1";
+
 /** API*/
 $route['^dk/api/(:any)']                 = "api/$1";
 $route['api/(:any)']                     = "api/$1";
