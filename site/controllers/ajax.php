@@ -66,5 +66,17 @@ class Ajax extends CI_Controller{
             die('1');
         }
     }
+
+    function setUsedDeal(){
+        $id = $this->input->post('id');
+        $result = $this->db->set('used', 1)
+            ->where("id", $id)
+            ->update("product_order_item");
+        if($result == false){
+            die('0');
+        } else {
+            die('1');
+        }
+    }
 }
 ?>

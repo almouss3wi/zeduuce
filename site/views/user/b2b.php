@@ -1,6 +1,6 @@
 <section class="min-profile">
     <div class="container">
-        <div class="row">
+        <!--<div class="row">
             <div class="col-sm-12">
                 <form action="" method="POST" class="form-inline" role="form">
                     <div class="form-group">
@@ -9,7 +9,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div>-->
         <div class="row">
             <div class="col-sm-12">
                 <div class="b2b_box clearfix">
@@ -28,127 +28,31 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($deals as $deal){?>
                                 <tr>
                                     <td>
-                                        <p>06-04-2013<br>
-                                        til: 23-02-2016</p>
+                                        <p><?php echo $deal->orderId;?></p>
                                     </td>
-                                    <td>14-08-2015</td>
-                                    <td>Produktets navn</td>
-                                    <td>1</td>
-                                    <td>Café & kaffe</td>
-                                    <td>1,-</td>
-                                    <td>SG-7029-1949</td>
+                                    <td><?php echo date('d/m/Y', strtotime($deal->dt_create));?></td>
+                                    <td><?php echo $deal->product_name;?></td>
+                                    <td><?php echo $deal->quantity;?></td>
+                                    <td><?php echo $deal->categoryName;?></td>
+                                    <td><?php echo number_format($deal->price, 0)?></td>
+                                    <td><?php echo $deal->codes;?></td>
                                     <td><div class="checkbox">
                                         <label>
-                                            <input type="checkbox" value="" checked>
+                                            <input class="setUsed" type="checkbox" value="<?php echo $deal->id;?>" <?php if($deal->used == 1) echo 'checked disabled';?> id="deal<?php echo $deal->id;?>">
                                         </label>
                                     </div></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <p>06-04-2013<br>
-                                        til: 23-02-2016</p>
-                                    </td>
-                                    <td>14-08-2015</td>
-                                    <td>Produktets navn</td>
-                                    <td>1</td>
-                                    <td>Café & kaffe</td>
-                                    <td>1,-</td>
-                                    <td>SG-7029-1949</td>
-                                    <td><div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="" checked>
-                                        </label>
-                                    </div></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>06-04-2013<br>
-                                        til: 23-02-2016</p>
-                                    </td>
-                                    <td>14-08-2015</td>
-                                    <td>Produktets navn</td>
-                                    <td>1</td>
-                                    <td>Café & kaffe</td>
-                                    <td>1,-</td>
-                                    <td>SG-7029-1949</td>
-                                    <td><div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="" checked>
-                                        </label>
-                                    </div></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>06-04-2013<br>
-                                        til: 23-02-2016</p>
-                                    </td>
-                                    <td>14-08-2015</td>
-                                    <td>Produktets navn</td>
-                                    <td>1</td>
-                                    <td>Café & kaffe</td>
-                                    <td>1,-</td>
-                                    <td>SG-7029-1949</td>
-                                    <td><div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="" checked>
-                                        </label>
-                                    </div></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>06-04-2013<br>
-                                        til: 23-02-2016</p>
-                                    </td>
-                                    <td>14-08-2015</td>
-                                    <td>Produktets navn</td>
-                                    <td>1</td>
-                                    <td>Café & kaffe</td>
-                                    <td>1,-</td>
-                                    <td>SG-7029-1949</td>
-                                    <td><div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                        </label>
-                                    </div></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>06-04-2013<br>
-                                        til: 23-02-2016</p>
-                                    </td>
-                                    <td>14-08-2015</td>
-                                    <td>Produktets navn</td>
-                                    <td>1</td>
-                                    <td>Café & kaffe</td>
-                                    <td>1,-</td>
-                                    <td>SG-7029-1949</td>
-                                    <td><div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                        </label>
-                                    </div></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>06-04-2013<br>
-                                        til: 23-02-2016</p>
-                                    </td>
-                                    <td>14-08-2015</td>
-                                    <td>Produktets navn</td>
-                                    <td>1</td>
-                                    <td>Café & kaffe</td>
-                                    <td>1,-</td>
-                                    <td>SG-7029-1949</td>
-                                    <td><div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="" checked>
-                                        </label>
-                                    </div></td>
-                                </tr>
+                                <?php }?>
                             </tbody>
                         </table>
+                        <div class="col-md-12">
+                            <ul class="pagination pagination-sm pull-right">
+                                <?php echo $pagination; ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

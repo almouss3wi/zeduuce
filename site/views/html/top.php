@@ -1,10 +1,15 @@
 <?php $user = $this->session->userdata('user');
 if(!empty($user)){
-    $this->load->model('user_model', 'user');
-    $numUnreadMessage = $this->user->getNumUnreadMessage($user->id);
-    $unreadMessageNotificationHTML = !empty($numUnreadMessage) ? '<i class="notify">' . $numUnreadMessage . '</i>' : '';
-    $numPositiveNotification = $this->user->getNumOfNotification($user->id);
-    $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';
+    if($user->b2b != 1){
+        $this->load->model('user_model', 'user');
+        $numUnreadMessage = $this->user->getNumUnreadMessage($user->id);
+        $unreadMessageNotificationHTML = !empty($numUnreadMessage) ? '<i class="notify">' . $numUnreadMessage . '</i>' : '';
+        $numPositiveNotification = $this->user->getNumOfNotification($user->id);
+        $numPositiveNotificationHTML = !empty($numPositiveNotification) ? '<i class="notify">' . $numPositiveNotification . '</i>' : '';
+    } else {
+        $unreadMessageNotificationHTML = '';
+        $numPositiveNotificationHTML = '';
+    }
 }
 ?>
 <?php if(!$user && $page == 'home/index'){?>

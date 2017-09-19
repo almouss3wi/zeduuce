@@ -176,6 +176,22 @@ $(document).ready(function(){
         $('#blockUserBtn').attr('href', href);
         $('#PUblockUserConfirm').modal('show');
     });
+
+    //Set used deal in B2B
+    $('.setUsed').click(function () {
+        var id = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: base_url+"ajax/setUsedDeal",
+            data: {'id':id,'csrf_site_name':token_value},
+            dataType: 'json',
+            success: function(data){
+                if(parseInt(data)==1){
+                    $('#deal'+id).attr("disabled", true);
+                }
+            }
+        });
+    })
 });
 $(window).load(function(e){
     $('#loader').fadeOut();

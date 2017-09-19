@@ -21,6 +21,13 @@ class User_model extends CI_Model{
     }
 
     /** USER*/
+    /**
+     * @param null $num
+     * @param null $offset
+     * @param null $search
+     * @param null $ignore
+     * @return mixed
+     */
     function getBrowsing($num=NULL,$offset=NULL,$search=NULL,$ignore=NULL){
         $this->db->select('u.*');
         $this->db->from('user as u');
@@ -177,6 +184,35 @@ class User_model extends CI_Model{
         $query = $this->db->get()->row();
         return $query;
 	}
+
+    function getQuantityB2BDeals($company_id){
+        $query = $this->db->select('po.*')
+            ->from('product_order_item as po')
+            ->join('product_product as pp', 'pp.id = po.product_id', 'left')
+            ->join('user_b2b as b2b', 'b2b.id = pp.company_id', 'left')
+            ->join('product_order as p', 'p.id = po.order_id', 'left')
+            ->where("b2b.id",$company_id)
+            ->where("p.bl_active",1)
+            ->order_by('po.dt_create','DESC')
+            ->get()->num_rows();
+        return $query;
+    }
+
+    function getB2BDeals($company_id, $num, $offset){
+        $query = $this->db->select('po.*, pp.name, pp.image, pp.description, p.orderID as orderId, pc.name as categoryName')
+            ->from('product_order_item as po')
+            ->join('product_product as pp', 'pp.id = po.product_id', 'left')
+            ->join('user_b2b as b2b', 'b2b.id = pp.company_id', 'left')
+            ->join('product_order as p', 'p.id = po.order_id', 'left')
+            ->join('product_category as pc', 'pp.category_id = pc.category_id', 'left')
+            ->where("b2b.id",$company_id)
+            ->where("p.bl_active",1)
+            ->order_by('po.dt_create','DESC')
+            ->limit($num,$offset)
+            ->get()->result();
+        return $query;
+    }
+
     function updateLogin($id=NULL, $b2b=NULL){
         if($b2b){
             $this->db->set('login', date('Y-m-d H:i:s'));

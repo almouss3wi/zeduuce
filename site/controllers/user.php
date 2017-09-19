@@ -83,12 +83,23 @@ class User extends MX_Controller
         $this->load->view('templates', $data);
     }
 
-    function b2b()
+    function b2b($page = 0)
     {
         $data = array();
         $this->user->addMeta($this->_meta, $data);
 
         $data['user'] = $this->session->userdata('user');
+        $data['deals'] = $this->user->getQuantityB2BDeals($data['user']->id);
+
+        $config['base_url'] = base_url() . $this->language . '/user/b2b/';
+        $config['total_rows'] = $this->user->getQuantityB2BDeals($data['user']->id);
+        $config['per_page'] = $this->config->item('numberpage');
+        $config['num_links'] = 2;
+        $config['uri_segment'] = $this->uri->total_segments();
+        $this->pagination->initialize($config);
+        $data['deals'] = $this->user->getB2BDeals($data['user']->id, $config['per_page'], (int)$page);
+        $data['pagination'] = $this->pagination->create_links();
+
         $data['page'] = 'user/b2b';
         $this->load->view('templates', $data);
     }
